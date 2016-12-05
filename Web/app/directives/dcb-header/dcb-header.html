@@ -1,4 +1,65 @@
-<div>
-	<h1>ENTER DIRECTIVE</h1>
-	<h2>{{head.value}}</h2>
-</div>
+<header>
+	<!-- Dropdown Structure -->
+	<ul id="admin_dd" class="dropdown-content">
+	  	<li>
+			<a ui-sref="dashboard">
+				<i class="fa fa-th fa-margin" aria-hidden="true"></i>
+				Solo Track
+			</a>
+		</li>
+	  	<li>
+			<a ui-sref="accountmanagement">
+				<i class="fa fa-user fa-margin" aria-hidden="true"></i>
+				Merged covers
+			</a>
+		</li>
+	</ul>
+
+	<nav class="primary-color">
+		<div class="container">
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo">
+					<img src="dist/img/logo_blue.jpg" alt="Logo Stad Antwerpen" />						
+					<span class="pad-left-s">DisCoverBand</span>
+				</a>
+				<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="fa fa-bars"></i></a>
+			</div>	
+			<ul ng-if="!$root.isLoggedIn" class="right hide-on-med-and-down">
+				<li ng-click="head.showLogin()"><a>Login</a></li>
+				<li ng-click="head.showRegister()"><a>Registreer</a></li>
+			</ul>
+			<ul ng-if="$root.isLoggedIn" class="right hide-on-med-and-down">
+				<li ng-click="head.logout()"><a>USERNAME, Logout</a></li>
+			</ul>
+			<ul class="right hide-on-med-and-down">
+				<li ng-class="head.isActive('home')"><a ui-sref="home">Home</a></li>
+				<li ng-class="head.isActive('solotrack')"><a ui-sref="projects">Solo Tracks</a></li>
+				<li ng-hide="!$root.isAdmin"><a class="dropdown-button" href="#!" data-activates="admin_dd" data-constrainwidth="false">Admin<i class="fa fa-caret-down mar-left-s" aria-hidden="true"></i></a></li>				
+			</ul>
+			<ul id="nav-mobile" class="side-nav">
+				<li ng-class="head.isActive('home')"><a ui-sref="home">Home</a></li>
+				<li ng-class="head.isActive('projects')"><a ui-sref="projects">Solo Track</a></li>
+				<li class="divider"></li>
+				<li ng-if="!$root.isLoggedIn" ng-click="head.showLogin()"><a>Login</a></li>
+				<li ng-if="!$root.isLoggedIn" ng-click="head.showRegister()"><a>Registreer</a></li>
+				<li ng-if="$root.isAdmin">
+					<ul>
+					  	<li>
+							<a ui-sref="dashboard">
+								<i class="fa fa-th fa-margin" aria-hidden="true"></i>
+								Dashboard
+							</a>
+						</li>
+					  	<li>
+							<a ui-sref="accountmanagement">
+								<i class="fa fa-user fa-margin" aria-hidden="true"></i>
+								Account Management
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li ng-if="$root.isLoggedIn" ng-click="head.logout()"><a>USERNAME, Logout</a></li>
+			</ul>			
+		</div>
+	</nav>
+</header>
