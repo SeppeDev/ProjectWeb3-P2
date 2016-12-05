@@ -56,4 +56,11 @@ TheCoverBand
 	qualiteit mee ingeven -> sorteren
 	
 	http://stackoverflow.com/questions/12630901/how-to-combine-audio-files-with-php
+
+	quotes
+	{
+		"Every good band in the world was a cover band first" - Alice Cooper
+		"One good thing about music, when it hits you, you feel no pain" Bob Marley
+		"I may not believe in myself, but I believe in what I'm doing" - Jimmy Page
+	}
 }
