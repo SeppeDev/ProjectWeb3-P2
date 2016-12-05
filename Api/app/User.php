@@ -26,4 +26,29 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function instruments()
+    {
+        return $this->belongsToMany('App\Instrument');
+    }
+
+    public function single_tracks()
+    {
+        return $this->hasMany('App\Single_track');
+    }
+
+    public function merged_tracks()
+    {
+        return $this->belongsToMany('App\Merged_track');
+    }
+
+    public function single_track_votes()
+    {
+        return $this->hasMany('App\Single_track_vote');
+    }
+
+    public function merged_track_votes()
+    {
+        return $this->hasMany('App\Merged_track_vote');
+    }
 }
