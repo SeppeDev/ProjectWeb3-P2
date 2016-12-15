@@ -1,0 +1,100 @@
+/* --------------------------------------
+---- This file is for the app styles ----
+-------------------------------------- */ 
+
+/*---------------------------------------
+--------------- VARIABLES ---------------
+---------------------------------------*/
+$white 				: #FFFFFF;
+$light-grey 		: #999999;
+$medium-grey 		: #666666;
+$dark-grey 			: #222222;
+$black 				: #000000;
+
+$purple 			: #9A30D8;
+$orange 			: #F9A02C;
+$blue 				: #296BE3;
+$yellow 			: #FFEC01;
+$red 				: #FF2021;
+$green 				: #4ECE2F;
+
+$dark-green 		: darken(desaturate($green, 15%), 5%);
+
+
+/* Custom Colours */
+.primary-color {
+	background-color: transparentize($dark-grey, 0.5) !important;
+}
+
+.primary-color-text {
+	color: $light-grey !important;
+}
+
+/* App-wide button */
+.btn-flat:focus {
+	background-color: #2D5696 !important;
+	color: #fff !important;
+}
+
+.waves-effect {
+	z-index: 0 !important;	
+}
+
+/* Header styles */
+.brand-logo {
+	height: 64px;
+}
+
+.brand-logo > img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.brand-logo > span {
+	display: inline-block;
+	position: absolute;
+}
+
+.dropdown-button > .fa {
+	height: 36px !important;
+}
+
+.dropdown-content li > a {
+	color: #2D5696 !important;
+}
+
+
+
+nav {
+	.nav-wrapper {
+		width: 75%;
+		margin: 0 12.5%
+	}
+}
+
+img {
+	
+	width: 100% !important;
+	margin-top: -100px;
+}
+
+.search {
+	position: absolute;
+	top: 20%;
+	width: 50% !important;
+	left: 25%;
+
+	input {
+		margin: 0 !important;
+		border-bottom: 2px solid $dark-green;
+		padding-left: 1rem !important;
+    	width: 100% !important;
+	}
+
+	input:focus {
+		background-color: $dark-grey !important;
+		color: white !important;
+		//border: 2px solid $dark-green !important;
+	}
+}
+
