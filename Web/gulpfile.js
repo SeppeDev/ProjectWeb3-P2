@@ -6,6 +6,7 @@ var plumber = require("gulp-plumber");
 var ngAnnotate = require("gulp-ng-annotate");
 var sourcemaps = require("gulp-sourcemaps");
 var cssnano = require("gulp-cssnano");
+var sass = require("gulp-sass");
 
 
 // ---------------------------------------------------------------------------------------------------------------------- //
@@ -54,11 +55,24 @@ gulp.task("css", function() {
 });
 
 
+// ------------------------------------------------------------- //
+// This task bundles your application styles into dist/styles.js //
+// ------------------------------------------------------------- //
+gulp.task("sass", function() {
+
+	gulp.src(["assets/sass/*.scss"])
+		.pipe(concat("styles.css"))
+		.pipe(sass().on("error", sass.logError))
+		.pipe(gulp.dest("assets/css"))
+});
+
+
 // ----------------------------------------- //
 // This task bundles your scripts and styles //
 // ----------------------------------------- //
 gulp.task("build", function() {
 
+	gulp.start("sass");
 	gulp.start("css");
 	gulp.start("js");
 });
@@ -76,6 +90,10 @@ gulp.task("watch", function() {
 	gulp.watch(["assets/css/*.css"], batch(function(events, done) {
 		gulp.start("css", done);
 	}));
+
+	gulp.watch(["assets/sass/*.scss"], batch(function(events, done) {
+		gulp.start("sass", done);
+	}));
 });
 
 
@@ -84,6 +102,7 @@ gulp.task("watch", function() {
 // ------------------------------------------------------------ //
 gulp.task("init", function() {
 	
+	gulp.start("sass");
 	gulp.start("css");
 	gulp.start("js");
 	gulp.start("watch");	
