@@ -18,3 +18,6 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 Route::get('tracks', 'SingleTrackController@index');
+Route::get('tracks/{id}', 'SingleTrackController@show');
+Route::get('mergedtracks', 'MergedTrackController@index');
+Route::get('mergedtracks/{id}', 'MergedTrackController@show');

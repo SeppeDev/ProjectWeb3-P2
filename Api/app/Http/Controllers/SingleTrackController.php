@@ -9,9 +9,32 @@ class SingleTrackController extends Controller
 {
     public function index()
     {
-    	$singletracks = Single_track::with('instrument', 'artist', 'user')->get();
+    	$tracks = Single_track::with('instrument', 'artist', 'user')->get();
 
-    	// Json staat op /api/tracks
-    	return response()->json($singletracks);
+        // Json staat op /api/tracks
+    	if($tracks->count())
+        { 
+            return response()->json($tracks);
+        }
+        else 
+        {
+            return response()->json(['status', 'No tracks found.']);
+        }
+        
+    }
+
+    public function show($id)
+    {
+    	$track = Single_track::where('id', $id)->with('instrument', 'artist', 'user')->get();
+
+        // Json staat op /api/mergedtracks/1
+        if($track->count())
+        {
+            return response()->json($track);
+        }
+        else
+        {
+            return response()->json(['status', 'Track not found.']);
+        }
     }
 }
