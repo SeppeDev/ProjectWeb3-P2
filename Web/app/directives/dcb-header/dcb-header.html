@@ -2,13 +2,13 @@
 	<div class="navbar-fixed">
 		<nav class="primary-color">
 		    <div class="nav-wrapper">
-		      	<a href="#" class="brand-logo center">DisCoverBand</a>
+		      	<a ui-sref="home" class="brand-logo center">DisCoverBand</a>
 		      	<ul id="nav-mobile" class="left hide-on-med-and-down">
 			        <li>
-			        	<a href="sass.html">Solo Track</a></li>
+			        	<a ui-sref="solo">Solo Track</a></li>
 			        
 			        <li>
-			        	<a href="badges.html">Merged Covers</a></li>
+			        	<a ui-sref="merged">Merged Covers</a></li>
 		      	</ul>
 
 		      	<ul ng-if="!$root.isLoggedIn" class="right hide-on-med-and-down">

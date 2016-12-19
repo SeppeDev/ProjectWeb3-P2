@@ -1,0 +1,36 @@
+<main class="solo">
+	<img class="background" src="dist/img/wn1ch6ferbg-hannu-pekka-peuranen.jpg">
+
+	<div class="container">
+		
+		<h1>Solo Tracks</h1>
+
+		<div class="row">
+			<h2>Filter</h2>
+
+			<form action="#">
+				<div class="col s6">
+					<label>Artist</label>
+					<input type="text" name="artist">
+				</div>
+				<div class="col s6">
+					<label>Title</label>
+					<input type="text" name="artist">
+				</div>
+
+				<div class="input-field col s2" ng-repeat="instrument in solo.instruments">
+					<input type="checkbox" id="{{instrument}}" checked="checked" />
+					<label for="{{instrument}}">{{instrument}}</label>
+				</div>
+			</form>
+		</div>
+
+		<div class="divider mar-top-xl"></div>
+
+		<div class="results">
+			<h2 class="primary-color-text">Results</h2>
+		</div>
+
+	</div>
+
+</main>

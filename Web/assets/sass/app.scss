@@ -18,6 +18,11 @@ $yellow 			: #FFEC01;
 $red 				: #FF2021;
 $green 				: #4ECE2F;
 
+$dark-purple 		: darken(desaturate($purple, 15%), 5%);
+$dark-orange 		: darken(desaturate($orange, 15%), 5%);
+$dark-blue 			: darken(desaturate($blue, 15%), 5%);
+$dark-yellow 		: darken(desaturate($yellow, 15%), 5%);
+$dark-red 			: darken(desaturate($red, 15%), 5%);
 $dark-green 		: darken(desaturate($green, 15%), 5%);
 
 
@@ -31,6 +36,10 @@ $dark-green 		: darken(desaturate($green, 15%), 5%);
 }
 
 /* App-wide button */
+.primary-button-color {
+	background-color: $dark-green !important;
+}
+
 .btn-flat:focus {
 	background-color: #2D5696 !important;
 	color: #fff !important;
@@ -98,3 +107,18 @@ img {
 	}
 }
 
+
+/**********SOLO TRACK**********/
+/**********SOLO TRACK**********/
+.background {
+	display: block;
+	position: fixed;
+	width: 100%;
+	z-index: -1;
+}
+
+.solo {
+	h1, h2, h3, h4, h5, h6, p, label {
+		color: $light-grey !important;
+	}
+}

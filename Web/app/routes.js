@@ -7,9 +7,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
       templateUrl: "app/pages/home.html",
       controller: "homeController as home"
     })
-  	.state('test', {
-      url: "/test",
-      templateUrl: "app/pages/test.html",
-      controller: "testController as test"
+  	.state('solo', {
+      url: "/solo",
+      templateUrl: "app/pages/solo.html",
+      controller: "soloController as solo"
+    })
+    .state('merged', {
+      url: "/merged",
+      templateUrl: "app/pages/merged.html",
+      controller: "mergedController as merged"
     })
 });

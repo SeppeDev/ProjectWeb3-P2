@@ -12,6 +12,9 @@
   color: #999999 !important; }
 
 /* App-wide button */
+.primary-button-color {
+  background-color: #51a83b !important; }
+
 .btn-flat:focus {
   background-color: #2D5696 !important;
   color: #fff !important; }
@@ -58,3 +61,14 @@ img {
   .search input:focus {
     background-color: #222222 !important;
     color: white !important; }
+
+/**********SOLO TRACK**********/
+/**********SOLO TRACK**********/
+.background {
+  display: block;
+  position: fixed;
+  width: 100%;
+  z-index: -1; }
+
+.solo h1, .solo h2, .solo h3, .solo h4, .solo h5, .solo h6, .solo p, .solo label {
+  color: #999999 !important; }
