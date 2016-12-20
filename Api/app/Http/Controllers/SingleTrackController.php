@@ -18,7 +18,7 @@ class SingleTrackController extends Controller
         }
         else 
         {
-            return response()->json(['status', 'No tracks found.']);
+            return response()->json(['status' => 'No tracks found.']);
         }
         
     }
@@ -34,7 +34,7 @@ class SingleTrackController extends Controller
         }
         else
         {
-            return response()->json(['status', 'Track not found.']);
+            return response()->json(['status' => 'Track not found.']);
         }
     }
 }
