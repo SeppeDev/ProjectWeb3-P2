@@ -36,18 +36,45 @@ class MergedTrackController extends Controller
         }
     }
 
+    // POST naar /api/mergedtracks/create
     public function store()
     {
         // Sox installation: sudo apt-get install sox
         // Lame installation: sudo apt-get install lame
+        // Ffmpeg installation: sudo apt-get install ffmpeg
 
-        // Merge 2 tracks using sox + convert to mp3
-        $track1         = "guitar.wav";
-        $track2         = "drum.wav";
+        // Gebruik ffmpeg om mp3 naar wav te converteren!
+
+        $tracks  = array(
+            "guitar.wav" => array(
+                "begin" => 0,
+                "end" => 0,
+            ),
+            "drum.wav" => array(
+                "begin" => 0.2,
+                "end" => 0,
+            )
+        );
+
+        // Trim tracks, geef aantal sec.msec om te trimmen begin en einde
+
+        $trackstring = "";
+
+        foreach ($tracks as $track => $timestamps) {
+            $trimBegining = $timestamps["begin"];
+            $trimEnding   = $timestamps["end"];
+
+            $trimmedTrackName = uniqid('trimmed_temp_', true).'.wav';
+
+            exec('cd audio ; sox ' . $track . ' ' . $trimmedTrackName . ' trim ' . $trimBegining . ' -' . $trimEnding);
+            $trackstring .= $trimmedTrackName . " ";
+        }
+
+        // Merge meerdere tracks + convert to mp3
 
         $tempFileName   = uniqid('tmp_', true).'.wav';
 
-        exec('cd audio ; sox -m ' . $track1 . ' ' . $track2 . ' ' . $tempFileName . ' 2>&1', $merge_output, $merge_returncode);
+        exec('cd audio ; sox -m ' . $trackstring . $tempFileName . ' 2>&1', $merge_output, $merge_returncode);
 
         if($merge_returncode === 0)
         {
@@ -56,6 +83,13 @@ class MergedTrackController extends Controller
 
             if($convert_returncode === 0)
             {
+                // Verwijder alle temp files
+                exec('cd audio ; rm ' . $tempFileName);
+                $tempTrimmedTracksArray = explode(' ', $trackstring);
+                for ($i = 0; $i < count($tempTrimmedTracksArray) - 1; $i++) { 
+                    exec('cd audio ; rm ' . $tempTrimmedTracksArray[$i]);
+                }
+                
                 return response()->json([
                     'status'            => 'success',
                     'mergedfilename'    => $fileName,
