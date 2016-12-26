@@ -1,5 +1,5 @@
 <main class="solo">
-	<img class="background" src="dist/img/wn1ch6ferbg-hannu-pekka-peuranen.jpg">
+	<img class="background background-img" src="dist/img/wn1ch6ferbg-hannu-pekka-peuranen.jpg">
 
 	<div class="container">
 		
@@ -29,8 +29,19 @@
 
 		<div class="results">
 			<h2 class="primary-color-text">Results</h2>
+
+			
+		    <div class="card horizontal" ng-repeat="track in solo.soloTracks">
+		      	<div class="card-image">
+		        	<img src="http://lorempixel.com/100/190/nature/{{track.instrument_id}}">
+		      	</div>
+		      	<div class="card-content">
+			          	<p>{{track.songname}}</p>
+			          	<p>{{track.artist_id}}</p>
+			    </div>
+			    <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons" ng-click="solo.addToBand(track)">add</i></a>
+		    </div>
+		    
 		</div>
-
 	</div>
-
 </main>
