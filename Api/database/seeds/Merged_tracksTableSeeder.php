@@ -14,12 +14,14 @@ class Merged_tracksTableSeeder extends Seeder
         DB::table('merged_tracks')->insert([
             'songname' => 'Raining blood',
             'file_url' => 'placeholder.mp3',
+            'track_length' => 254.121456,
             'artist_id' => 1
         ]); 
 
         DB::table('merged_tracks')->insert([
             'songname' => 'Angel of Death',
             'file_url' => 'placeholder.mp3',
+            'track_length' => 254.121456,
             'artist_id' => 1
         ]); 
     }
