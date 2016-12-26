@@ -14,6 +14,7 @@ class Single_tracksTableSeeder extends Seeder
         DB::table('single_tracks')->insert([
             'songname' => 'Raining blood',
             'file_url' => 'placeholder.mp3',
+            'track_length' => 254.121456,
             'artist_id' => 1,
             'user_id' => 2,
             'instrument_id' => 3
@@ -22,6 +23,7 @@ class Single_tracksTableSeeder extends Seeder
         DB::table('single_tracks')->insert([
             'songname' => 'Angel of death',
             'file_url' => 'placeholder.mp3',
+            'track_length' => 254.121456,
             'artist_id' => 1,
             'user_id' => 1,
             'instrument_id' => 1

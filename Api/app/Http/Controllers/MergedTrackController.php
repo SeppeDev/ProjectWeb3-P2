@@ -56,53 +56,88 @@ class MergedTrackController extends Controller
             )
         );
 
-        // Trim tracks, geef aantal sec.msec om te trimmen begin en einde
-
         $trackstring = "";
 
+        // Trim tracks, geef aantal sec.msec mee om te trimmen vanaf begin en vanaf einde
         foreach ($tracks as $track => $timestamps) {
             $trimBegining = $timestamps["begin"];
             $trimEnding   = $timestamps["end"];
 
             $trimmedTrackName = uniqid('trimmed_temp_', true).'.wav';
 
-            exec('cd audio ; sox ' . $track . ' ' . $trimmedTrackName . ' trim ' . $trimBegining . ' -' . $trimEnding);
-            $trackstring .= $trimmedTrackName . " ";
-        }
-
-        // Merge meerdere tracks + convert to mp3
-
-        $tempFileName   = uniqid('tmp_', true).'.wav';
-
-        exec('cd audio ; sox -m ' . $trackstring . $tempFileName . ' 2>&1', $merge_output, $merge_returncode);
-
-        if($merge_returncode === 0)
-        {
-            $fileName   = uniqid('merged_', true).'.mp3';
-            exec('cd audio ; lame '. $tempFileName .' ' . $fileName . ' 2>&1', $convert_output, $convert_returncode);
-
-            if($convert_returncode === 0)
+            exec('cd audio ; sox ' . $track . ' ' . $trimmedTrackName . ' trim ' . $trimBegining . ' -' . $trimEnding . ' 2>&1', $trim_output, $trim_returncode);
+            if($trim_returncode === 0)
             {
-                // Verwijder alle temp files
-                exec('cd audio ; rm ' . $tempFileName);
-                $tempTrimmedTracksArray = explode(' ', $trackstring);
-                for ($i = 0; $i < count($tempTrimmedTracksArray) - 1; $i++) { 
-                    exec('cd audio ; rm ' . $tempTrimmedTracksArray[$i]);
-                }
-                
-                return response()->json([
-                    'status'            => 'success',
-                    'mergedfilename'    => $fileName,
-                ]);
+                $trackstring .= $trimmedTrackName . " ";
             }
             else
             {
                 // Remove cmd-output in production! 
                 return response()->json([
                     'status'            => 'failed',
-                    'error_location'    => 'convert',
-                    'error_code'        => $convert_returncode,
-                    'cmd-output'        => $convert_output
+                    'error_location'    => 'trim',
+                    'error_code'        => $trim_returncode,
+                    'cmd-output'        => $trim_output
+                ]);
+            }
+        }
+
+        // Merge meerdere tracks + convert to mp3
+        $tempFileName = uniqid('tmp_', true).'.wav';
+
+        exec('cd audio ; sox -m ' . $trackstring . $tempFileName . ' 2>&1', $merge_output, $merge_returncode);
+
+        if($merge_returncode === 0)
+        {
+            exec('cd audio ; soxi -D ' . $tempFileName . ' 2>&1',  $tracklength, $length_returncode);
+
+            if($length_returncode === 0)
+            {
+                $fileName = uniqid('merged_', true).'.mp3';
+                exec('cd audio ; lame '. $tempFileName .' ' . $fileName . ' 2>&1', $convert_output, $convert_returncode);
+
+                if($convert_returncode === 0)
+                {
+                    // Verwijder alle temp files
+                    exec('cd audio ; rm ' . $tempFileName);
+                    $tempTrimmedTracksArray = explode(' ', $trackstring);
+                    for ($i = 0; $i < count($tempTrimmedTracksArray) - 1; $i++) { 
+                        exec('cd audio ; rm ' . $tempTrimmedTracksArray[$i]);
+                    }
+
+                    $mergedtrack                = new Merged_track();
+
+                    $mergedtrack->songname      = "Temp_songname";
+                    $mergedtrack->artist_id     = 1;
+                    $mergedtrack->track_length  = $tracklength[0];
+                    $mergedtrack->file_url      = $fileName;
+                    
+                    $mergedtrack->save();
+
+                    return response()->json([
+                        'status'            => 'success',
+                        'mergedfilename'    => $fileName,
+                    ]);
+                }
+                else
+                {
+                    // Remove cmd-output in production! 
+                    return response()->json([
+                        'status'            => 'failed',
+                        'error_location'    => 'convert',
+                        'error_code'        => $convert_returncode,
+                        'cmd-output'        => $convert_output
+                    ]);
+                }
+            }
+            else
+            {
+                // Remove cmd-output in production! 
+                return response()->json([
+                    'status'            => 'failed',
+                    'error_location'    => 'length',
+                    'error_code'        => $length_returncode,
+                    'cmd-output'        => $tracklength
                 ]);
             }
         }

@@ -17,6 +17,7 @@ class CreateMergedTracksTable extends Migration
             $table->increments('id');
             $table->string('songname');
             $table->string('file_url');
+            $table->double('track_length');
 
             $table->integer('artist_id')->unsigned();
             $table->foreign('artist_id')->references('id')->on('artists');
