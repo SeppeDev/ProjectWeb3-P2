@@ -11,16 +11,16 @@
 			<form action="#">
 				<div class="col s6">
 					<label>Artist</label>
-					<input type="text" name="artist">
+					<input type="text" name="artist" ng-model="solo.formData.artist">
 				</div>
 				<div class="col s6">
 					<label>Title</label>
-					<input type="text" name="artist">
+					<input type="text" name="artist" ng-model="solo.formData.title">
 				</div>
 
 				<div class="input-field col s2" ng-repeat="instrument in solo.instruments">
-					<input type="checkbox" id="{{instrument}}" checked="checked" />
-					<label for="{{instrument}}">{{instrument}}</label>
+					<input type="checkbox" id="{{instrument.name}}" ng-model="solo.formData[instrument.id]" checked="checked" />
+					<label for="{{instrument.name}}">{{instrument.name}}</label>
 				</div>
 			</form>
 		</div>
@@ -31,13 +31,13 @@
 			<h2 class="primary-color-text">Results</h2>
 
 			
-		    <div class="card horizontal" ng-repeat="track in solo.soloTracks">
+		    <div class="card horizontal" ng-repeat="track in solo.filteredTracks">
 		      	<div class="card-image">
-		        	<img src="http://lorempixel.com/100/190/nature/{{track.instrument_id}}">
+		        	<img src="http://lorempixel.com/100/190/nature/{{track.instrument_id}}" alt="{{track.instrument.name}}">
 		      	</div>
 		      	<div class="card-content">
 			          	<p>{{track.songname}}</p>
-			          	<p>{{track.artist_id}}</p>
+			          	<p>{{track.artist.name}}</p>
 			    </div>
 			    <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons" ng-click="solo.addToBand(track)">add</i></a>
 		    </div>
