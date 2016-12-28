@@ -1,8 +1,10 @@
-app.controller("soloController", function($scope, bandService, soloService) {
+app.controller("soloController", function($scope, bandService, soloService, instrumentService, filterService) {
 	
 	var vm = this;
 	var bandSvc = bandService;
 	var soloSvc = soloService;
+	var instSvc = instrumentService;
+	var fltSvc = filterService;
 
 	//Private functions
 	function playAudioFile(track)
@@ -17,23 +19,12 @@ app.controller("soloController", function($scope, bandService, soloService) {
 			{
 				vm.soloTracks = data.data;
 				vm.filteredTracks = vm.soloTracks;
+				filter();
 			
 			}, function(error)
 			{
 				console.log(error);
 			});
-	}
-
-	function createFormData()
-	{
-		vm.formData = {	"artist": "layer",
-						"title": "blood",
-						};
-
-		angular.forEach(vm.instruments, function(value, key)
-		{
-			vm.formData[value.id] = true;
-		});
 	}
 
 	function filter()
@@ -42,20 +33,20 @@ app.controller("soloController", function($scope, bandService, soloService) {
 
 		angular.forEach(vm.soloTracks, function(track, key)
 		{
-			console.log(track);
+			//console.log(track);
 			goodSearch = true;
 
-			if(!vm.formData.artist == "" && !track.artist.name.match(new RegExp(vm.formData.artist, "i")))
+			if(!vm.filterData.artist == "" && !track.artist.name.match(new RegExp(vm.filterData.artist, "i")))
 			{
 				goodSearch = false;
 			}
 
-			if(!vm.formData.title == "" && !track.songname.match(new RegExp(vm.formData.title, "i")))
+			if(!vm.filterData.title == "" && !track.songname.match(new RegExp(vm.filterData.title, "i")))
 			{
 				goodSearch = false;
 			}
 
-			if(!vm.formData[track.instrument_id])
+			if(!vm.filterData[track.instrument_id])
 			{
 				goodSearch = false;
 			}
@@ -65,27 +56,20 @@ app.controller("soloController", function($scope, bandService, soloService) {
 			{
 				vm.filteredTracks.push(track);
 			}
-			console.log(vm.filteredTracks);
+			//console.log(vm.filteredTracks);
 		});
 	}
 
 	function _init() {
-		createFormData();
-
 		getSoloTracks();
+		vm.instruments = instSvc.instruments;
+		vm.filterData = fltSvc.filterData;
 
 		//vm.track1.play();
 		//setTimeout(function(){playAudioFile(vm.track2)}, 400);
 	}
 
 	//Vm functions
-	vm.advancedFilter = function(track)
-	{
-		return track.artist.name.match(new RegExp(vm.formData.artist, "i"))
-				&&
-				track.songname.match(new RegExp(vm.formData.title, "i"));
-	}
-
 	vm.addToBand = function(track) {
 		
 		bandSvc.trackArray.push(track);
@@ -93,11 +77,11 @@ app.controller("soloController", function($scope, bandService, soloService) {
 
 	//Watches
 	$scope.$watch(
-		function () { return vm.formData }, 
+		function () { return vm.filterData }, 
 		function () {
 
-			if(vm.formData) 
-			{		
+			if(vm.filterData) 
+			{
 				filter();
 			}
 		}, true);
@@ -106,23 +90,6 @@ app.controller("soloController", function($scope, bandService, soloService) {
 
 	vm.track1 = new Audio("dist/audio/Behemoth - Conquer All - Drum.mp3");
 	vm.track2 = new Audio("dist/audio/Behemoth - Conquer All - Guitar.mp3");
-
-	vm.instruments = [{
-							"name":"Guitar",
-							"id":1
-						},
-						{
-							"name":"Drum",
-							"id":2
-						},
-						{
-							"name":"Bass",
-							"id":3
-						},
-						{
-							"name":"Piano",
-							"id":4
-						}];
 
 
 	_init();

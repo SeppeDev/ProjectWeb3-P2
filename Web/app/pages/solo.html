@@ -11,15 +11,15 @@
 			<form action="#">
 				<div class="col s6">
 					<label>Artist</label>
-					<input type="text" name="artist" ng-model="solo.formData.artist">
+					<input type="text" name="artist" ng-model="solo.filterData.artist">
 				</div>
 				<div class="col s6">
 					<label>Title</label>
-					<input type="text" name="artist" ng-model="solo.formData.title">
+					<input type="text" name="artist" ng-model="solo.filterData.title">
 				</div>
 
 				<div class="input-field col s2" ng-repeat="instrument in solo.instruments">
-					<input type="checkbox" id="{{instrument.name}}" ng-model="solo.formData[instrument.id]" checked="checked" />
+					<input type="checkbox" id="{{instrument.name}}" ng-model="solo.filterData[instrument.id]" checked="checked" />
 					<label for="{{instrument.name}}">{{instrument.name}}</label>
 				</div>
 			</form>
@@ -33,7 +33,7 @@
 			
 		    <div class="card horizontal" ng-repeat="track in solo.filteredTracks">
 		      	<div class="card-image">
-		        	<img src="http://lorempixel.com/100/190/nature/{{track.instrument_id}}" alt="{{track.instrument.name}}">
+		        	<img class="{{track.instrument.name}}" src="dist/img/transparent.png" alt="{{track.instrument.name}}">
 		      	</div>
 		      	<div class="card-content">
 			          	<p>{{track.songname}}</p>

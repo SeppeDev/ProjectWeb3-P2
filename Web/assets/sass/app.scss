@@ -26,6 +26,10 @@ $dark-red 			: darken(desaturate($red, 15%), 5%);
 $dark-green 		: darken(desaturate($green, 15%), 5%);
 
 
+body {
+	color: $light-grey !important;
+}
+
 /* Custom Colours */
 .primary-color {
 	background-color: transparentize($dark-grey, 0.5) !important;
@@ -47,6 +51,17 @@ $dark-green 		: darken(desaturate($green, 15%), 5%);
 
 .waves-effect {
 	z-index: 0 !important;	
+}
+
+/* Override filter form color */
+[type="checkbox"]:checked+label:before {
+	border-right: 2px solid $dark-green;
+	border-bottom: 2px solid $dark-green;
+}
+
+input[type=text]:focus:not([readonly]) {
+	border-bottom: 1px solid $dark-green;
+    box-shadow: 0 1px 0 0 $dark-green;
 }
 
 /* Header styles */
@@ -73,7 +88,71 @@ $dark-green 		: darken(desaturate($green, 15%), 5%);
 }
 
 
+/**********SPRITES**********/
+/**********SPRITES**********/
+.instrument {
+	background-image: url("../img/instrumentsprite.png");
+	background-repeat: no-repeat;
+}
 
+.Guitar {
+	@extend .instrument;
+	height: 150px;
+	width: 150px;
+	background-position: -150px 0px;
+	background-color: $dark-blue;
+}
+
+.Leadguitar {
+	@extend .instrument;
+	height: 150px;
+	width: 150px;
+	background-position: -150px 0px;
+	background-color: $dark-blue;
+}
+
+.Rhythmguitar {
+	@extend .instrument;
+	height: 150px;
+	width: 150px;
+	background-position: 0px 0px;
+	background-color: $dark-green;
+}
+
+.Bass {
+	@extend .instrument;
+	height: 150px;
+	width: 150px;
+	background-position: -150px -150px;
+	background-color: $dark-orange;
+}
+
+.Drum {
+	@extend .instrument;
+	height: 150px;
+	width: 150px;
+	background-position: 0px -300px;
+	background-color: $dark-yellow;
+}
+
+.Keys {
+	@extend .instrument;
+	height: 150px;
+	width: 150px;
+	background-position: -150px -300px;
+	background-color: $dark-purple;
+}
+
+.Vocals {
+	@extend .instrument;
+	height: 150px;
+	width: 150px;
+	background-position: 0px -150px;
+}
+
+
+/**********NAV**********/
+/**********NAV**********/
 nav {
 	.nav-wrapper {
 		width: 75%;
@@ -97,10 +176,11 @@ nav {
 	left: 25%;
 
 	input {
+		display: inline !important;
 		margin: 0 !important;
 		border-bottom: 2px solid $dark-green;
 		padding-left: 1rem !important;
-    	width: 100% !important;
+    	width: calc(50% - 1.5rem) !important;
 	}
 
 	input:focus {
@@ -124,4 +204,15 @@ nav {
 	h1, h2, h3, h4, h5, h6, p, label {
 		color: $light-grey !important;
 	}
+}
+
+input {
+	border-bottom: 2px solid $dark-green;
+	padding-left: 1rem !important;
+}
+
+input:focus {
+	background-color: $dark-grey !important;
+	color: white !important;
+	//border: 2px solid $dark-green !important;
 }

@@ -4,6 +4,9 @@
 /*---------------------------------------
 --------------- VARIABLES ---------------
 ---------------------------------------*/
+body {
+  color: #999999 !important; }
+
 /* Custom Colours */
 .primary-color {
   background-color: rgba(34, 34, 34, 0.5) !important; }
@@ -21,6 +24,15 @@
 
 .waves-effect {
   z-index: 0 !important; }
+
+/* Override filter form color */
+[type="checkbox"]:checked + label:before {
+  border-right: 2px solid #51a83b;
+  border-bottom: 2px solid #51a83b; }
+
+input[type=text]:focus:not([readonly]) {
+  border-bottom: 1px solid #51a83b;
+  box-shadow: 0 1px 0 0 #51a83b; }
 
 /* Header styles */
 .brand-logo {
@@ -40,6 +52,55 @@
 .dropdown-content li > a {
   color: #2D5696 !important; }
 
+/**********SPRITES**********/
+/**********SPRITES**********/
+.instrument, .Guitar, .Leadguitar, .Rhythmguitar, .Bass, .Drum, .Keys, .Vocals {
+  background-image: url("../img/instrumentsprite.png");
+  background-repeat: no-repeat; }
+
+.Guitar {
+  height: 150px;
+  width: 150px;
+  background-position: -150px 0px;
+  background-color: #2e63c4; }
+
+.Leadguitar {
+  height: 150px;
+  width: 150px;
+  background-position: -150px 0px;
+  background-color: #2e63c4; }
+
+.Rhythmguitar {
+  height: 150px;
+  width: 150px;
+  background-position: 0px 0px;
+  background-color: #51a83b; }
+
+.Bass {
+  height: 150px;
+  width: 150px;
+  background-position: -150px -150px;
+  background-color: #e69225; }
+
+.Drum {
+  height: 150px;
+  width: 150px;
+  background-position: 0px -300px;
+  background-color: #d5c711; }
+
+.Keys {
+  height: 150px;
+  width: 150px;
+  background-position: -150px -300px;
+  background-color: #8838b7; }
+
+.Vocals {
+  height: 150px;
+  width: 150px;
+  background-position: 0px -150px; }
+
+/**********NAV**********/
+/**********NAV**********/
 nav .nav-wrapper {
   width: 75%;
   margin: 0 12.5%; }
@@ -56,10 +117,11 @@ nav .nav-wrapper {
   width: 50% !important;
   left: 25%; }
   .search input {
+    display: inline !important;
     margin: 0 !important;
     border-bottom: 2px solid #51a83b;
     padding-left: 1rem !important;
-    width: 100% !important; }
+    width: calc(50% - 1.5rem) !important; }
   .search input:focus {
     background-color: #222222 !important;
     color: white !important; }
@@ -74,3 +136,11 @@ nav .nav-wrapper {
 
 .solo h1, .solo h2, .solo h3, .solo h4, .solo h5, .solo h6, .solo p, .solo label {
   color: #999999 !important; }
+
+input {
+  border-bottom: 2px solid #51a83b;
+  padding-left: 1rem !important; }
+
+input:focus {
+  background-color: #222222 !important;
+  color: white !important; }
