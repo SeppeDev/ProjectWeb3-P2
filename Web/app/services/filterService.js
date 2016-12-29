@@ -18,7 +18,6 @@ app.service("filterService", function(instrumentService) {
 
 	function _init() {
 		svc.createFilterData();
-		console.log(svc.filterData);
 	}
 
 	_init();

@@ -28,6 +28,7 @@ $dark-green 		: darken(desaturate($green, 15%), 5%);
 
 body {
 	color: $light-grey !important;
+	background-color: $black;
 }
 
 /* Custom Colours */
@@ -99,7 +100,7 @@ input[type=text]:focus:not([readonly]) {
 	@extend .instrument;
 	height: 150px;
 	width: 150px;
-	background-position: -150px 0px;
+	background-position: 0px -150px;
 	background-color: $dark-blue;
 }
 
@@ -107,7 +108,7 @@ input[type=text]:focus:not([readonly]) {
 	@extend .instrument;
 	height: 150px;
 	width: 150px;
-	background-position: -150px 0px;
+	background-position: 0px -150px;
 	background-color: $dark-blue;
 }
 
@@ -131,7 +132,7 @@ input[type=text]:focus:not([readonly]) {
 	@extend .instrument;
 	height: 150px;
 	width: 150px;
-	background-position: 0px -300px;
+	background-position: -300px 0px;
 	background-color: $dark-yellow;
 }
 
@@ -139,7 +140,7 @@ input[type=text]:focus:not([readonly]) {
 	@extend .instrument;
 	height: 150px;
 	width: 150px;
-	background-position: -150px -300px;
+	background-position: -300px -150px;
 	background-color: $dark-purple;
 }
 
@@ -147,7 +148,7 @@ input[type=text]:focus:not([readonly]) {
 	@extend .instrument;
 	height: 150px;
 	width: 150px;
-	background-position: 0px -150px;
+	background-position: -150px 0px;
 }
 
 
@@ -169,6 +170,8 @@ nav {
 	width: 100% !important;
 }
 
+/*********HOME*********/
+/*********HOME*********/
 .search {
 	position: absolute;
 	top: 20%;
@@ -180,13 +183,10 @@ nav {
 		margin: 0 !important;
 		border-bottom: 2px solid $dark-green;
 		padding-left: 1rem !important;
-    	width: calc(50% - 1.5rem) !important;
 	}
 
 	input:focus {
-		background-color: $dark-grey !important;
 		color: white !important;
-		//border: 2px solid $dark-green !important;
 	}
 }
 
@@ -202,7 +202,7 @@ nav {
 
 .solo {
 	h1, h2, h3, h4, h5, h6, p, label {
-		color: $light-grey !important;
+		color: $light-grey;
 	}
 }
 
@@ -212,7 +212,43 @@ input {
 }
 
 input:focus {
-	background-color: $dark-grey !important;
 	color: white !important;
-	//border: 2px solid $dark-green !important;
+}
+
+/************CARD************/
+/************CARD************/
+.card {
+	background-color: transparentize($dark-grey, 0.25);
+}
+
+.card-button {
+	&.add {
+		background-color: $dark-green;
+	}
+
+	&.remove {
+		background-color: $dark-red;
+	}
+	
+	i {
+		font-size: 5rem;
+		color: transparentize($dark-grey, 0.25);
+		margin: 0 auto;
+	}
+}
+
+.card-button:hover {
+	background-color: transparent;
+
+	&.add {
+		i {
+			color: $dark-green;
+		}
+	}
+
+	&.remove {
+		i {
+			color: $dark-red;
+		}
+	}
 }

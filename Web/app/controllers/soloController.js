@@ -60,10 +60,24 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 		});
 	}
 
+	function arrayObjectIndexOf(myArray, searchTerm, property) {
+    	
+    	for(var i = 0, len = myArray.length; i < len; i++) {
+        	if (myArray[i][property] === searchTerm) return i;
+    	}
+
+    	return -1;
+	}
+
 	function _init() {
 		getSoloTracks();
 		vm.instruments = instSvc.instruments;
 		vm.filterData = fltSvc.filterData;
+		vm.bandTrackIdArray = [];
+
+		angular.forEach(bandSvc.trackArray, function(track, key) {
+			vm.bandTrackIdArray.push(track.id);
+		});
 
 		//vm.track1.play();
 		//setTimeout(function(){playAudioFile(vm.track2)}, 400);
@@ -71,8 +85,31 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 
 	//Vm functions
 	vm.addToBand = function(track) {
-		
+
 		bandSvc.trackArray.push(track);
+		angular.forEach(bandSvc.trackArray, function(track, key) {
+			vm.bandTrackIdArray.push(track.id);
+		});
+
+		console.log("Track added to new band: " + track);
+		console.log(bandSvc.trackArray);
+	}
+
+	vm.removeFromBand = function(track) {
+		
+		index = arrayObjectIndexOf(bandSvc.trackArray, track.id, "id");
+		if (index > -1) {
+			bandSvc.trackArray.splice(index, 1);
+			vm.bandTrackArray = bandSvc.trackArray;
+
+			intIndex = vm.bandTrackIdArray.indexOf(track.id);
+			if (intIndex > -1) {
+				vm.bandTrackIdArray.splice(intIndex, 1);
+			}
+		}
+
+		console.log("Track removed from new band: " + track);
+		console.log(bandSvc.trackArray);
 	}
 
 	//Watches
