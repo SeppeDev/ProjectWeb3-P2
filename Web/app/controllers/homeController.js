@@ -1,8 +1,13 @@
-app.controller("homeController", function() {
+app.controller("homeController", function(instrumentService, filterService) {
+	
 	var vm = this;
+	var instSvc = instrumentService;
+	var fltSvc = filterService;
 
 	function _init() {
-		vm.test = "This value has been initiated through _init() and bound to the scope!";
+		//instSvc.getInstruments();
+
+		vm.filterData = fltSvc.filterData;
 	}
 
 	_init();

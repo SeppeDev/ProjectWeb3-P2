@@ -12,10 +12,17 @@
 				</div>
 				<div class="search">
 			      	<form>
-			        	<div class="input-field">
-			          		<input id="search" type="search" placeholder="Search for an ARTIST or SONGTITLE" required>
+			        	<div class="row input-field">
+			          		<input id="search" class="col l6 s12" type="search" placeholder="Search for an ARTIST..." ng-model="home.filterData.artist">
+			          		<input id="search" class="col l6 s12" type="search" placeholder="or SONGTITLE" ng-model="home.filterData.title">
+			          		<input type="submit" value="Search" ui-sref="solo" ng-hide="true">
 			        	</div>
 			      	</form>
+			      	<div class="row">
+			      		<div>
+			      			<a class="btn-large primary-button-color col l2 s12 push-l5" ui-sref="solo">Search</a>
+			      		</div>
+			      	</div>
 				</div>
 				<div class="divider mar-top-l"></div>
 			</div>

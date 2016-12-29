@@ -14,7 +14,7 @@ var sass = require("gulp-sass");
 // ---------------------------------------------------------------------------------------------------------------------- //
 gulp.task("js", function() {
 
-  	gulp.src(["app/*.js", "app/controllers/*.js", "app/services/*.js", "app/directives/*/*.js"])
+  	gulp.src(["app/*.js", "app/controllers/*.js", "app/filters/*.js", "app/services/*.js", "app/directives/*/*.js"])
 	  	.pipe(plumber({
 	        handleError: function (err) {
 	            console.log(err);
@@ -83,7 +83,7 @@ gulp.task("build", function() {
 // ----------------------------------------------------------------------------------------- //
 gulp.task("watch", function() {
 
-  	gulp.watch(["app/*.js", "app/controllers/*.js", "app/services/*.js", "app/directives/*/*.js"], batch(function(events, done) {
+  	gulp.watch(["app/*.js", "app/controllers/*.js", "app/filters/*.js", "app/services/*.js", "app/directives/*/*.js"], batch(function(events, done) {
   		gulp.start("js", done);
 	}));
 

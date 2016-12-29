@@ -4,6 +4,10 @@
 /*---------------------------------------
 --------------- VARIABLES ---------------
 ---------------------------------------*/
+body {
+  color: #999999 !important;
+  background-color: #000000; }
+
 /* Custom Colours */
 .primary-color {
   background-color: rgba(34, 34, 34, 0.5) !important; }
@@ -21,6 +25,15 @@
 
 .waves-effect {
   z-index: 0 !important; }
+
+/* Override filter form color */
+[type="checkbox"]:checked + label:before {
+  border-right: 2px solid #51a83b;
+  border-bottom: 2px solid #51a83b; }
+
+input[type=text]:focus:not([readonly]) {
+  border-bottom: 1px solid #51a83b;
+  box-shadow: 0 1px 0 0 #51a83b; }
 
 /* Header styles */
 .brand-logo {
@@ -40,6 +53,55 @@
 .dropdown-content li > a {
   color: #2D5696 !important; }
 
+/**********SPRITES**********/
+/**********SPRITES**********/
+.instrument, .Guitar, .Leadguitar, .Rhythmguitar, .Bass, .Drum, .Keys, .Vocals {
+  background-image: url("../img/instrumentsprite.png");
+  background-repeat: no-repeat; }
+
+.Guitar {
+  height: 150px;
+  width: 150px;
+  background-position: 0px -150px;
+  background-color: #2e63c4; }
+
+.Leadguitar {
+  height: 150px;
+  width: 150px;
+  background-position: 0px -150px;
+  background-color: #2e63c4; }
+
+.Rhythmguitar {
+  height: 150px;
+  width: 150px;
+  background-position: 0px 0px;
+  background-color: #51a83b; }
+
+.Bass {
+  height: 150px;
+  width: 150px;
+  background-position: -150px -150px;
+  background-color: #e69225; }
+
+.Drum {
+  height: 150px;
+  width: 150px;
+  background-position: -300px 0px;
+  background-color: #d5c711; }
+
+.Keys {
+  height: 150px;
+  width: 150px;
+  background-position: -300px -150px;
+  background-color: #8838b7; }
+
+.Vocals {
+  height: 150px;
+  width: 150px;
+  background-position: -150px 0px; }
+
+/**********NAV**********/
+/**********NAV**********/
 nav .nav-wrapper {
   width: 75%;
   margin: 0 12.5%; }
@@ -50,18 +112,19 @@ nav .nav-wrapper {
 .scroll {
   width: 100% !important; }
 
+/*********HOME*********/
+/*********HOME*********/
 .search {
   position: absolute;
   top: 20%;
   width: 50% !important;
   left: 25%; }
   .search input {
+    display: inline !important;
     margin: 0 !important;
     border-bottom: 2px solid #51a83b;
-    padding-left: 1rem !important;
-    width: 100% !important; }
+    padding-left: 1rem !important; }
   .search input:focus {
-    background-color: #222222 !important;
     color: white !important; }
 
 /**********SOLO TRACK**********/
@@ -73,4 +136,34 @@ nav .nav-wrapper {
   z-index: -1; }
 
 .solo h1, .solo h2, .solo h3, .solo h4, .solo h5, .solo h6, .solo p, .solo label {
-  color: #999999 !important; }
+  color: #999999; }
+
+input {
+  border-bottom: 2px solid #51a83b;
+  padding-left: 1rem !important; }
+
+input:focus {
+  color: white !important; }
+
+/************CARD************/
+/************CARD************/
+.card {
+  background-color: rgba(34, 34, 34, 0.75); }
+
+.card-button.add {
+  background-color: #51a83b; }
+
+.card-button.remove {
+  background-color: #ec191a; }
+
+.card-button i {
+  font-size: 5rem;
+  color: rgba(34, 34, 34, 0.75);
+  margin: 0 auto; }
+
+.card-button:hover {
+  background-color: transparent; }
+  .card-button:hover.add i {
+    color: #51a83b; }
+  .card-button:hover.remove i {
+    color: #ec191a; }
