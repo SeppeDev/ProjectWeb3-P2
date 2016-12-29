@@ -12,6 +12,14 @@ app.directive("dcbHeader", function() {
 				vm.value = "This is a directive test value!";
 			}
 
+			vm.showLogin = function() {
+				$("#login_modal").modal();
+			}
+
+			vm.showRegister = function() {
+				$("#register_modal").modal();
+			}
+
 			_init();
 		}
 	}
