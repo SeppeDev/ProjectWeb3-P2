@@ -5,19 +5,22 @@ app.directive("dcbHeader", function() {
 		replace: true,
 		scope: {},
 		controllerAs: "head",
-		controller: function() {
-			var vm = this;
+		controller: function(loginService) {
+			var vm 			= this;
+			var loginSvc 	= loginService;
 
 			function _init() {
 				vm.value = "This is a directive test value!";
 			}
 
-			vm.showLogin = function() {
-				$("#login_modal").modal();
+			vm.showLogin = function () {
+				$('#login_modal').modal();
+				$('#login_modal').modal('open');
 			}
 
-			vm.showRegister = function() {
-				$("#register_modal").modal();
+			vm.showRegister = function () {
+				$('#register_modal').modal();
+				$('#register_modal').modal('open');
 			}
 
 			_init();

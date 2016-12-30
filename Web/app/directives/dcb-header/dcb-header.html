@@ -12,11 +12,8 @@
 		      	</ul>
 
 		      	<ul ng-if="!$root.isLoggedIn" class="right hide-on-med-and-down">
-					<li ng-click="head.showLogin()">
-						<a href="#login_modal">Login</a></li>
-					
-					<li ng-click="head.showRegister()">
-						<a>Registreer</a></li>
+					<li><a ng-click="head.showLogin()" data-target="#login_modal">Login</a></li>
+					<li ng-click="head.showRegister()"><a>Registreer</a></li>
 				</ul>
 				<ul ng-if="$root.isLoggedIn" class="right hide-on-med-and-down">
 					<li ng-click="head.logout()">
