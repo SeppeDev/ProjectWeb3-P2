@@ -3,10 +3,6 @@ app.service("loginService", function($http) {
 
 	svc.getUser = function()
 	{
-		$http.get(CONSTANTS.API_BASE_URL + "/user").success(function(user) {
-            console.log(user);
-        }).error(function(error) {
-        	console.log(error);
-        });
+		return $http.get(CONSTANTS.API_BASE_URL + "/user");
 	}
 })

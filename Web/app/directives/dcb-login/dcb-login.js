@@ -5,7 +5,7 @@ app.directive("dcbLogin", function() {
 		replace: true,
 		scope: {},
 		controllerAs: "login",
-		controller: function($auth, loginService) {
+		controller: function($auth, loginService, $rootScope) {
 			var vm 			= this;
 			var loginSvc 	= loginService;
 			var target 		= document.getElementById('login-spinner');
@@ -34,7 +34,6 @@ app.directive("dcbLogin", function() {
 			}
 
 	        vm.login = function() {
-	        	console.log('Sent');
 	        	var spinner = new Spinner(opts).spin(target);
 	        	vm.loading 	= true;
 
@@ -49,8 +48,10 @@ app.directive("dcbLogin", function() {
 	            	vm.loading = false;
 	            	$('#login_modal').modal();
 					$('#login_modal').modal('close');
-	            	console.log(data);
-	            	loginSvc.getUser();
+
+					loginSvc.getUser().then(function (data) {
+						$rootScope.username = data.data.username;
+					});
 	            }, 
 	            function(error){
 	            	// Authentication failed

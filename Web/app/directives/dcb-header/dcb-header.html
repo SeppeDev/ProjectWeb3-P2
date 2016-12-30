@@ -4,20 +4,17 @@
 		    <div class="nav-wrapper">
 		      	<a ui-sref="home" class="brand-logo center">DisCoverBand</a>
 		      	<ul id="nav-mobile" class="left hide-on-med-and-down">
-			        <li>
-			        	<a ui-sref="solo">Solo Track</a></li>
-			        
-			        <li>
-			        	<a ui-sref="merged">Merged Covers</a></li>
+			        <li><a ui-sref="solo">Solo Track</a></li>
+			        <li><a ui-sref="merged">Merged Covers</a></li>
 		      	</ul>
 
-		      	<ul ng-if="!$root.isLoggedIn" class="right hide-on-med-and-down">
-					<li><a ng-click="head.showLogin()" data-target="#login_modal">Login</a></li>
-					<li ng-click="head.showRegister()"><a>Registreer</a></li>
+		      	<ul ng-if="!head.isAuthenticated()" class="right hide-on-med-and-down">
+					<li><a ng-click="head.showLogin()">Login</a></li>
+					<li><a ng-click="head.showRegister()">Register</a></li>
 				</ul>
-				<ul ng-if="$root.isLoggedIn" class="right hide-on-med-and-down">
-					<li ng-click="head.logout()">
-						<a>USERNAME, Logout</a></li>
+				<ul ng-if="head.isAuthenticated()" class="right hide-on-med-and-down">
+					<li>You are logged in as {{ $root.username }}</li>
+					<li ng-click="head.logout()"><a>Logout</a></li>
 				</ul>
 		    </div>
 	 	</nav>
