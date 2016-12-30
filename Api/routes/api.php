@@ -21,6 +21,7 @@ Route::get('tracks', 'SingleTrackController@index');
 Route::get('tracks/{id}', 'SingleTrackController@show');
 Route::get('mergedtracks', 'MergedTrackController@index');
 Route::get('mergedtracks/{id}', 'MergedTrackController@show');
+Route::get('instruments', 'InstrumentController@index');
 
 Route::post('mergedtracks/create', 'MergedTrackController@store');
 
