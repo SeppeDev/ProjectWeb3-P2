@@ -1,5 +1,6 @@
 app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
-  $authProvider.loginUrl = CONSTANTS.API_BASE_URL + '/authenticate';
+  $authProvider.loginUrl    = CONSTANTS.API_BASE_URL + '/login';
+  $authProvider.signupUrl   = CONSTANTS.API_BASE_URL + '/register';
   $urlRouterProvider.otherwise("/");
 
   $stateProvider

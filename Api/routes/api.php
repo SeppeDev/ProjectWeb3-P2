@@ -12,10 +12,9 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('register', 'AuthenticateController@register');
+Route::post('login', 'AuthenticateController@login');
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
 
 Route::get('tracks', 'SingleTrackController@index');
 Route::get('tracks/{id}', 'SingleTrackController@show');
@@ -26,5 +25,6 @@ Route::get('instruments', 'InstrumentController@index');
 Route::post('mergedtracks/create', 'MergedTrackController@store');
 
 Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
-Route::post('authenticate', 'AuthenticateController@authenticate');
+
+
 Route::get('user', 'AuthenticateController@getUser');

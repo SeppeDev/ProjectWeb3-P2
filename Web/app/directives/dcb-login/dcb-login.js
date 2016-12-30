@@ -1,11 +1,11 @@
-app.directive("dcbLogin", function() {
+app.directive("dcbLogin", function(loginService) {
 	return {
 		restrict: "E",
 		templateUrl: "app/directives/dcb-login/dcb-login.html",
 		replace: true,
 		scope: {},
 		controllerAs: "login",
-		controller: function($auth, loginService, $rootScope) {
+		controller: function($auth, $rootScope) {
 			var vm 			= this;
 			var loginSvc 	= loginService;
 			var target 		= document.getElementById('login-spinner');

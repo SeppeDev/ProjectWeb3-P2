@@ -11,17 +11,16 @@ class AuthenticateController extends Controller
 {
 	public function __construct()
    	{
-       	$this->middleware('jwt.auth', ['except' => ['authenticate']]);
+       	$this->middleware('jwt.auth', ['except' => ['login', 'register']]);
    	}
 
-   	public function index()
-	{
-	    $users = User::all();
-	    return $users;
-	}
-
-    public function authenticate(Request $request)
+    public function login(Request $request)
     {
+        $this->validate($request, [
+            'email'     => 'required|max:255|email',
+            'password'  => 'required',
+        ]);
+
         $credentials = $request->only('email', 'password');
 
         try {
@@ -43,5 +42,24 @@ class AuthenticateController extends Controller
         $user = JWTAuth::parseToken()->authenticate();
         
         return response()->json($user);
+    }
+
+    public function register(Request $request) 
+    {
+        $this->validate($request, [
+            'username'  => 'required|max:18',
+            'email'     => 'required|max:255|email|unique:users',
+            'password'  => 'required|min:3|max:18',
+        ]);
+
+        $user = new User();
+
+        $user->username = $request->username;
+        $user->email    = $request->email;
+        $user->password = bcrypt($request->password);
+
+        $user->save();
+
+        return response()->json(['status' => 'OK'], 200);
     }
 }
