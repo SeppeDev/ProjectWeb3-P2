@@ -88,6 +88,21 @@ input[type=text]:focus:not([readonly]) {
 	color: #2D5696 !important;
 }
 
+/* Modal styles */
+.modal {
+	bottom: auto;
+	
+	input:focus {
+		color: black !important;
+	}
+
+	.modal-content {
+		overflow: hidden;
+		.spinner {
+			padding: 50px 0;
+		}
+	}
+}
 
 /**********SPRITES**********/
 /**********SPRITES**********/

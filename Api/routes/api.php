@@ -13,13 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
-
 Route::get('tracks', 'SingleTrackController@index');
 Route::get('tracks/{id}', 'SingleTrackController@show');
 Route::get('mergedtracks', 'MergedTrackController@index');
 Route::get('mergedtracks/{id}', 'MergedTrackController@show');
+Route::get('instruments', 'InstrumentController@index');
 
 Route::post('mergedtracks/create', 'MergedTrackController@store');
+
+Route::get('user', 'UserController@index');
+Route::post('user', 'UserController@update');
+Route::post('login', 'AuthenticateController@login');
+Route::post('register', 'AuthenticateController@register');
