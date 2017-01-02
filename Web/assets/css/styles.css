@@ -149,16 +149,31 @@ input:focus {
 /************CARD************/
 .card {
   background-color: rgba(34, 34, 34, 0.75); }
+  .card .card-content .row {
+    margin-bottom: 0px; }
 
 .card-button.add {
   background-color: #51a83b; }
+  .card-button.add i {
+    font-size: 5rem;
+    color: rgba(34, 34, 34, 0.75);
+    margin: 0 auto; }
 
 .card-button.remove {
   background-color: #ec191a; }
+  .card-button.remove i {
+    font-size: 5rem;
+    color: rgba(34, 34, 34, 0.75);
+    margin: 0 auto; }
 
-.card-button i {
-  font-size: 5rem;
-  color: rgba(34, 34, 34, 0.75);
+.card-button.play i {
+  font-size: 2rem;
+  color: #8838b7;
+  margin: 0 auto; }
+
+.card-button.pause i {
+  font-size: 2rem;
+  color: #2e63c4;
   margin: 0 auto; }
 
 .card-button:hover {

@@ -12,6 +12,9 @@
 		      	</ul>
 
 		      	<ul ng-if="!$root.isLoggedIn" class="right hide-on-med-and-down">
+					<li ng-click="head.showBand()">
+						<a ng-model="head.trackArrayCount">{{head.trackArrayCount}}</a></li>
+
 					<li ng-click="head.showLogin()">
 						<a>Login</a></li>
 					

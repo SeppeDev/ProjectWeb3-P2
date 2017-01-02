@@ -219,21 +219,50 @@ input:focus {
 /************CARD************/
 .card {
 	background-color: transparentize($dark-grey, 0.25);
+
+	.card-content {
+
+		.row {
+			margin-bottom: 0px;
+		}
+	}
 }
 
 .card-button {
 	&.add {
 		background-color: $dark-green;
+
+		i {
+			font-size: 5rem;
+			color: transparentize($dark-grey, 0.25);
+			margin: 0 auto;
+		}
 	}
 
 	&.remove {
 		background-color: $dark-red;
+
+		i {
+			font-size: 5rem;
+			color: transparentize($dark-grey, 0.25);
+			margin: 0 auto;
+		}
 	}
 	
-	i {
-		font-size: 5rem;
-		color: transparentize($dark-grey, 0.25);
-		margin: 0 auto;
+	&.play {
+		i {
+			font-size: 2rem;
+			color: $dark-purple;
+			margin: 0 auto;
+		}
+	}
+
+	&.pause {
+		i {
+			font-size: 2rem;
+			color: $dark-blue;
+			margin: 0 auto;
+		}
 	}
 }
 

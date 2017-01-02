@@ -3,6 +3,7 @@ app.service("bandService", function() {
 	svc.testValue = "This value is from a service!";
 
 	svc.trackArray = [];
+	svc.trackArrayCount = 0;
 
 	
 

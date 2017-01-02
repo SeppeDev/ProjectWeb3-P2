@@ -36,7 +36,15 @@
 		        	<img class="{{track.instrument.name}}" src="dist/img/transparent.png" alt="{{track.instrument.name}}">
 		      	</div>
 		      	<div class="card-content">
-			          	<h3>{{track.artist.name}} - {{track.songname}}</h3>
+			          	<h4>{{track.artist.name}} - {{track.songname}}</h4>
+			          	<div class="row">
+			          		<div class="card-button play col s1 valign-wrapper" ng-click="solo.play(track.id)" ng-if="track.id != solo.currentAudioTrackId">
+						    	<i class="fa fa-play valign" aria-hidden="true"></i>
+					      	</div>
+					      	<div class="card-button pause col s1 valign-wrapper" ng-click="solo.pause(track.id)" ng-if="track.id == solo.currentAudioTrackId">
+						    	<i class="fa fa-pause valign" aria-hidden="true"></i>
+					      	</div>
+			          	</div>
 			    </div>
 			    <div class="card-button add col s1 valign-wrapper" ng-click="solo.addToBand(track)" ng-if="(track.id | band:solo.bandTrackIdArray) == false">
 			    	<i class="fa fa-plus valign" aria-hidden="true"></i>
