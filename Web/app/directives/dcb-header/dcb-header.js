@@ -5,14 +5,14 @@ app.directive("dcbHeader", function() {
 		replace: true,
 		scope: {},
 		controllerAs: "head",
-		controller: function(loginService, $auth, $rootScope) {
+		controller: function(userService, $auth, $rootScope) {
 			var vm 			= this;
-			var loginSvc 	= loginService;
+			var userSvc 	= userService;
 
 			function _init() {
 				if($auth.isAuthenticated())
 				{
-					loginSvc.getUser().then(function (data) {
+					userSvc.getUser().then(function (data) {
 						$rootScope.username = data.data.username;
 					});
 				}

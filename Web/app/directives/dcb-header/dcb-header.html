@@ -13,7 +13,7 @@
 					<li><a ng-click="head.showRegister()">Register</a></li>
 				</ul>
 				<ul ng-if="head.isAuthenticated()" class="right hide-on-med-and-down">
-					<li>You are logged in as {{ $root.username }}</li>
+					<li><a ui-sref="profile">You are logged in as {{ $root.username }}</a></li>
 					<li ng-click="head.logout()"><a>Logout</a></li>
 				</ul>
 		    </div>

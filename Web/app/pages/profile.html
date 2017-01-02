@@ -1,0 +1,31 @@
+<main>
+<div class="container">
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="card white">
+        <div class="card-content black-text">
+          <span class="card-title">My profile</span>
+           <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="username" type="text" class="validate" ng-model="profile.username">
+                  <label for="username" class="active">Username</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="email" type="email" class="validate" ng-model="profile.email">
+                  <label for="email" class="active">Email</label>
+                </div>
+              </div>
+            </form>
+          </div>
+          <a class="waves-effect waves-light btn" ng-click="profile.update()">Save</a>
+          <div id="update-profile-spinner" ng-show="profile.loading"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</main>

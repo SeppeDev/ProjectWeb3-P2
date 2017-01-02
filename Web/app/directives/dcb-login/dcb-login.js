@@ -1,4 +1,4 @@
-app.directive("dcbLogin", function(loginService) {
+app.directive("dcbLogin", function(userService) {
 	return {
 		restrict: "E",
 		templateUrl: "app/directives/dcb-login/dcb-login.html",
@@ -7,7 +7,7 @@ app.directive("dcbLogin", function(loginService) {
 		controllerAs: "login",
 		controller: function($auth, $rootScope) {
 			var vm 			= this;
-			var loginSvc 	= loginService;
+			var userSvc 	= userService;
 			var target 		= document.getElementById('login-spinner');
 
 			var opts = {
@@ -49,8 +49,9 @@ app.directive("dcbLogin", function(loginService) {
 	            	$('#login_modal').modal();
 					$('#login_modal').modal('close');
 
-					loginSvc.getUser().then(function (data) {
+					userSvc.getUser().then(function (data) {
 						$rootScope.username = data.data.username;
+						$rootScope.email 	= data.data.email;
 					});
 	            }, 
 	            function(error){

@@ -19,4 +19,9 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
       templateUrl: "app/pages/merged.html",
       controller: "mergedController as merged"
     })
+    .state('profile', {
+      url: "/profile",
+      templateUrl: "app/pages/profile.html",
+      controller: "profileController as profile"
+    })
 });

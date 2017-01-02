@@ -1,4 +1,4 @@
-app.directive("dcbRegister", function(loginService) {
+app.directive("dcbRegister", function(userService) {
 	return {
 		restrict: "E",
 		templateUrl: "app/directives/dcb-register/dcb-register.html",
@@ -7,7 +7,7 @@ app.directive("dcbRegister", function(loginService) {
 		controllerAs: "register",
 		controller: function($auth, $rootScope) {
 			var vm 			= this;
-			var loginSvc 	= loginService;
+			var userSvc 	= userService;
 			var target 		= document.getElementById('register-spinner');
 
 			var opts = {
@@ -54,7 +54,7 @@ app.directive("dcbRegister", function(loginService) {
 		            	$('#register_modal').modal();
 						$('#register_modal').modal('close');
 
-						loginSvc.getUser().then(function (data) {
+						userSvc.getUser().then(function (data) {
 							$rootScope.username = data.data.username;
 						});
 		            }, 

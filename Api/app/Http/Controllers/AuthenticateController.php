@@ -37,13 +37,6 @@ class AuthenticateController extends Controller
         return response()->json(compact('token'));
     }
 
-    public function getUser()
-    {
-        $user = JWTAuth::parseToken()->authenticate();
-        
-        return response()->json($user);
-    }
-
     public function register(Request $request) 
     {
         $this->validate($request, [
