@@ -5,10 +5,11 @@ app.directive("dcbHeader", function(bandService) {
 		replace: true,
 		scope: {},
 		controllerAs: "head",
-		controller: function($scope, userService, $auth, $rootScope) {
+		controller: function($scope, userService, authService, $auth, $rootScope) {
 			
 			var vm 			= this;
 			var userSvc 	= userService;
+			var authSvc 	= authService;
 			var bandSvc 	= bandService;
 
 			function _init() {
@@ -29,7 +30,7 @@ app.directive("dcbHeader", function(bandService) {
 			}
 
 			vm.logout = function () {
-				$auth.logout();
+				authSvc.logout();
 			}
 
 			vm.showRegister = function () {
@@ -42,6 +43,15 @@ app.directive("dcbHeader", function(bandService) {
 			};
 
 			_init();
+
+			//Watches
+			$scope.$watch(
+				function () { return authSvc.user }, 
+				function () {
+
+					vm.user = authSvc.user;
+					//console.log(vm.user);
+				});
 		}
 	}
 })

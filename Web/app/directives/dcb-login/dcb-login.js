@@ -1,13 +1,14 @@
-app.directive("dcbLogin", function(userService) {
+app.directive("dcbLogin", function() {
 	return {
 		restrict: "E",
 		templateUrl: "app/directives/dcb-login/dcb-login.html",
 		replace: true,
 		scope: {},
 		controllerAs: "login",
-		controller: function($auth, $rootScope) {
+		controller: function($auth, $scope, $rootScope, userService, authService, $cookies) {
 			var vm 			= this;
 			var userSvc 	= userService;
+			var authSvc 	= authService;
 			var target 		= document.getElementById('login-spinner');
 
 			var opts = {
@@ -33,6 +34,35 @@ app.directive("dcbLogin", function(userService) {
 				, position: 'absolute' // Element positioning
 			}
 
+			//Private functions
+			function login (token, id, username, email) {
+
+				var expirationTime = new Date();
+				expirationTime = expirationTime.setTime(expirationTime.getTime() + (token["expires_in"] * 1000));
+				expirationTime = new Date(expirationTime);
+
+				var userData = {
+
+					token: token,
+					userId: id,
+					username: username,
+					email: email,
+					//isAdmin: data.data.isAdmin
+				}
+
+				console.log(userData.token);
+
+				authSvc.user = userData;
+
+				$cookies.putObject("user", userData, { expires: expirationTime });
+				$rootScope.isLoggedIn = true;
+				
+				//Check if returned user is Admin
+				userData.isAdmin == "1" ? $rootScope.isAdmin = true : $rootScope.isAdmin = false;
+			}
+
+
+			//Vm functions
 	        vm.login = function() {
 	        	var spinner = new Spinner(opts).spin(target);
 	        	vm.loading 	= true;
@@ -42,24 +72,28 @@ app.directive("dcbLogin", function(userService) {
 	                password: vm.password
 	            }
 	            
-	            $auth.login(credentials).then(function(data) {
-	            	// Authentication success
-	            	spinner.stop();
-	            	vm.loading = false;
-	            	$('#login_modal').modal();
-					$('#login_modal').modal('close');
+	            authSvc.login(credentials);
 
-					userSvc.getUser().then(function (data) {
-						$rootScope.username = data.data.username;
-						$rootScope.email 	= data.data.email;
-					});
-	            }, 
-	            function(error){
-	            	// Authentication failed
-	            	spinner.stop();
-	            	vm.loading = false;
-	            	console.log(error);
-	            });
+	            //Watches
+				var unregister = $scope.$watch(
+					function () { return authSvc.isLoggedIn }, 
+					function () {
+
+						if(authSvc.isLoggedIn) 
+						{
+							vm.loading = false;
+				        	$('#login_modal').modal();
+							$('#login_modal').modal('close');
+				        	spinner.stop();
+				        	unregister();
+						}
+						if(authSvc.isLoggedIn === false)
+						{
+							spinner.stop();
+        					vm.loading = false;
+        					unregister();
+						}
+					}, true);
 	        }
 		}
 	}

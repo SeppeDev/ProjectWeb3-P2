@@ -5,9 +5,10 @@ app.directive("dcbRegister", function(userService) {
 		replace: true,
 		scope: {},
 		controllerAs: "register",
-		controller: function($auth, $rootScope) {
+		controller: function($auth, $scope, $rootScope, userService, authService) {
 			var vm 			= this;
 			var userSvc 	= userService;
+			var authSvc 	= authService;
 			var target 		= document.getElementById('register-spinner');
 
 			var opts = {
@@ -47,23 +48,28 @@ app.directive("dcbRegister", function(userService) {
 
 				$auth.signup(user).then(function(response) {
 					// Registration success
-					$auth.login(user).then(function(data) {
-	            		// Authentication success
-		            	spinner.stop();
-		            	vm.loading = false;
-		            	$('#register_modal').modal();
-						$('#register_modal').modal('close');
+					authSvc.login(user);
 
-						userSvc.getUser().then(function (data) {
-							$rootScope.username = data.data.username;
-						});
-		            }, 
-		            function(error){
-		            	// Authentication failed
-		            	spinner.stop();
-		            	vm.loading = false;
-		            	console.log(error);
-		            });
+		            //Watches
+					var unregister = $scope.$watch(
+						function () { return authSvc.isLoggedIn }, 
+						function () {
+
+							if(authSvc.isLoggedIn) 
+							{
+								vm.loading = false;
+					        	$('#register_modal').modal();
+								$('#register_modal').modal('close');
+					        	spinner.stop();
+					        	unregister();
+							}
+							if(authSvc.isLoggedIn === false)
+							{
+								spinner.stop();
+	        					vm.loading = false;
+	        					unregister();
+							}
+						}, true);
 				})
 				.catch(function(response) {
 					// Registration failed

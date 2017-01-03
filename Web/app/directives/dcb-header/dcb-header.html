@@ -17,13 +17,16 @@
 					
 					<li ng-click="head.showRegister()">
 						<a>Registreer</a></li>
-		      	<ul ng-if="!$root.isLoggedIn()" class="right hide-on-med-and-down">
-					<li><a ng-click="head.showLogin()">Login</a></li>
-					<li><a ng-click="head.showRegister()">Register</a></li>
 				</ul>
-				<ul ng-if="$root.isLoggedIn()" class="right hide-on-med-and-down">
-					<li><a ui-sref="profile">You are logged in as {{ $root.username }}</a></li>
-					<li ng-click="head.logout()"><a>Logout</a></li>
+				<ul ng-if="$root.isLoggedIn" class="right hide-on-med-and-down">
+					<li ng-click="head.showBand()">
+						<a ng-model="head.trackArrayCount">{{head.trackArrayCount}}</a></li>
+
+					<li>
+						<a ui-sref="profile">You are logged in as {{ head.user.username }}</a></li>
+					
+					<li ng-click="head.logout()">
+						<a>Logout</a></li>
 				</ul>
 		    </div>
 	 	</nav>

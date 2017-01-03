@@ -123,7 +123,7 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 		}
 
 		console.log("Track removed from new band: " + track);
-		console.log(bandSvc.trackArray);
+		//console.log(bandSvc.trackArray);
 	}
 
 	vm.play = function(trackId) {

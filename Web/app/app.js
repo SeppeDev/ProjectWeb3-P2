@@ -1,1 +1,5 @@
-var app = angular.module("app", ["ui.router", "satellizer"]);
+var app = angular.module("app", [
+		"ui.router",
+		"satellizer",
+		"ngCookies"
+	]);

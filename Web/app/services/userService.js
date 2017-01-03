@@ -1,4 +1,5 @@
 app.service("userService", function($http) {	
+	
 	var svc = this;
 
 	svc.getUser = function()
