@@ -1,1 +1,48 @@
-<h1>{{merged.test}}</h1>
+<main class="merged">
+	<img class="background background-img" src="dist/img/wn1ch6ferbg-hannu-pekka-peuranen.jpg">
+
+	<div class="container">
+		
+		<h1>Merged Tracks</h1>
+
+		<div class="row">
+			<h2>Filter</h2>
+
+			<form action="#">
+				<div class="col s6">
+					<label>Artist</label>
+					<input type="text" name="artist" placeholder="Artist" ng-model="merged.filterData.artist">
+				</div>
+				<div class="col s6">
+					<label>Title</label>
+					<input type="text" name="title" placeholder="Title" ng-model="merged.filterData.title">
+				</div>
+			</form>
+		</div>
+
+		<div class="divider mar-top-xl"></div>
+
+		<div class="results">
+			<h2 class="primary-color-text">Results</h2>
+
+			
+		    <div class="card horizontal row" ng-repeat="track in merged.filteredTracks">
+		      	<div class="card-content">
+			          	<h4>{{track.artist.name}} - {{track.songname}}</h4>
+			          	<div class="row">
+			          		<div class="card-button play col s1 valign-wrapper" ng-click="merged.play(track.id)" ng-if="track.id != merged.currentAudioTrackId">
+						    	<i class="fa fa-play valign" aria-hidden="true"></i>
+					      	</div>
+					      	<div class="card-button pause col s1 valign-wrapper" ng-click="merged.pause(track.id)" ng-if="track.id == merged.currentAudioTrackId">
+						    	<i class="fa fa-pause valign" aria-hidden="true"></i>
+					      	</div>
+			          	</div>
+			    </div>
+			    <div class="card-button add col s1 valign-wrapper" ng-click="merged.download()">
+			    	<i class="fa fa-download" aria-hidden="true"></i>
+		      	</div>
+		    </div>
+		    
+		</div>
+	</div>
+</main>
