@@ -46,10 +46,10 @@
 					      	</div>
 			          	</div>
 			    </div>
-			    <div class="card-button add col s1 valign-wrapper" ng-click="solo.addToBand(track)" ng-if="(track.id | band:solo.bandTrackIdArray) == false">
+			    <div class="card-button add col s1 valign-wrapper" ng-click="solo.addToBand(track)" ng-if="(track.id | band:solo.bandTrackIdArray()) == false">
 			    	<i class="fa fa-plus valign" aria-hidden="true"></i>
 		      	</div>
-		      	<div class="card-button remove col s1 valign-wrapper" ng-click="solo.removeFromBand(track)" ng-if="track.id | band:solo.bandTrackIdArray">
+		      	<div class="card-button remove col s1 valign-wrapper" ng-click="solo.removeFromBand(track)" ng-if="track.id | band:solo.bandTrackIdArray()">
 			    	<i class="fa fa-plus valign" aria-hidden="true"></i>
 		      	</div>
 		    </div>

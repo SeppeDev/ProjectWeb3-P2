@@ -13,8 +13,8 @@ app.directive("dcbHeader", function(bandService) {
 			var bandSvc 	= bandService;
 
 			function _init() {
-				vm.trackArray = bandSvc.trackArray;
-				vm.trackArrayCount = bandSvc.trackArrayCount;
+				vm.trackArray = bandSvc.getTrackArray;
+				vm.trackArrayCount = bandSvc.getTrackArrayCount;
 
 				if($auth.isAuthenticated())
 				{

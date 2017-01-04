@@ -66,14 +66,14 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 		});
 	}
 
-	function arrayObjectIndexOf(myArray, searchTerm, property) {
+	/*function arrayObjectIndexOf(myArray, searchTerm, property) {
     	
     	for(var i = 0, len = myArray.length; i < len; i++) {
         	if (myArray[i][property] === searchTerm) return i;
     	}
 
     	return -1;
-	}
+	}*/
 
 	function _init() {
 		vm.soloTrackAudio = [];
@@ -81,12 +81,14 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 
 		getSoloTracks();
 		vm.instruments = instSvc.instruments;
-		vm.filterData = fltSvc.filterData;
-		vm.bandTrackIdArray = [];
+		vm.filterData = fltSvc.soloFilterData;
+		vm.trackArray = bandSvc.getTrackArray;
+		vm.bandTrackIdArray = bandSvc.getTrackIdArray;
+		vm.trackArrayCount = bandSvc.getTrackArrayCount;
 
-		angular.forEach(bandSvc.trackArray, function(track, key) {
+		/*angular.forEach(bandSvc.trackArray, function(track, key) {
 			vm.bandTrackIdArray.push(track.id);
-		});
+		});*/
 
 		//vm.track1.play();
 		//setTimeout(function(){playAudioFile(vm.track2)}, 400);
@@ -95,22 +97,26 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 	//Vm functions
 	vm.addToBand = function(track) {
 
-		vm.bandTrackIdArray = [];
+		bandSvc.addToTrackArray(track);
+		/*vm.bandTrackIdArray = [];
 
 		bandSvc.trackArray.push(track);
 		bandSvc.trackArrayCount ++;
 		angular.forEach(bandSvc.trackArray, function(track, key) {
 			vm.bandTrackIdArray.push(track.id);
-		});
+		});*/
 
 		console.log("Track added to new band: " + track);
 		//console.log(bandSvc.trackArray);
 		//console.log(vm.bandTrackIdArray);
+		//console.log(vm.trackArrayCount());
+		//console.log(vm.bandTrackIdArray());
 	}
 
 	vm.removeFromBand = function(track) {
 		
-		index = arrayObjectIndexOf(bandSvc.trackArray, track.id, "id");
+		bandSvc.removeFromTrackArray(track);
+		/*index = arrayObjectIndexOf(bandSvc.trackArray, track.id, "id");
 		if (index > -1) {
 			bandSvc.trackArray.splice(index, 1);
 			bandSvc.trackArrayCount --;
@@ -120,7 +126,7 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 			if (intIndex > -1) {
 				vm.bandTrackIdArray.splice(intIndex, 1);
 			}
-		}
+		}*/
 
 		console.log("Track removed from new band: " + track);
 		//console.log(bandSvc.trackArray);
