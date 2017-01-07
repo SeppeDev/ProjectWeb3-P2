@@ -37,4 +37,22 @@ class SingleTrackController extends Controller
             return response()->json(['status' => 'Track not found.']);
         }
     }
+
+    public function store(Request $request)
+    {
+        $track                      = new Single_track();
+
+        $track->songname           = 'Temp_songname';
+        // $path                    = $request->file->store('audio', 'upload'); 
+        // $tracks->file_url        = basename($path);
+        $track->file_url           = 'temp_url.mp3';
+        $track->track_length       = 100.000001;
+        $track->instrument_id      = 1;
+        $track->artist_id          = 1;
+        $track->user_id            = 1;
+
+        $track->save();
+
+        return response()->json(['status' => 'Track saved.']);
+    }
 }
