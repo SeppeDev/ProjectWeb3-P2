@@ -40,19 +40,41 @@ class SingleTrackController extends Controller
 
     public function store(Request $request)
     {
-        $track                      = new Single_track();
+        // $path       = $request->file->store('audio', 'upload');
+        $path       = 'drum.mp3';
+        $fileName   = uniqid('solo_', true) . '.wav';
 
-        $track->songname           = 'Temp_songname';
-        // $path                    = $request->file->store('audio', 'upload'); 
-        // $tracks->file_url        = basename($path);
-        $track->file_url           = 'temp_url.mp3';
-        $track->track_length       = 100.000001;
-        $track->instrument_id      = 1;
-        $track->artist_id          = 1;
-        $track->user_id            = 1;
+        exec('cd audio ; ffmpeg -i ' . basename($path) . ' ' . $fileName . ' 2>&1',  $output, $returncode);
+        exec('cd audio ; soxi -D ' . $fileName . ' 2>&1',  $tracklength, $length_returncode);
 
-        $track->save();
+        if($returncode === 0 && $length_returncode === 0)
+        {
+            $track                     = new Single_track();
 
-        return response()->json(['status' => 'Track saved.']);
+            $track->songname           = 'Temp_songname';             
+            $track->file_url           = $fileName;
+            $track->track_length       = $tracklength[0];
+            $track->instrument_id      = 1;
+            $track->artist_id          = 1;
+            $track->user_id            = 1;
+
+            $track->save();
+
+            return response()->json([
+                'status'        => 'success',
+                'trackname'     => $fileName,
+                'tracklength'   => $tracklength[0]
+            ]);
+        }
+        else
+        {
+            // Remove cmd-output in production! 
+            return response()->json([
+                'status'            => 'failed',
+                'error_location'    => 'convert',
+                'error_code'        => $returncode,
+                'cmd-output'        => $output
+            ]);
+        } 
     }
 }
