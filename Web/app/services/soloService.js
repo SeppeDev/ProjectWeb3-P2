@@ -25,4 +25,9 @@ app.service("soloService", function($http) {
 
 		return getData(url);
 	}
+
+	svc.insertTrack = function(data)
+	{
+		return $http.post(CONSTANTS.API_BASE_URL + "/tracks/create", data);
+	}
 })

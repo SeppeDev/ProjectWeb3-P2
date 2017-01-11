@@ -16,7 +16,7 @@ app.service("instrumentService", function($http) {
 
 		var url = CONSTANTS.API_BASE_URL + "/instruments";
 		
-	svc.instruments = getData(url);
+		return getData(url);
 	}
 
 	svc.instruments = [{

@@ -40,44 +40,25 @@ class SingleTrackController extends Controller
 
     public function upload(Request $request)
     {   
-        $fileNameArray  = explode(".", $request->song->getClientOriginalName());
-        $extension      = $fileNameArray[1];
-        $fileName       = uniqid('uploaded_', true) . '.' . $extension;
+        $fileNameArray      = explode(".", $request->song->getClientOriginalName());
+        $extension          = $fileNameArray[1];
+        $tempFileName       = uniqid('uploaded_', true) . '.' . $extension;
 
-        $path = $request->song->storeAs('audio', $fileName,'upload');
+        $path               = $request->song->storeAs('audio', $tempFileName,'upload');
         
-        return response()->json([
-            'status' => 'Success',
-            'name'   => $fileName,
-        ]);
-    }
+        $fileName           = uniqid('solo_', true) . '.wav';
 
-    public function store(Request $request)
-    {
-        // $path       = $request->file->store('audio', 'upload');
-        $path       = 'drum.mp3';
-        $fileName   = uniqid('solo_', true) . '.wav';
-
-        exec('cd audio ; ffmpeg -i ' . basename($path) . ' ' . $fileName . ' 2>&1',  $output, $returncode);
+        exec('cd audio ; ffmpeg -i ' . $tempFileName . ' ' . $fileName . ' 2>&1',  $output, $returncode);
         exec('cd audio ; soxi -D ' . $fileName . ' 2>&1',  $tracklength, $length_returncode);
 
         if($returncode === 0 && $length_returncode === 0)
         {
-            $track                     = new Single_track();
-
-            $track->songname           = 'Temp_songname';             
-            $track->file_url           = $fileName;
-            $track->track_length       = $tracklength[0];
-            $track->instrument_id      = 1;
-            $track->artist_id          = 1;
-            $track->user_id            = 1;
-
-            $track->save();
+            exec('cd audio ; rm ' . $tempFileName);
 
             return response()->json([
                 'status'        => 'success',
-                'trackname'     => $fileName,
-                'tracklength'   => $tracklength[0]
+                'name'          => $fileName,
+                'length'        => $tracklength[0]
             ]);
         }
         else
@@ -90,5 +71,19 @@ class SingleTrackController extends Controller
                 'cmd-output'        => $output
             ]);
         } 
+    }
+
+    public function store(Request $request)
+    {   
+        $track                     = new Single_track();
+
+        $track->songname           = $request->name;             
+        $track->file_url           = $request->file_url;
+        $track->track_length       = $request->track_length;
+        $track->instrument_id      = $request->instrument_id;
+        $track->artist_id          = $request->artist_id;
+        $track->user_id            = $request->user_id;
+
+        $track->save();
     }
 }
