@@ -12,19 +12,19 @@ class Single_tracksTableSeeder extends Seeder
     public function run()
     {
         DB::table('single_tracks')->insert([
-            'songname' => 'Raining blood',
-            'file_url' => 'placeholder.mp3',
+            'songname' => 'Enter sandman',
+            'file_url' => 'drum.wav',
             'track_length' => 254.121456,
-            'artist_id' => 1,
+            'artist_id' => 3,
             'user_id' => 2,
-            'instrument_id' => 3
+            'instrument_id' => 2
         ]);
 
         DB::table('single_tracks')->insert([
-            'songname' => 'Angel of death',
-            'file_url' => 'placeholder.mp3',
+            'songname' => 'Enter sandman',
+            'file_url' => 'guitar.wav',
             'track_length' => 254.121456,
-            'artist_id' => 1,
+            'artist_id' => 3,
             'user_id' => 1,
             'instrument_id' => 1
         ]);

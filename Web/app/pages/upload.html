@@ -1,0 +1,26 @@
+<main>
+<div class="container">
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="card white">
+        <div class="card-content black-text">
+          <span class="card-title">Upload track</span>
+           <div class="row">
+            <form class="col s12">
+              <!-- <div class="row">
+                <div class="input-field col s12">
+                  <input id="band" type="text" class="validate" ng-model="upload.band">
+                  <label for="band" class="active">Original band</label>
+                </div>
+              </div> -->
+              <div ngf-select="upload.uploadFile($file)" ngf-drop="upload.uploadFile($file)" class="drop-box" ngf-drag-over-class="'dragover'" ngf-accept="'audio/mp3'" ngf-pattern="'audio/mp3'" type="file" name="file">Drop file here</div>
+            </form>
+          </div>
+          <a class="waves-effect waves-light btn" ng-click="upload.save()">Save</a>
+          <div id="upload-spinner" ng-show="upload.loading"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</main>

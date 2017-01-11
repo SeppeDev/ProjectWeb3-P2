@@ -34,4 +34,9 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
       templateUrl: "app/pages/profile.html",
       controller: "profileController as profile"
     })
+    .state('upload', {
+      url: "/upload",
+      templateUrl: "app/pages/upload.html",
+      controller: "uploadController as upload"
+    })
 });

@@ -38,6 +38,20 @@ class SingleTrackController extends Controller
         }
     }
 
+    public function upload(Request $request)
+    {   
+        $fileNameArray  = explode(".", $request->song->getClientOriginalName());
+        $extension      = $fileNameArray[1];
+        $fileName       = uniqid('uploaded_', true) . '.' . $extension;
+
+        $path = $request->song->storeAs('audio', $fileName,'upload');
+        
+        return response()->json([
+            'status' => 'Success',
+            'name'   => $fileName,
+        ]);
+    }
+
     public function store(Request $request)
     {
         // $path       = $request->file->store('audio', 'upload');
