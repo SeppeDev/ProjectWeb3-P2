@@ -106,7 +106,7 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 			vm.bandTrackIdArray.push(track.id);
 		});*/
 
-		console.log("Track added to new band: " + track);
+		console.log(track);
 		//console.log(bandSvc.trackArray);
 		//console.log(vm.bandTrackIdArray);
 		//console.log(vm.trackArrayCount());

@@ -10,7 +10,7 @@
 
 		      	<ul ng-if="!$root.isLoggedIn" class="right hide-on-med-and-down">
 					<li ng-if="head.trackArrayCount() > 0" ng-click="head.showBand()">
-						<a>{{head.trackArrayCount()}}</a></li>
+						<a ui-sref="merge">{{head.trackArrayCount()}}</a></li>
 
 					<li ng-click="head.showLogin()">
 						<a>Login</a></li>
@@ -20,7 +20,7 @@
 				</ul>
 				<ul ng-if="$root.isLoggedIn" class="right hide-on-med-and-down">
 					<li ng-if="head.trackArrayCount() > 0" ng-click="head.showBand()">
-						<a>{{head.trackArrayCount()}}</a></li>
+						<a ui-sref="merge">{{head.trackArrayCount()}}</a></li>
 
 					<li>
 						<a ui-sref="profile">You are logged in as {{ head.user.username }}</a></li>

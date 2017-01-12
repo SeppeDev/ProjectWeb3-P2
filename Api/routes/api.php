@@ -28,3 +28,5 @@ Route::get('user', 'UserController@index');
 Route::post('user', 'UserController@update');
 Route::post('login', 'AuthenticateController@login');
 Route::post('register', 'AuthenticateController@register');
+
+Route::get('audio/{file}', 'AudioController@index');
