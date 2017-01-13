@@ -1,6 +1,6 @@
 app.controller("bandController", function(bandService) {
 	
-	var vm = this;
+	var vm 		= this;
 	var bandSvc = bandService;
 
 	function _init() {

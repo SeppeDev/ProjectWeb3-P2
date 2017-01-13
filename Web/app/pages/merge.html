@@ -13,7 +13,7 @@
 
 		        <span ng-hide="merge.thereAreTracks">No tracks added. <a ui-sref="solo">Click here to add some tracks!</a></span>
 		 
-		        <table class="table" ng-show="merge.thereAreTracks">
+		        <table class="table" ng-show="merge.thereAreTracks"> 
 		        	<tr>
 		        		<th>Name</th>
 		        		<th>Instrument</th>
@@ -37,13 +37,16 @@
 		            </tr>
 		        </table>
 		    </div>
-
-		    <div id="waveform{{key}}" ng-repeat="(key,track) in merge.tracks"></div>
-
+			<div ng-repeat="track in merge.tracks" ng-show="merge.showTracks">
+		    	<div id="waveform{{track.id}}" ></div>
+		    	<a type="button" class="btn btn-danger" ng-show="merge.thereAreTracks" ng-click="merge.playPause(track.id)">Play/Pause<span aria-hidden="true" ></span></a>
+		    	<a type="button" class="btn btn-danger" ng-show="merge.thereAreTracks" ng-click="merge.trim(track.id)">Trim from beginning<span aria-hidden="true" ></span></a>
+			</div>
 		    <div class="text-left">
 		        <a type="button" class="btn btn-danger" ng-show="merge.thereAreTracks" ng-click="merge.load()">Load <span aria-hidden="true" ></span></a>
-		 		<a type="button" class="btn btn-danger" ng-show="merge.thereAreTracks" ng-click="merge.playAll()">Play all <span aria-hidden="true" ></span></a>
+		 		<a type="button" class="btn btn-danger" ng-show="merge.thereAreTracks" ng-click="merge.playPauseAll()">Play/Pause combined<span aria-hidden="true" ></span></a>
 		    </div>
+		    <a type="button" class="btn btn-danger" ng-show="merge.thereAreTracks" ng-click="merge.save()">Save <span aria-hidden="true" ></span></a>
 		</div>
 		
 	</div>

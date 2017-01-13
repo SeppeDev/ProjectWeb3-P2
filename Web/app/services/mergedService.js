@@ -25,4 +25,9 @@ app.service("mergedService", function($http) {
 
 		return getData(url);
 	}
+
+	svc.mergeTracks = function(data)
+	{
+		return $http.post(CONSTANTS.API_BASE_URL + "/mergedtracks/create", data);
+	}
 })

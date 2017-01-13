@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Merged_track;
+use App\Single_track;
 
 class MergedTrackController extends Controller
 {
@@ -37,35 +38,30 @@ class MergedTrackController extends Controller
     }
 
     // POST naar /api/mergedtracks/create
-    public function store()
+    public function store(Request $request)
     {
+        // header("Access-Control-Allow-Origin: *");
+        
+        $tracks = $request->input();
+
         // Sox installation: sudo apt-get install sox
         // Lame installation: sudo apt-get install lame
         // Ffmpeg installation: sudo apt-get install ffmpeg
 
         // Gebruik ffmpeg om mp3 naar wav te converteren!
 
-        $tracks  = array(
-            "guitar.wav" => array(
-                "begin" => 0,
-                "end" => 0,
-            ),
-            "drum.wav" => array(
-                "begin" => 0.2,
-                "end" => 0,
-            )
-        );
-
         $trackstring = "";
 
         // Trim tracks, geef aantal sec.msec mee om te trimmen vanaf begin en vanaf einde
-        foreach ($tracks as $track => $timestamps) {
-            $trimBegining = $timestamps["begin"];
-            $trimEnding   = $timestamps["end"];
+        for ($i = 0; $i < count($tracks); $i++) { 
+            $track_id       = $tracks[$i]['track_id'];
+            $trimBegining   = $tracks[$i]['trim_amount'];
+            $track          = Single_track::find($track_id); 
+            $trackname      = $track->file_url;
 
             $trimmedTrackName = uniqid('trimmed_temp_', true).'.wav';
 
-            exec('cd audio ; sox ' . $track . ' ' . $trimmedTrackName . ' trim ' . $trimBegining . ' -' . $trimEnding . ' 2>&1', $trim_output, $trim_returncode);
+            exec('cd audio ; sox ' . $trackname . ' ' . $trimmedTrackName . ' trim ' . $trimBegining . ' -0 2>&1', $trim_output, $trim_returncode);
             if($trim_returncode === 0)
             {
                 $trackstring .= $trimmedTrackName . " ";
