@@ -24,7 +24,6 @@ app.controller("mergeController", function(bandService, mergedService) {
 
 				if(document.getElementById(track_id).checked) 
 				{
-					console.log('ID: ' + track_id);
 					wavesurfer[track_id] = WaveSurfer.create({
 			    		container: '#waveform'+track_id,
 			    		waveColor: 'green',
@@ -41,11 +40,9 @@ app.controller("mergeController", function(bandService, mergedService) {
 			}
 			vm.showTracks = true;
 		}
-		console.log(vm.loadedTracks);
 	}
 
 	vm.playPause = function(id) {
-		console.log(id);
 		wavesurfer[id].playPause();
 		wavesurfer[id].zoom(50);
 	}
@@ -63,7 +60,7 @@ app.controller("mergeController", function(bandService, mergedService) {
 
 	vm.playPauseAll = function() {
 		for (var i = vm.loadedTracks.length - 1; i >= 0; i--) {
-			var id = vm.loadedTracks[i];
+			var id = vm.loadedTracks[i].track_id;
     		wavesurfer[id].playPause();
     		wavesurfer[id].zoom(50);
 		}
