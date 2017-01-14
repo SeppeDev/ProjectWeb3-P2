@@ -25,7 +25,6 @@ $dark-yellow 		: darken(desaturate($yellow, 15%), 5%);
 $dark-red 			: darken(desaturate($red, 15%), 5%);
 $dark-green 		: darken(desaturate($green, 15%), 5%);
 
-
 body {
 	color: $light-grey !important;
 	background-color: $black;
@@ -47,7 +46,7 @@ body {
 
 .btn-flat:focus {
 	background-color: #2D5696 !important;
-	color: #fff !important;
+	color: $white !important;
 }
 
 .waves-effect {
@@ -173,7 +172,17 @@ input[type=text]:focus:not([readonly]) {
 nav {
 	.nav-wrapper {
 		width: 75%;
-		margin: 0 12.5%
+		margin: 0 12.5%;
+
+		a:hover {
+			color: $white !important;
+			text-decoration: underline;
+		}
+
+		a:focus {
+			color: $white !important;
+			text-decoration: none;
+		}
 	}
 }
 

@@ -21,7 +21,7 @@ body {
 
 .btn-flat:focus {
   background-color: #2D5696 !important;
-  color: #fff !important; }
+  color: #FFFFFF !important; }
 
 .waves-effect {
   z-index: 0 !important; }
@@ -116,6 +116,12 @@ input[type=text]:focus:not([readonly]) {
 nav .nav-wrapper {
   width: 75%;
   margin: 0 12.5%; }
+  nav .nav-wrapper a:hover {
+    color: #FFFFFF !important;
+    text-decoration: underline; }
+  nav .nav-wrapper a:focus {
+    color: #FFFFFF !important;
+    text-decoration: none; }
 
 .background-img {
   margin-top: -100px; }

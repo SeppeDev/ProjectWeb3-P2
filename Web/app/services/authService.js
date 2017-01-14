@@ -3,7 +3,7 @@ app.service("authService", function ($auth, $rootScope, $cookies, $state, userSe
 	var svc 		= this;
 	var userSvc 	= userService;
 
-	svc.isLoggedIn 	= null;
+	svc.isLoggedIn 	= false;
 
 	//Private functions
 	function login (token, id, username, email) {
@@ -62,7 +62,6 @@ app.service("authService", function ($auth, $rootScope, $cookies, $state, userSe
 	}
 
 	svc.logout = function () {
-
 		$auth.logout()
 			.then(function (data) {
 

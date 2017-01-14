@@ -73,24 +73,22 @@ app.directive("dcbLogin", function() {
 	            }
 	            
 	            authSvc.login(credentials);
+	            
 	            //Watches
 				var unregister = $scope.$watch(
-					function () { return authSvc.isLoggedIn }, 
-					function () {
-						console.log('isLoggedIn: ' + authSvc.isLoggedIn);
+				 	function () { return authSvc.isLoggedIn }, 
+				 	function () {
 						if(authSvc.isLoggedIn) 
 						{
 							vm.loading = false;
 				        	$('#login_modal').modal();
 							$('#login_modal').modal('close');
 				        	spinner.stop();
-				        	unregister();
 						}
-						if(authSvc.isLoggedIn === false)
+						if(!authSvc.isLoggedIn)
 						{
 							spinner.stop();
-        					vm.loading = false;
-        					unregister();
+							vm.loading = false;
 						}
 					}, true);
 	        }
