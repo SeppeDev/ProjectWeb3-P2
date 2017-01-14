@@ -8,7 +8,7 @@
 			        <li><a ui-sref="merged">Merged Covers</a></li>
 		      	</ul>
 
-		      	<ul ng-if="!$root.isLoggedIn" class="right hide-on-med-and-down">
+		      	<ul ng-if="!head.isAuthenticated()" class="right hide-on-med-and-down">
 					<li ng-if="head.trackArrayCount() > 0" ng-click="head.showBand()">
 						<a ui-sref="merge">{{head.trackArrayCount()}}</a></li>
 
@@ -18,12 +18,13 @@
 					<li ng-click="head.showRegister()">
 						<a>Registreer</a></li>
 				</ul>
-				<ul ng-if="$root.isLoggedIn" class="right hide-on-med-and-down">
+				<ul ng-if="head.isAuthenticated()" class="right hide-on-med-and-down">
+					<li><a class="waves-effect waves-light btn primary-button-color" ui-sref="upload">Upload</a></li>
 					<li ng-if="head.trackArrayCount() > 0" ng-click="head.showBand()">
 						<a ui-sref="merge">{{head.trackArrayCount()}}</a></li>
 
 					<li>
-						<a ui-sref="profile">You are logged in as {{ head.user.username }}</a></li>
+						<a ui-sref="profile">Profile</a></li>
 					
 					<li ng-click="head.logout()">
 						<a>Logout</a></li>

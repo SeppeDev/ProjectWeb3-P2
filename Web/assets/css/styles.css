@@ -57,7 +57,8 @@ input[type=text]:focus:not([readonly]) {
 .modal {
   bottom: auto; }
   .modal input:focus {
-    color: black !important; }
+    color: black !important;
+    border-bottom: 1px solid #51a83b !important; }
   .modal .modal-content {
     overflow: hidden; }
     .modal .modal-content .spinner {
@@ -135,7 +136,8 @@ nav .nav-wrapper {
     border-bottom: 2px solid #51a83b;
     padding-left: 1rem !important; }
   .search input:focus {
-    color: white !important; }
+    color: white !important;
+    background-color: none; }
 
 /**********SOLO TRACK**********/
 /**********SOLO TRACK**********/
@@ -148,11 +150,11 @@ nav .nav-wrapper {
 .solo h1, .solo h2, .solo h3, .solo h4, .solo h5, .solo h6, .solo p, .solo label {
   color: #999999; }
 
-input {
-  border-bottom: 2px solid #51a83b;
+.solo input {
   padding-left: 1rem !important; }
 
-input:focus {
+.solo input:focus {
+  border-bottom: 2px solid #51a83b;
   color: white !important; }
 
 /************CARD************/

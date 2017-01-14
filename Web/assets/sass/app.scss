@@ -91,9 +91,10 @@ input[type=text]:focus:not([readonly]) {
 /* Modal styles */
 .modal {
 	bottom: auto;
-	
+
 	input:focus {
 		color: black !important;
+		border-bottom: 1px solid $dark-green !important;
 	}
 
 	.modal-content {
@@ -202,6 +203,7 @@ nav {
 
 	input:focus {
 		color: white !important;
+		background-color: none;
 	}
 }
 
@@ -219,16 +221,19 @@ nav {
 	h1, h2, h3, h4, h5, h6, p, label {
 		color: $light-grey;
 	}
+
+	input {
+		
+		padding-left: 1rem !important;
+	}
+
+	input:focus {
+		border-bottom: 2px solid $dark-green;
+		color: white !important;
+	}
 }
 
-input {
-	border-bottom: 2px solid $dark-green;
-	padding-left: 1rem !important;
-}
 
-input:focus {
-	color: white !important;
-}
 
 /************CARD************/
 /************CARD************/
