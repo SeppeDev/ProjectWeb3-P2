@@ -25,8 +25,13 @@ $dark-yellow 		: darken(desaturate($yellow, 15%), 5%);
 $dark-red 			: darken(desaturate($red, 15%), 5%);
 $dark-green 		: darken(desaturate($green, 15%), 5%);
 
+@font-face {
+    font-family: amplify;
+    src: url(/dist/fonts/Amplify.ttf);
+}
+
 body {
-	color: $light-grey !important;
+	color: $white !important;
 	background-color: $black;
 }
 
@@ -51,6 +56,29 @@ body {
 
 .waves-effect {
 	z-index: 0 !important;	
+}
+
+/* App wide well */
+.well {
+	border-radius: 0px;
+	background-color: $white;
+	color: $black;
+}
+
+/* Title */
+
+.title {
+	font-size: 124px;
+	color: $dark-green;
+	position: absolute;
+	color: $white;
+	font-family: amplify;
+	width: 100%;
+	top: 20%;
+}
+
+.title-container {
+	text-align: center;
 }
 
 /* Override filter form color */
@@ -91,6 +119,10 @@ input[type=text]:focus:not([readonly]) {
 .modal {
 	bottom: auto;
 
+	h3 {
+		color: $black;
+	}
+
 	input:focus {
 		color: black !important;
 		border-bottom: 1px solid $dark-green !important;
@@ -116,7 +148,6 @@ input[type=text]:focus:not([readonly]) {
 	height: 150px;
 	width: 150px;
 	background-position: 0px -150px;
-	background-color: $dark-blue;
 }
 
 .Leadguitar {
@@ -124,7 +155,6 @@ input[type=text]:focus:not([readonly]) {
 	height: 150px;
 	width: 150px;
 	background-position: 0px -150px;
-	background-color: $dark-blue;
 }
 
 .Rhythmguitar {
@@ -132,7 +162,6 @@ input[type=text]:focus:not([readonly]) {
 	height: 150px;
 	width: 150px;
 	background-position: 0px 0px;
-	background-color: $dark-green;
 }
 
 .Bass {
@@ -148,7 +177,7 @@ input[type=text]:focus:not([readonly]) {
 	height: 150px;
 	width: 150px;
 	background-position: -300px 0px;
-	background-color: $dark-yellow;
+	
 }
 
 .Keys {
@@ -165,6 +194,27 @@ input[type=text]:focus:not([readonly]) {
 	width: 150px;
 	background-position: -150px 0px;
 }
+
+.Guitar-container {
+	padding: 5px;
+	background-color: $dark-blue;
+}
+
+.Rhythmguitar-container {
+	padding: 5px;
+	background-color: $dark-green;
+}
+
+.Leadguitar-container {
+	padding: 5px;
+	background-color: $dark-blue;
+}
+
+.Drum-container {
+	padding: 5px;
+	background-color: $dark-yellow;
+}
+
 
 
 /**********NAV**********/
@@ -199,7 +249,7 @@ nav {
 /*********HOME*********/
 .search {
 	position: absolute;
-	top: 20%;
+	top: 50%;
 	width: 50% !important;
 	left: 25%;
 
@@ -228,7 +278,7 @@ nav {
 
 .solo {
 	h1, h2, h3, h4, h5, h6, p, label {
-		color: $light-grey;
+		color: $white;
 	}
 
 	input {
@@ -248,9 +298,9 @@ nav {
 /************CARD************/
 .card {
 	background-color: transparentize($dark-grey, 0.25);
-
+	
 	.card-content {
-
+	
 		.row {
 			margin-bottom: 0px;
 		}
@@ -281,7 +331,7 @@ nav {
 	&.play {
 		i {
 			font-size: 2rem;
-			color: $dark-purple;
+			color: $dark-green;
 			margin: 0 auto;
 		}
 	}

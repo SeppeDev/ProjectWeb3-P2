@@ -4,8 +4,12 @@
 /*---------------------------------------
 --------------- VARIABLES ---------------
 ---------------------------------------*/
+@font-face {
+  font-family: amplify;
+  src: url(/dist/fonts/Amplify.ttf); }
+
 body {
-  color: #999999 !important;
+  color: #FFFFFF !important;
   background-color: #000000; }
 
 /* Custom Colours */
@@ -25,6 +29,25 @@ body {
 
 .waves-effect {
   z-index: 0 !important; }
+
+/* App wide well */
+.well {
+  border-radius: 0px;
+  background-color: #FFFFFF;
+  color: #000000; }
+
+/* Title */
+.title {
+  font-size: 124px;
+  color: #51a83b;
+  position: absolute;
+  color: #FFFFFF;
+  font-family: amplify;
+  width: 100%;
+  top: 20%; }
+
+.title-container {
+  text-align: center; }
 
 /* Override filter form color */
 [type="checkbox"]:checked + label:before {
@@ -56,6 +79,8 @@ input[type=text]:focus:not([readonly]) {
 /* Modal styles */
 .modal {
   bottom: auto; }
+  .modal h3 {
+    color: #000000; }
   .modal input:focus {
     color: black !important;
     border-bottom: 1px solid #51a83b !important; }
@@ -73,20 +98,17 @@ input[type=text]:focus:not([readonly]) {
 .Guitar {
   height: 150px;
   width: 150px;
-  background-position: 0px -150px;
-  background-color: #2e63c4; }
+  background-position: 0px -150px; }
 
 .Leadguitar {
   height: 150px;
   width: 150px;
-  background-position: 0px -150px;
-  background-color: #2e63c4; }
+  background-position: 0px -150px; }
 
 .Rhythmguitar {
   height: 150px;
   width: 150px;
-  background-position: 0px 0px;
-  background-color: #51a83b; }
+  background-position: 0px 0px; }
 
 .Bass {
   height: 150px;
@@ -97,8 +119,7 @@ input[type=text]:focus:not([readonly]) {
 .Drum {
   height: 150px;
   width: 150px;
-  background-position: -300px 0px;
-  background-color: #d5c711; }
+  background-position: -300px 0px; }
 
 .Keys {
   height: 150px;
@@ -110,6 +131,22 @@ input[type=text]:focus:not([readonly]) {
   height: 150px;
   width: 150px;
   background-position: -150px 0px; }
+
+.Guitar-container {
+  padding: 5px;
+  background-color: #2e63c4; }
+
+.Rhythmguitar-container {
+  padding: 5px;
+  background-color: #51a83b; }
+
+.Leadguitar-container {
+  padding: 5px;
+  background-color: #2e63c4; }
+
+.Drum-container {
+  padding: 5px;
+  background-color: #d5c711; }
 
 /**********NAV**********/
 /**********NAV**********/
@@ -133,7 +170,7 @@ nav .nav-wrapper {
 /*********HOME*********/
 .search {
   position: absolute;
-  top: 20%;
+  top: 50%;
   width: 50% !important;
   left: 25%; }
   .search input {
@@ -154,7 +191,7 @@ nav .nav-wrapper {
   z-index: -1; }
 
 .solo h1, .solo h2, .solo h3, .solo h4, .solo h5, .solo h6, .solo p, .solo label {
-  color: #999999; }
+  color: #FFFFFF; }
 
 .solo input {
   padding-left: 1rem !important; }
@@ -186,7 +223,7 @@ nav .nav-wrapper {
 
 .card-button.play i {
   font-size: 2rem;
-  color: #8838b7;
+  color: #51a83b;
   margin: 0 auto; }
 
 .card-button.pause i {

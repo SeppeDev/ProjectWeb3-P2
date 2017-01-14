@@ -2,15 +2,16 @@
 	<div class="navbar-fixed">
 		<nav class="primary-color">
 		    <div class="nav-wrapper">
-		      	<a ui-sref="home" class="brand-logo center">DisCoverBand</a>
+		      	<a ui-sref="home" class="brand-logo center">Logo (?)</a>
+		      	<!-- <a ui-sref="home" class="brand-logo center">DisCoverBand</a> -->
 		      	<ul id="nav-mobile" class="left hide-on-med-and-down">
-			        <li><a ui-sref="solo">Solo Track</a></li>
-			        <li><a ui-sref="merged">Merged Covers</a></li>
+			        <li><a ui-sref="solo">Solo tracks</a></li>
+			        <li><a ui-sref="merged">Band tracks</a></li>
 		      	</ul>
 
 		      	<ul ng-if="!head.isAuthenticated()" class="right hide-on-med-and-down">
 					<li ng-if="head.trackArrayCount() > 0" ng-click="head.showBand()">
-						<a ui-sref="merge">{{head.trackArrayCount()}}</a></li>
+						<a ui-sref="merge">My band ({{head.trackArrayCount()}})</a></li>
 
 					<li ng-click="head.showLogin()">
 						<a>Login</a></li>
@@ -21,7 +22,7 @@
 				<ul ng-if="head.isAuthenticated()" class="right hide-on-med-and-down">
 					<li><a class="waves-effect waves-light btn primary-button-color" ui-sref="upload">Upload</a></li>
 					<li ng-if="head.trackArrayCount() > 0" ng-click="head.showBand()">
-						<a ui-sref="merge">{{head.trackArrayCount()}}</a></li>
+						<a ui-sref="merge">My band ({{head.trackArrayCount()}})</a></li>
 
 					<li>
 						<a ui-sref="profile">Profile</a></li>
