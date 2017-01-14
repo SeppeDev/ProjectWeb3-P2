@@ -37,6 +37,15 @@ class MergedTrackController extends Controller
         }
     }
 
+    public function download($id)
+    {
+        $track = Merged_track::find($id);
+
+        $url    = $track->file_url;
+
+        return response()->download(public_path() . "/audio/" . $url);
+    }
+
     // POST naar /api/mergedtracks/create
     public function store(Request $request)
     {

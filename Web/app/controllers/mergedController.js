@@ -78,6 +78,11 @@ app.controller("mergedController", function($scope, mergedService, filterService
 		vm.currentAudioTrackId = "";
 	}
 
+	vm.download = function(id) {
+    	window.open(CONSTANTS.API_BASE_URL + '/mergedtracks/' + id + '/download', '_blank', '');  
+	}
+
+
 	//Watches
 	$scope.$watch(
 		function () { return vm.filterData }, 

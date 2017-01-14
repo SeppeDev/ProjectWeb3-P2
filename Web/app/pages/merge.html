@@ -3,7 +3,7 @@
 
 	<div class="container">
 		
-		<h2 class="title">Step 1: Select tracks</h2>
+		<h2>Step 1: Select tracks</h2>
 		<div class="row">
       			<div class="col s12">
 				    <div class="well">
@@ -36,7 +36,7 @@
 				        </table>
 				    </div>
 				    <div ng-show="merge.showTracks">
-				    	<h2 class="title">Step 2: Sync all tracks</h2>
+				    	<h2>Step 2: Sync all tracks</h2>
 						<span>Use "trim" to cut a piece from the beginning of each individual track, until they sync up!</span>
 					</div>
 					<div class="sync-container">
@@ -53,7 +53,7 @@
 				    </div>
 				</div>
 				</div>
-				<h2 class="title" ng-show="merge.showTracks">Step 3: Save!</h2>
+				<h2 ng-show="merge.showTracks">Step 3: Save!</h2>
 				<a type="button" class="btn btn-danger primary-button-color" ng-show="merge.showTracks" ng-click="merge.save()">Save <span aria-hidden="true" ></span></a>
 	</div>
 </main>
