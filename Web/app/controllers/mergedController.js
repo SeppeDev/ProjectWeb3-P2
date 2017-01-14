@@ -19,8 +19,7 @@ app.controller("mergedController", function($scope, mergedService, filterService
 				filter();
 
 				angular.forEach(vm.mergedTracks, function(track, key) {
-						//newTrack = new Audio(track.file_url);
-						newTrack = new Audio("dist/audio/Behemoth - Conquer All - Drum.mp3");
+						newTrack = new Audio('http://discoverbandapi.int/public/audio/' + track.file_url);
 						vm.mergedTrackAudio[track.id] = newTrack;
 					});
 			}, function(error) {
@@ -79,6 +78,11 @@ app.controller("mergedController", function($scope, mergedService, filterService
 		vm.currentAudioTrackId = "";
 	}
 
+	vm.download = function(id) {
+    	window.open(CONSTANTS.API_BASE_URL + '/mergedtracks/' + id + '/download', '_blank', '');  
+	}
+
+
 	//Watches
 	$scope.$watch(
 		function () { return vm.filterData }, 
@@ -92,8 +96,8 @@ app.controller("mergedController", function($scope, mergedService, filterService
 
 
 
-	vm.track1 = new Audio("dist/audio/Behemoth - Conquer All - Drum.mp3");
-	vm.track2 = new Audio("dist/audio/Behemoth - Conquer All - Guitar.mp3");
+	//vm.track1 = new Audio("dist/audio/Behemoth - Conquer All - Drum.mp3");
+	//vm.track2 = new Audio("dist/audio/Behemoth - Conquer All - Guitar.mp3");
 
 
 	_init();

@@ -17,6 +17,7 @@ Route::get('tracks', 'SingleTrackController@index');
 Route::get('tracks/{id}', 'SingleTrackController@show');
 Route::get('mergedtracks', 'MergedTrackController@index');
 Route::get('mergedtracks/{id}', 'MergedTrackController@show');
+Route::get('mergedtracks/{id}/download', 'MergedTrackController@download');
 Route::get('instruments', 'InstrumentController@index');
 Route::get('artists', 'ArtistController@index');
 

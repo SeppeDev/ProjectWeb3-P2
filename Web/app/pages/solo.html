@@ -7,7 +7,6 @@
 
 		<div class="row">
 			<h2>Filter</h2>
-
 			<form action="#">
 				<div class="col s6">
 					<label>Artist</label>
@@ -28,15 +27,14 @@
 		<div class="divider mar-top-xl"></div>
 
 		<div class="results">
-			<h2 class="primary-color-text">Results</h2>
-
-			
+			<h2>Results</h2>
 		    <div class="card horizontal row" ng-repeat="track in solo.filteredTracks">
-		      	<div class="card-image">
+		      	<div class="card-image {{track.instrument.name}}-container">
 		        	<img class="{{track.instrument.name}}" src="dist/img/transparent.png" alt="{{track.instrument.name}}">
 		      	</div>
 		      	<div class="card-content">
 			          	<h4>{{track.artist.name}} - {{track.songname}}</h4>
+			          	<h5>By {{track.user.username}}</h5>
 			          	<div class="row">
 			          		<div class="card-button play col s1 valign-wrapper" ng-click="solo.play(track.id)" ng-if="track.id != solo.currentAudioTrackId">
 						    	<i class="fa fa-play valign" aria-hidden="true"></i>
