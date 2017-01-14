@@ -73,12 +73,11 @@ app.directive("dcbLogin", function() {
 	            }
 	            
 	            authSvc.login(credentials);
-
 	            //Watches
 				var unregister = $scope.$watch(
 					function () { return authSvc.isLoggedIn }, 
 					function () {
-
+						console.log('isLoggedIn: ' + authSvc.isLoggedIn);
 						if(authSvc.isLoggedIn) 
 						{
 							vm.loading = false;

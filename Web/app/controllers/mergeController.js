@@ -6,13 +6,14 @@ app.controller("mergeController", function(bandService, mergedService) {
 
 	function _init() {
 		vm.tracks 			= bandSvc.getTrackArray();
-		vm.thereAreTracks 	= false;
 		vm.showTracks 		= false;
+		vm.thereAreTracks	= false;
 		vm.loadedTracks 	= [];
+		vm.savedTime 		= [];
 
-		if(vm.tracks.length > 0) 
+		if(vm.tracks.length > 0)
 		{
-			vm.thereAreTracks = true;
+			vm.thereAreTracks	= true;
 		}
 	}
 
@@ -31,11 +32,11 @@ app.controller("mergeController", function(bandService, mergedService) {
 					});
 
 					wavesurfer[track_id].load('http://discoverbandapi.int/public/api/audio/' + vm.tracks[i].file_url);
-					
+
 					vm.loadedTracks.push({
-			            	track_id: track_id,
-			            	trim_amount: 0
-			        });
+		            	track_id: track_id,
+		            	trim_amount: 0
+		        	});
 				}
 			}
 			vm.showTracks = true;
@@ -43,6 +44,12 @@ app.controller("mergeController", function(bandService, mergedService) {
 	}
 
 	vm.playPause = function(id) {
+		if(!wavesurfer[id].isPlaying())
+		{
+			vm.savedTime[id] = wavesurfer[id].getCurrentTime();
+			console.log(vm.savedTime);
+		}
+
 		wavesurfer[id].playPause();
 		wavesurfer[id].zoom(50);
 	}
@@ -61,8 +68,24 @@ app.controller("mergeController", function(bandService, mergedService) {
 	vm.playPauseAll = function() {
 		for (var i = vm.loadedTracks.length - 1; i >= 0; i--) {
 			var id = vm.loadedTracks[i].track_id;
+			if(!wavesurfer[id].isPlaying())
+			{
+				vm.savedTime[id] = wavesurfer[id].getCurrentTime();
+				console.log(vm.savedTime);
+			}
+
     		wavesurfer[id].playPause();
     		wavesurfer[id].zoom(50);
+		}
+	}
+
+	vm.toPrevious = function() {
+		for (var i = vm.loadedTracks.length - 1; i >= 0; i--) {
+			var id = vm.loadedTracks[i].track_id;
+			var previousTime 	= vm.savedTime[id];
+			var totalTime		= wavesurfer[id].getDuration();
+			var progress = previousTime / totalTime;
+			wavesurfer[id].seekTo(progress);
 		}
 	}
 
