@@ -63,6 +63,10 @@
 }
 
 /* Bottom */
+.no-mar-btm {
+	margin-bottom: 0px !important;
+}
+
 .mar-btm-s {
 	margin-bottom: 5px !important;
 }

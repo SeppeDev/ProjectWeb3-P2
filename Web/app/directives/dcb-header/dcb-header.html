@@ -10,7 +10,7 @@
 
 		      	<ul ng-if="!head.isAuthenticated()" class="right hide-on-med-and-down">
 					<li ng-if="head.trackArrayCount() > 0" ng-click="head.showBand()">
-						<a ui-sref="merge">My band ({{head.trackArrayCount()}})</a></li>
+						<a class="waves-effect waves-light btn primary-button-color" ng-click="head.showBand()">My band ({{head.trackArrayCount()}})</a></li>
 
 					<li ng-click="head.showLogin()">
 						<a>Login</a></li>
@@ -20,7 +20,7 @@
 				</ul>
 				<ul ng-if="head.isAuthenticated()" class="right hide-on-med-and-down">
 					<li ng-if="head.trackArrayCount() > 0" ng-click="head.showBand()">
-						<a class="waves-effect waves-light btn primary-button-color" ui-sref="merge">My band ({{head.trackArrayCount()}})</a></li>
+						<a class="waves-effect waves-light btn primary-button-color" ng-click="head.showBand()">My band ({{head.trackArrayCount()}})</a></li>
 
 					<li><a class="waves-effect waves-light btn primary-button-color" ui-sref="upload">Upload <i class="fa fa-upload" aria-hidden="true"></i></a></li>
 
