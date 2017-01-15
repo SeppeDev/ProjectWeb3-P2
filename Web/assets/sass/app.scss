@@ -47,6 +47,10 @@ body {
 /* App-wide button */
 .primary-button-color {
 	background-color: $dark-green !important;
+
+	a:hover {
+		color: $white;
+	}
 }
 
 .btn-flat:focus {

@@ -18,7 +18,7 @@
 				</div>
 
 				<div class="input-field col s2" ng-repeat="instrument in solo.instruments">
-					<input type="checkbox" id="{{instrument.name}}" ng-model="solo.filterData[instrument.id]" checked="checked" />
+					<input type="checkbox" id="{{instrument.name}}" ng-model="solo.filterData[instrument.id]" checked="checked">
 					<label for="{{instrument.name}}">{{instrument.name}}</label>
 				</div>
 			</form>
@@ -28,6 +28,7 @@
 
 		<div class="results">
 			<h2>Results</h2>
+			<h5 ng-show="solo.showNoResultsFound">No results found</h5>
 		    <div class="card horizontal row" ng-repeat="track in solo.filteredTracks">
 		      	<div class="card-image {{track.instrument.name}}-container">
 		        	<img class="{{track.instrument.name}}" src="dist/img/transparent.png" alt="{{track.instrument.name}}">

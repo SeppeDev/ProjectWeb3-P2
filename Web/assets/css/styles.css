@@ -22,6 +22,8 @@ body {
 /* App-wide button */
 .primary-button-color {
   background-color: #51a83b !important; }
+  .primary-button-color a:hover {
+    color: #FFFFFF; }
 
 .btn-flat:focus {
   background-color: #2D5696 !important;

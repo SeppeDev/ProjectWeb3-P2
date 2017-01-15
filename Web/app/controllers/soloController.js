@@ -62,8 +62,16 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 			{
 				vm.filteredTracks.push(track);
 			}
-			//console.log(vm.filteredTracks);
 		});
+
+		if(vm.filteredTracks.length === 0) 
+		{
+			vm.showNoResultsFound = true;
+		}
+		else
+		{
+			vm.showNoResultsFound = false;
+		}
 	}
 
 	/*function arrayObjectIndexOf(myArray, searchTerm, property) {
@@ -76,22 +84,25 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 	}*/
 
 	function _init() {
-		vm.soloTrackAudio = [];
-		vm.currentAudioTrackId = "";
+		vm.soloTrackAudio 		= [];
+		vm.currentAudioTrackId 	= "";
+		vm.showNoResultsFound 	= false;
+
+		instSvc.getInstruments()
+			.then(function(data)
+			{
+				vm.instruments = data.data;
+			
+			}, function(error)
+			{
+				console.log(error);
+			});
 
 		getSoloTracks();
-		vm.instruments = instSvc.instruments;
-		vm.filterData = fltSvc.soloFilterData;
-		vm.trackArray = bandSvc.getTrackArray;
-		vm.bandTrackIdArray = bandSvc.getTrackIdArray;
-		vm.trackArrayCount = bandSvc.getTrackArrayCount;
-
-		/*angular.forEach(bandSvc.trackArray, function(track, key) {
-			vm.bandTrackIdArray.push(track.id);
-		});*/
-
-		//vm.track1.play();
-		//setTimeout(function(){playAudioFile(vm.track2)}, 400);
+		vm.filterData 			= fltSvc.soloFilterData;
+		vm.trackArray 			= bandSvc.getTrackArray;
+		vm.bandTrackIdArray 	= bandSvc.getTrackIdArray;
+		vm.trackArrayCount 		= bandSvc.getTrackArrayCount;	
 	}
 
 	//Vm functions
@@ -107,10 +118,6 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 		});*/
 
 		console.log(track);
-		//console.log(bandSvc.trackArray);
-		//console.log(vm.bandTrackIdArray);
-		//console.log(vm.trackArrayCount());
-		//console.log(vm.bandTrackIdArray());
 	}
 
 	vm.removeFromBand = function(track) {
@@ -151,10 +158,9 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 	$scope.$watch(
 		function () { return vm.filterData }, 
 		function () {
-
 			if(vm.filterData) 
 			{
-				filter();
+				filter();		
 			}
 		}, true);
 
