@@ -12,7 +12,11 @@ class InstrumentsTableSeeder extends Seeder
     public function run()
     {
         DB::table('instruments')->insert([
-            'name' => 'Guitar',
+            'name' => 'Leadguitar',
+        ]);
+
+        DB::table('instruments')->insert([
+            'name' => 'Rhythmguitar',
         ]);
 
         DB::table('instruments')->insert([
@@ -21,6 +25,10 @@ class InstrumentsTableSeeder extends Seeder
 
         DB::table('instruments')->insert([
             'name' => 'Bass',
+        ]);
+
+        DB::table('instruments')->insert([
+            'name' => 'Vocals',
         ]);
 
         DB::table('instruments')->insert([

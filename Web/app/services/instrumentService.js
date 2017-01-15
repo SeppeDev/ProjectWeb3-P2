@@ -25,15 +25,23 @@ app.service("instrumentService", function($http) {
  							"id":1
  						},
  						{
- 							"name":"Drum",
+ 							"name":"Rythm-guitar",
  							"id":2
  						},
  						{
+ 							"name":"Drum",
+ 							"id":3
+ 						},
+ 						{
  							"name":"Bass",
-							"id":3
+							"id":4
+ 						},
+ 						{
+ 							"name":"Bass",
+							"id":5
  						},
 						{
 							"name":"Keys",
- 							"id":4
+ 							"id":6
  						}];
 })
