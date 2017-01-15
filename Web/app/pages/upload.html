@@ -1,13 +1,14 @@
 <main>
 <div class="container">
+  <h1 class="page-title">Upload</h1>
   <div class="row">
     <div class="col s12">
       <div class="card white">
         <div class="card-content black-text">
-          <span class="card-title">Upload track</span>
+          <span class="card-title">Upload your recorded tracks here:</span>
            <div class="row">
             <div class="input-field col s12">
-              <div ngf-select="upload.uploadFile($file)" ngf-drop="upload.uploadFile($file)" class="drop-box" ngf-drag-over-class="'dragover'" ngf-accept="'audio/mp3'" ngf-pattern="'audio/mp3'" type="file" name="file" ng-hide="upload.loading">Drop/click here to upload</div>
+              <div ngf-select="upload.uploadFile($file)" ngf-drop="upload.uploadFile($file)" class="drop-box" ngf-drag-over-class="'dragover'" ngf-accept="'audio/mp3'" ngf-pattern="'audio/mp3'" type="file" name="file" ng-hide="upload.loading">Drop/click to upload</div>
               <span ng-show="upload.uploaded">File uploaded! You can always replace this file by uploading another.</span>
               <div id="upload-spinner" ng-show="upload.loading"></div>
               <input type="hidden" value="{{ upload.filename }}">

@@ -50,7 +50,7 @@ body {
 .title-container {
   text-align: center; }
 
-.header-title {
+.header-title, .page-title {
   font-size: 84px;
   color: #FFFFFF;
   font-family: amplify; }
