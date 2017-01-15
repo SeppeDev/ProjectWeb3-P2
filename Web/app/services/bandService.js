@@ -59,7 +59,7 @@ app.service("bandService", function() {
 	}
 
 	svc.removeFromTrackArray = function(track) {
-		index = track.arrayObjectIndexOf(trackArray, track.id, "id");
+		index = arrayObjectIndexOf(trackArray, track.id, "id");
 		if(index > -1) {
 			trackArray.splice(index, 1);
 		}
