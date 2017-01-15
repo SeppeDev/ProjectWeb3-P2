@@ -124,6 +124,10 @@ input[type=text]:focus:not([readonly]) {
 	color: #2D5696 !important;
 }
 
+.fa-upload {
+	line-height: inherit !important;
+}
+
 /* Modal styles */
 .modal {
 	bottom: auto;
@@ -189,7 +193,7 @@ input[type=text]:focus:not([readonly]) {
 	
 }
 
-.Keys {
+.Piano {
 	@extend .instrument;
 	height: 150px;
 	width: 150px;
@@ -222,6 +226,11 @@ input[type=text]:focus:not([readonly]) {
 .Drum-container {
 	padding: 5px;
 	background-color: $dark-yellow;
+}
+
+.Piano-container {
+	padding: 5px;
+	background-color: $dark-purple;
 }
 
 
@@ -314,6 +323,18 @@ nav {
 			margin-bottom: 0px;
 		}
 	}
+
+	.card-action {
+		.play-pause {
+			background-color: $dark-green;
+		}
+		.start {
+			background-color: $dark-orange;
+		}
+		.trim {
+			background-color: $dark-purple;
+		}
+	}
 }
 
 .card-button {
@@ -391,6 +412,31 @@ nav {
 
 /************MERGE************/
 /************MERGE************/
+.sticky {
+	position: fixed;
+	top: 75px;
+	width: 100px !important;
+}
+
+.push-s3 {
+	
+}
+
+.manage-all {
+	a {
+		margin-top: 20px;
+
+		&.play-pause {
+			background-color: $dark-green;
+		}
+		&.start {
+			background-color: $dark-orange;
+		}
+		&.trim {
+			background-color: $dark-purple;
+		}
+	}
+}
 
 .audiotrack {
 	margin: 20px 0;
@@ -403,4 +449,12 @@ nav {
 
 .audiotrack-controls a{
 	margin:  0 20px 20px 0;
+}
+
+.switch label input[type="checkbox"]:checked+.lever {
+	background-color: $dark-green;
+
+	&:after {
+		background-color: $dark-green;
+	}
 }

@@ -91,6 +91,10 @@ app.controller("mergeController", function(bandService, mergedService, $state) {
 		}
 	}
 
+	vm.toStart = function(id) {
+		wavesurfer[id].seekAndCenter(0);
+	}
+
 	
 	vm.save = function() {
 		mergedSvc.mergeTracks(vm.loadedTracks)

@@ -82,6 +82,9 @@ input[type=text]:focus:not([readonly]) {
 .dropdown-content li > a {
   color: #2D5696 !important; }
 
+.fa-upload {
+  line-height: inherit !important; }
+
 /* Modal styles */
 .modal {
   bottom: auto; }
@@ -97,7 +100,7 @@ input[type=text]:focus:not([readonly]) {
 
 /**********SPRITES**********/
 /**********SPRITES**********/
-.instrument, .Guitar, .Leadguitar, .Rhythmguitar, .Bass, .Drum, .Keys, .Vocals {
+.instrument, .Guitar, .Leadguitar, .Rhythmguitar, .Bass, .Drum, .Piano, .Vocals {
   background-image: url("../img/instrumentsprite.png");
   background-repeat: no-repeat; }
 
@@ -127,7 +130,7 @@ input[type=text]:focus:not([readonly]) {
   width: 150px;
   background-position: -300px 0px; }
 
-.Keys {
+.Piano {
   height: 150px;
   width: 150px;
   background-position: -300px -150px;
@@ -153,6 +156,10 @@ input[type=text]:focus:not([readonly]) {
 .Drum-container {
   padding: 5px;
   background-color: #d5c711; }
+
+.Piano-container {
+  padding: 5px;
+  background-color: #8838b7; }
 
 /**********NAV**********/
 /**********NAV**********/
@@ -212,6 +219,12 @@ nav .nav-wrapper {
   background-color: rgba(34, 34, 34, 0.75); }
   .card .card-content .row {
     margin-bottom: 0px; }
+  .card .card-action .play-pause {
+    background-color: #51a83b; }
+  .card .card-action .start {
+    background-color: #e69225; }
+  .card .card-action .trim {
+    background-color: #8838b7; }
 
 .card-button.add {
   background-color: #51a83b; }
@@ -263,6 +276,20 @@ nav .nav-wrapper {
 
 /************MERGE************/
 /************MERGE************/
+.sticky {
+  position: fixed;
+  top: 75px;
+  width: 100px !important; }
+
+.manage-all a {
+  margin-top: 20px; }
+  .manage-all a.play-pause {
+    background-color: #51a83b; }
+  .manage-all a.start {
+    background-color: #e69225; }
+  .manage-all a.trim {
+    background-color: #8838b7; }
+
 .audiotrack {
   margin: 20px 0;
   padding-bottom: 20px; }
@@ -271,3 +298,8 @@ nav .nav-wrapper {
 
 .audiotrack-controls a {
   margin: 0 20px 20px 0; }
+
+.switch label input[type="checkbox"]:checked + .lever {
+  background-color: #51a83b; }
+  .switch label input[type="checkbox"]:checked + .lever:after {
+    background-color: #51a83b; }
