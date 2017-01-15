@@ -461,9 +461,23 @@ nav {
 
 /* BandModal */
 #band_modal {
-	color: $black;
+	background-color: transparentize($black, 0.05);
+	border-top: 2px solid $dark-green;
 
 	.modal-footer {
 		margin-bottom: 20px;
+		background-color: transparent;
+		border: none;
 	}
+
+	.modal-content {
+		background-color: transparent;
+		border: none;
+		box-shadow: none;
+	}
+}
+
+/* Modal overlay */
+#materialize-modal-overlay-1 {
+	opacity: 0.8 !important;
 }
