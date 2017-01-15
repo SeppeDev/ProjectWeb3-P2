@@ -82,7 +82,7 @@ app.controller("uploadController", function(Upload, artistService, instrumentSer
         function (resp) {
             vm.loading  = false;
             spinner.stop();
-            console.log('Error');
+            vm.uploadfailed = true;
         });
     };
 

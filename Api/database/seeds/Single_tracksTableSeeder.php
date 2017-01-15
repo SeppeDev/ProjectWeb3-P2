@@ -17,7 +17,7 @@ class Single_tracksTableSeeder extends Seeder
             'track_length' => 254.121456,
             'artist_id' => 3,
             'user_id' => 2,
-            'instrument_id' => 2
+            'instrument_id' => 3
         ]);
 
         DB::table('single_tracks')->insert([
