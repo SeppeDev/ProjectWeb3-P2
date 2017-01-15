@@ -24,7 +24,6 @@ Route::get('artists', 'ArtistController@index');
 Route::post('mergedtracks/create', 'MergedTrackController@store');
 Route::post('tracks/create', 'SingleTrackController@store');
 Route::post('upload', 'SingleTrackController@upload');
-Route::post('artists/create', 'ArtistController@store');
 
 Route::get('user', 'UserController@index');
 Route::post('user', 'UserController@update');

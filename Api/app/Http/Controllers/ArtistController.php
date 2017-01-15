@@ -13,14 +13,4 @@ class ArtistController extends Controller
 
     	return response()->json($artists);
     }
-
-    public function store(Request $request)
-    {
-    	dd($request);
-    	$artist = new Artist();
-
-    	$artist->name = $request->name;
-
-    	$artist->save();
-    }
 }
