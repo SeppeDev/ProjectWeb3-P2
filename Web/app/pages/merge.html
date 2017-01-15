@@ -37,13 +37,14 @@
 				    </div>
 				    <div ng-show="merge.showTracks">
 				    	<h2>Step 2: Sync all tracks</h2>
-						<span>Use "trim" to cut a piece from the beginning of each individual track, until they sync up!</span>
+						<span>Use "trim" to cut a piece from the beginning of each individual track, until they sync up! The purple color indicates the part that will be cut, when you click 'trim'.</span>
 					</div>
 					<div class="sync-container">
 						<div ng-repeat="track in merge.tracks" ng-show="merge.showTracks" class="audiotrack">
 					    	<div id="waveform{{track.id}}" ></div>
 					    	<a type="button" class="btn btn-danger" ng-click="merge.playPause(track.id)">Play/Pause<span aria-hidden="true"></span></a>
 					    	<a type="button" class="btn btn-danger" ng-click="merge.trim(track.id)">Trim<span aria-hidden="true" ></span></a>
+					    	<span ng-if="merge.trimAmounts[track.id]">{{ merge.trimAmounts[track.id] }} seconds will be cut off this track.</span>
 						</div>
 					    <div class="text-left audiotrack-controls">
 					        <a type="button" class="btn btn-danger primary-button-color" ng-show="merge.thereAreTracks && !merge.showTracks" ng-click="merge.load()">Load <span aria-hidden="true" ></span></a>

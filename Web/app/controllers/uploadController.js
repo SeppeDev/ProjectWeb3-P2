@@ -1,4 +1,4 @@
-app.controller("uploadController", function(Upload, artistService, instrumentService, soloService) {
+app.controller("uploadController", function(Upload, artistService, instrumentService, soloService, $state) {
   
   var vm            = this;
   var soloSvc       = soloService;
@@ -60,6 +60,10 @@ app.controller("uploadController", function(Upload, artistService, instrumentSer
         vm.loading  = true;
         vm.uploaded = false;
 
+        // Initialize form
+        vm.showform     = true;
+        $('select').material_select();
+
         Upload.upload({
             url: CONSTANTS.API_BASE_URL + "/upload",
             fileFormDataName: 'song',
@@ -74,10 +78,6 @@ app.controller("uploadController", function(Upload, artistService, instrumentSer
             spinner.stop();
             vm.loading      = false;
             vm.uploaded     = true;
-
-            // Initialize form
-            vm.showform     = true;
-            $('select').material_select();
         }, 
         function (resp) {
             vm.loading  = false;
@@ -100,6 +100,7 @@ app.controller("uploadController", function(Upload, artistService, instrumentSer
       soloSvc.insertTrack(data)
         .then(function(data)
         {
+          $state.go("solo");
           console.log(data);
         }, function(error)
         {

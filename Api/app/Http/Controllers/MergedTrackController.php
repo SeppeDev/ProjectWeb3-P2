@@ -111,9 +111,8 @@ class MergedTrackController extends Controller
                     }
 
                     $mergedtrack                = new Merged_track();
-
-                    $mergedtrack->songname      = "Temp_songname";
-                    $mergedtrack->artist_id     = 1;
+                    $mergedtrack->songname      = $track->songname;
+                    $mergedtrack->artist_id     = $track->artist_id;
                     $mergedtrack->track_length  = $tracklength[0];
                     $mergedtrack->file_url      = $fileName;
                     

@@ -1,4 +1,4 @@
-app.controller("mergeController", function(bandService, mergedService) {
+app.controller("mergeController", function(bandService, mergedService, $state) {
 	var vm 			= this;
 	var bandSvc 	= bandService;
 	var mergedSvc 	= mergedService;
@@ -10,6 +10,7 @@ app.controller("mergeController", function(bandService, mergedService) {
 		vm.thereAreTracks	= false;
 		vm.loadedTracks 	= [];
 		vm.savedTime 		= [];
+		vm.trimAmounts  	= [];
 
 		if(vm.tracks.length > 0)
 		{
@@ -59,7 +60,8 @@ app.controller("mergeController", function(bandService, mergedService) {
 		for (var i = vm.loadedTracks.length - 1; i >= 0; i--) {
 			if(vm.loadedTracks[i].track_id === id)
 			{
-				vm.loadedTracks[i].trim_amount = timeToTrim;
+				vm.loadedTracks[i].trim_amount 	= timeToTrim;
+				vm.trimAmounts[id] 				= Math.round(timeToTrim * 100) / 100;
 			}
 		}
 	}
@@ -85,7 +87,7 @@ app.controller("mergeController", function(bandService, mergedService) {
 			var previousTime 	= vm.savedTime[id];
 			var totalTime		= wavesurfer[id].getDuration();
 			var progress = previousTime / totalTime;
-			wavesurfer[id].seekTo(progress);
+			wavesurfer[id].seekAndCenter(progress);
 		}
 	}
 
@@ -95,6 +97,8 @@ app.controller("mergeController", function(bandService, mergedService) {
 		.then(function(data)
         {
           console.log(data);
+          $state.go("merged");
+
         }, function(error)
         {
           console.log(error);

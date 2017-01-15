@@ -39,7 +39,6 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 
 		angular.forEach(vm.soloTracks, function(track, key)
 		{
-			//console.log(track);
 			goodSearch = true;
 
 			if(!vm.filterData.artist == "" && !track.artist.name.match(new RegExp(vm.filterData.artist, "i")))
@@ -92,7 +91,6 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 			.then(function(data)
 			{
 				vm.instruments = data.data;
-			
 			}, function(error)
 			{
 				console.log(error);
@@ -163,12 +161,6 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 				filter();		
 			}
 		}, true);
-
-
-
-	//vm.track1 = new Audio('http://discoverbandapi.int/public/audio/drum.wav');
-	//vm.track2 = new Audio('http://discoverbandapi.int/public/audio/guitar.wav');
-
 
 	_init();
 });
