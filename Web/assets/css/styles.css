@@ -41,7 +41,6 @@ body {
 /* Title */
 .title {
   font-size: 124px;
-  color: #51a83b;
   position: absolute;
   color: #FFFFFF;
   font-family: amplify;
@@ -50,6 +49,11 @@ body {
 
 .title-container {
   text-align: center; }
+
+.header-title {
+  font-size: 84px;
+  color: #FFFFFF;
+  font-family: amplify; }
 
 /* Override filter form color */
 [type="checkbox"]:checked + label:before {

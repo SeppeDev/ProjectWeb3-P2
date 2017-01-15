@@ -73,7 +73,6 @@ body {
 
 .title {
 	font-size: 124px;
-	color: $dark-green;
 	position: absolute;
 	color: $white;
 	font-family: amplify;
@@ -83,6 +82,12 @@ body {
 
 .title-container {
 	text-align: center;
+}
+
+.header-title {
+	font-size: 84px;
+	color: $white;
+	font-family: amplify;
 }
 
 /* Override filter form color */
