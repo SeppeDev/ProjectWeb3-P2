@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Single_track;
+use App\Artist;
 
 class SingleTrackController extends Controller
 {
@@ -20,7 +21,6 @@ class SingleTrackController extends Controller
         {
             return response()->json(['status' => 'No tracks found.']);
         }
-        
     }
 
     public function show($id)
@@ -81,8 +81,26 @@ class SingleTrackController extends Controller
         $track->file_url           = $request->file_url;
         $track->track_length       = $request->track_length;
         $track->instrument_id      = $request->instrument_id;
-        $track->artist_id          = $request->artist_id;
         $track->user_id            = $request->user_id;
+
+        $input_artist              = ucfirst(strtolower($request->artist_id));
+
+        $existingArtist            = Artist::where('name', 'LIKE', $input_artist)->first();
+
+        if($existingArtist)
+        {
+            $track->artist_id      = $existingArtist->id;
+        }
+        else
+        {
+            $newArtist = new Artist();
+
+            $newArtist->name = $input_artist;
+
+            $newArtist->save();
+
+            $track->artist_id      = $newArtist->id;
+        }
 
         $track->save();
     }
