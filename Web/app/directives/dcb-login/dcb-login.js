@@ -66,6 +66,7 @@ app.directive("dcbLogin", function() {
 	        vm.login = function() {
 	        	var spinner = new Spinner(opts).spin(target);
 	        	vm.loading 	= true;
+	        	console.log(vm.loading);
 
 	            var credentials = {
 	                email: vm.email,
