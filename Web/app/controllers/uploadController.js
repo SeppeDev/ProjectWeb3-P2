@@ -94,7 +94,7 @@ app.controller("uploadController", function(Upload, artistService, instrumentSer
             track_length: vm.tracklength,
             user_id: user_id,
             instrument_id: vm.instrumentsdropdown,
-            artist_id : vm.artistsdropdown
+            artist_id : vm.artistname
         }
 
       soloSvc.insertTrack(data)

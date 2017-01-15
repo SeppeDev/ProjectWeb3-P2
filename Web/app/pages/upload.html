@@ -21,18 +21,15 @@
               <label>Song name</label>
             </div>
             <div class="input-field col s12">
+              <input type="text" ng-model="upload.artistname">
+              <label>Original band</label>
+            </div>
+            <div class="input-field col s12">
               <select ng-model="upload.instrumentsdropdown">
                   <option value="" disabled selected>Choose your option</option>
                   <option ng-repeat="instrument in upload.instruments" value="{{instrument.id}}">{{instrument.name}}</option>
               </select>
               <label>Instrument</label>
-            </div>
-            <div class="input-field col s12">
-              <select ng-model="upload.artistsdropdown">
-                  <option value="" disabled selected>Choose your option</option>
-                  <option ng-repeat="artist in upload.artists" value="{{artist.id}}">{{artist.name}}</option>
-              </select>
-              <label>Original band</label>
             </div>
             <a class="waves-effect waves-light btn" ng-click="upload.save()">Save</a>
             </div>
