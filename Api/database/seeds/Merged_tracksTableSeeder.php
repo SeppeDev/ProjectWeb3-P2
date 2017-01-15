@@ -12,17 +12,17 @@ class Merged_tracksTableSeeder extends Seeder
     public function run()
     {
         DB::table('merged_tracks')->insert([
-            'songname' => 'Raining blood',
-            'file_url' => 'placeholder.mp3',
+            'songname' => 'In waves',
+            'file_url' => '02-trivium-in_waves.mp3',
             'track_length' => 254.121456,
-            'artist_id' => 1
+            'artist_id' => 5
         ]); 
 
         DB::table('merged_tracks')->insert([
-            'songname' => 'Angel of Death',
-            'file_url' => 'placeholder.mp3',
+            'songname' => 'Davidian',
+            'file_url' => 'Machine Head - Davidian.mp3',
             'track_length' => 254.121456,
-            'artist_id' => 1
+            'artist_id' => 6
         ]); 
     }
 }

@@ -30,5 +30,9 @@ class ArtistsTableSeeder extends Seeder
         DB::table('artists')->insert([
             'name' => 'Trivium'
         ]);
+
+        DB::table('artists')->insert([
+            'name' => 'Machine head'
+        ]);
     }
 }
