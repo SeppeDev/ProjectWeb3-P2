@@ -14,7 +14,7 @@ app.directive("dcbBand", function(bandService) {
 				vm.bandTrackIdArray 	= bandSvc.getTrackIdArray;
 				vm.trackArrayCount 		= bandSvc.getTrackArrayCount;
 
-				console.log(vm.trackArrayCount);
+				//console.log(vm.trackArrayCount);
 			}
 
 			vm.removeFromBand = function(track) {
