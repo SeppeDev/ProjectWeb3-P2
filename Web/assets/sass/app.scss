@@ -458,3 +458,12 @@ nav {
 		background-color: $dark-green;
 	}
 }
+
+/* BandModal */
+#band_modal {
+	color: $black;
+
+	.modal-footer {
+		margin-bottom: 20px;
+	}
+}

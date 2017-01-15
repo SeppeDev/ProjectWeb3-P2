@@ -38,6 +38,11 @@ app.directive("dcbHeader", function(bandService) {
 				$('#register_modal').modal('open');
 			}
 
+			vm.showBand = function () {
+				$('#band_modal').modal();
+				$('#band_modal').modal('open');
+			}
+
 			vm.isAuthenticated = function() {
 				return $auth.isAuthenticated();
 			};

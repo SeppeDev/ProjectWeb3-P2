@@ -1,3 +1,25 @@
-<main>
-	<h1>{{band.value}}</h1>
-</main>
+<div id="band_modal" class="modal bottom-sheet">
+	<div class="container">
+	    <div class="modal-footer">
+	    	<div class="row">
+	    		<h2 class="center no-mar-btm col s10">My band</h2>
+	      		<a ui-sref="merge" class=" modal-action modal-close waves-effect waves-green btn-flat col s2">LET'S MERGE</a>
+	      	</div>
+	    </div>
+
+	    <div class="modal-content">
+	      	<div class="card horizontal row" ng-repeat="track in band.trackArray()">
+			      	<div class="card-image {{track.instrument.name}}-container">
+			        	<img class="{{track.instrument.name}}" src="dist/img/transparent.png" alt="{{track.instrument.name}}">
+			      	</div>
+			      	<div class="card-content">
+				          	<h4>{{track.artist.name}} - {{track.songname}}</h4>
+				          	<h5>By {{track.user.username}}</h5>
+				    </div>
+			      	<div class="card-button remove col s1 valign-wrapper" ng-click="band.removeFromBand(track)" ng-if="track.id | band:band.bandTrackIdArray()">
+				    	<i class="fa fa-plus valign" aria-hidden="true"></i>
+			      	</div>
+			    </div>
+	    </div>
+	</div>
+</div>

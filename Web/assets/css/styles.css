@@ -303,3 +303,9 @@ nav .nav-wrapper {
   background-color: #51a83b; }
   .switch label input[type="checkbox"]:checked + .lever:after {
     background-color: #51a83b; }
+
+/* BandModal */
+#band_modal {
+  color: #000000; }
+  #band_modal .modal-footer {
+    margin-bottom: 20px; }
