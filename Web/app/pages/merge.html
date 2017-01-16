@@ -16,7 +16,6 @@
 				        		<th>Name</th>
 				        		<th>Instrument</th>
 				        		<th>Track length</th>
-				        		<th>Load</th>
 				        	</tr>
 				            <tr ng-repeat="track in merge.tracks">
 				            	<td>
@@ -27,14 +26,6 @@
 				                </td>
 				                <td>
 				                    {{track.track_length}}
-				                </td>
-				                <td>
-				                	<div class="switch">
-									    <label for="{{track.id}}">
-									      	<input type="checkbox" checked="checked" id="{{track.id}}">
-									      	<span class="lever"></span>
-									    </label>
-									</div>
 				                </td>
 				            </tr>
 				        </table>

@@ -24,21 +24,18 @@ app.controller("mergeController", function(bandService, mergedService, $state) {
 			for (var i = vm.tracks.length - 1; i >= 0; i--) {
 				var track_id = vm.tracks[i].id;
 
-				if(document.getElementById(track_id).checked) 
-				{
-					wavesurfer[track_id] = WaveSurfer.create({
-			    		container: '#waveform'+track_id,
-			    		waveColor: 'green',
-			    		progressColor: 'purple'
-					});
+				wavesurfer[track_id] = WaveSurfer.create({
+		    		container: '#waveform'+track_id,
+		    		waveColor: 'green',
+		    		progressColor: 'purple'
+				});
 
-					wavesurfer[track_id].load('http://discoverbandapi.int/public/api/audio/' + vm.tracks[i].file_url);
+				wavesurfer[track_id].load('http://discoverbandapi.int/public/api/audio/' + vm.tracks[i].file_url);
 
-					vm.loadedTracks.push({
-		            	track_id: track_id,
-		            	trim_amount: 0
-		        	});
-				}
+				vm.loadedTracks.push({
+	            	track_id: track_id,
+	            	trim_amount: 0
+	        	});
 			}
 			vm.showTracks = true;
 		}
