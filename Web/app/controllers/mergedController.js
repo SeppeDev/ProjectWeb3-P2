@@ -10,18 +10,37 @@ app.controller("mergedController", function($scope, mergedService, filterService
 		track.play();
 	}
 
+	function getCookie(cname) {
+          var name = cname + "=";
+          var decodedCookie = decodeURIComponent(document.cookie);
+          var ca = decodedCookie.split(';');
+          for(var i = 0; i <ca.length; i++) {
+              var c = ca[i];
+              while (c.charAt(0) == ' ') {
+                  c = c.substring(1);
+              }
+              if (c.indexOf(name) == 0) {
+                  return c.substring(name.length, c.length);
+              }
+          }
+          return "";
+      }
+
 	function getMergedTracks() {
 		mergedService.getTracks()
 			.then(function(data) {
-				
 				vm.mergedTracks = data.data;
 				vm.filteredTracks = vm.mergedTracks;
 				filter();
 
 				angular.forEach(vm.mergedTracks, function(track, key) {
-						newTrack = new Audio('http://discoverbandapi.int/public/audio/' + track.file_url);
-						vm.mergedTrackAudio[track.id] = newTrack;
-					});
+					newTrack = new Audio('http://discoverbandapi.int/public/audio/' + track.file_url);
+					vm.mergedTrackAudio[track.id] = newTrack;
+				});
+
+				for (var i = vm.mergedTracks.length - 1; i >= 0; i--) {
+					vm.voteCountPerTrack[vm.mergedTracks[i].id] = vm.mergedTracks[i].merged_track_votes.length;
+				}
 			}, function(error) {
 
 				console.log(error);
@@ -55,11 +74,12 @@ app.controller("mergedController", function($scope, mergedService, filterService
 	}
 
 	function _init() {
-		vm.mergedTrackAudio = [];
-		vm.currentAudioTrackId = "";
-
+		vm.mergedTrackAudio 	= [];
+		vm.currentAudioTrackId 	= "";
+		vm.source = "/dist/img/rockhand.png";
 		getMergedTracks();
-		vm.filterData = fltSvc.mergedFilterData;
+		vm.filterData 	= fltSvc.mergedFilterData;
+		vm.voteCountPerTrack = [];
 	}
 
 	//Vm functions
@@ -80,6 +100,31 @@ app.controller("mergedController", function($scope, mergedService, filterService
 
 	vm.download = function(id) {
     	window.open(CONSTANTS.API_BASE_URL + '/mergedtracks/' + id + '/download', '_blank', '');  
+	}
+
+	vm.upVote = function(id) {
+		var user_id = JSON.parse(getCookie('user')).userId;
+	    var data = {
+            track_id: id,
+            user_id: user_id
+	    }
+
+	    mgdSvc.insertVote(data)
+        .then(function(data)
+        {
+        	if(data.data.status == "OK")
+        	{
+        		vm.voteCountPerTrack[id]++;
+        	}
+        	else
+        	{
+        		console.log('already voted');
+        	}
+        }, function(error)
+        {
+          console.log(error);
+        });
+		
 	}
 
 

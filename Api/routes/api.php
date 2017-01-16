@@ -23,6 +23,7 @@ Route::get('artists', 'ArtistController@index');
 
 Route::post('mergedtracks/create', 'MergedTrackController@store');
 Route::post('tracks/create', 'SingleTrackController@store');
+Route::post('vote/create', 'VoteController@store');
 Route::post('upload', 'SingleTrackController@upload');
 
 Route::get('user', 'UserController@index');

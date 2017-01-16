@@ -31,6 +31,11 @@ app.service("mergedService", function($http) {
 		return $http.post(CONSTANTS.API_BASE_URL + "/mergedtracks/create", data);
 	}
 
+	svc.insertVote = function(data)
+	{
+		return $http.post(CONSTANTS.API_BASE_URL + "/vote/create", data);
+	}
+
 	svc.download = function (id) {
 
 		var url = CONSTANTS.API_BASE_URL + "/mergedtracks/" + id + "/download";

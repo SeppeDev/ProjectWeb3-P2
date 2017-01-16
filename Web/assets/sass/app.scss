@@ -516,3 +516,24 @@ nav {
 .trim-explanation {
 	font-size: 18px;
 }
+
+.votes-count {
+	position: relative;
+	top: 5px;
+	left: 30px;
+
+	.rockhand {
+		position: relative;
+		top: -10px;
+		left: 10px; 
+		width: 40px;
+		height: 40px;
+		float: left;
+	}
+
+	span {
+		position: relative;
+		left:20px; 
+	}
+}
+

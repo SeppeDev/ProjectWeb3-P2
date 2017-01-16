@@ -29,16 +29,21 @@
 			          	<h4>{{track.artist.name}} - {{track.songname}}</h4>
 			          	<div class="mar-btm-m">
 			          		<span class="contributors" ng-repeat="user in track.users">
-			          			{{user.username}}
+			          			<i class="fa fa-user" aria-hidden="true"></i> {{user.username}}
 			          		</span>
 			          	</div>
-
+	
 			          	<div class="row">
 			          		<div class="card-button play col s1 valign-wrapper" ng-click="merged.play(track.id)" ng-if="track.id != merged.currentAudioTrackId">
 						    	<i class="fa fa-play valign" aria-hidden="true"></i>
 					      	</div>
 					      	<div class="card-button pause col s1 valign-wrapper" ng-click="merged.pause(track.id)" ng-if="track.id == merged.currentAudioTrackId">
 						    	<i class="fa fa-pause valign" aria-hidden="true"></i>
+					      	</div>
+					      	<div class="votes-count" ng-click="merged.upVote(track.id)">
+					      		<!-- <a href="#"><div class="rockhand"></div><a href=""></a><span ng-bind="merge.handsToBeColored.indexOf(vm.loggedinUserId)"></span> -->
+					      		<img ng-src="{{ merged.source }}" id="#rockhand{{track.id}}" class="rockhand">
+					      		<span>{{ merged.voteCountPerTrack[track.id] }} users think this track rocks!</span>
 					      	</div>
 			          	</div>
 			    </div>

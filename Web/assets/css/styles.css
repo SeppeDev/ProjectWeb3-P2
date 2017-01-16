@@ -344,3 +344,18 @@ nav .nav-wrapper {
 
 .trim-explanation {
   font-size: 18px; }
+
+.votes-count {
+  position: relative;
+  top: 5px;
+  left: 30px; }
+  .votes-count .rockhand {
+    position: relative;
+    top: -10px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    float: left; }
+  .votes-count span {
+    position: relative;
+    left: 20px; }
