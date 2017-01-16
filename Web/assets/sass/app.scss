@@ -18,12 +18,12 @@ $yellow 			: #FFEC01;
 $red 				: #FF2021;
 $green 				: #4ECE2F;
 
-$dark-purple 		: darken(desaturate($purple, 15%), 5%);
-$dark-orange 		: darken(desaturate($orange, 15%), 5%);
-$dark-blue 			: darken(desaturate($blue, 15%), 5%);
-$dark-yellow 		: darken(desaturate($yellow, 15%), 5%);
-$dark-red 			: darken(desaturate($red, 15%), 5%);
-$dark-green 		: darken(desaturate($green, 15%), 5%);
+$dark-purple 		: darken(desaturate($purple, 15%), 5%);	//Piano
+$dark-orange 		: darken(desaturate($orange, 15%), 5%);	//Bass
+$dark-blue 			: darken(desaturate($blue, 15%), 5%);	//Leadguitar
+$dark-yellow 		: darken(desaturate($yellow, 15%), 5%);	//Drum
+$dark-red 			: darken(desaturate($red, 15%), 5%);	//Vocals
+$dark-green 		: darken(desaturate($green, 15%), 5%);	//Rhythguitar
 
 @font-face {
     font-family: amplify;
@@ -182,7 +182,7 @@ input[type=text]:focus:not([readonly]) {
 	height: 150px;
 	width: 150px;
 	background-position: -150px -150px;
-	background-color: $dark-orange;
+	//background-color: $dark-orange;
 }
 
 .Drum {
@@ -198,7 +198,7 @@ input[type=text]:focus:not([readonly]) {
 	height: 150px;
 	width: 150px;
 	background-position: -300px -150px;
-	background-color: $dark-purple;
+	//background-color: $dark-purple;
 }
 
 .Vocals {
@@ -206,6 +206,7 @@ input[type=text]:focus:not([readonly]) {
 	height: 150px;
 	width: 150px;
 	background-position: -150px 0px;
+	//background-color: $dark-red;
 }
 
 .Guitar-container {
@@ -231,6 +232,16 @@ input[type=text]:focus:not([readonly]) {
 .Piano-container {
 	padding: 5px;
 	background-color: $dark-purple;
+}
+
+.Bass-container {
+	padding: 5px;
+	background-color: $dark-orange;
+}
+
+.Vocals-container {
+	padding: 5px;
+	background-color: $dark-red;
 }
 
 
