@@ -12,7 +12,6 @@ class SingleTrackController extends Controller
     {
     	$tracks = Single_track::with('instrument', 'artist', 'user')->get();
 
-        // Json staat op /api/tracks
     	if($tracks->count())
         { 
             return response()->json($tracks);
@@ -27,7 +26,6 @@ class SingleTrackController extends Controller
     {
     	$track = Single_track::where('id', $id)->with('instrument', 'artist', 'user')->get();
 
-        // Json staat op /api/mergedtracks/1
         if($track->count())
         {
             return response()->json($track);
@@ -49,7 +47,6 @@ class SingleTrackController extends Controller
         $fileName           = uniqid('solo_', true) . '.mp3';
 
         exec('cd audio ; ffmpeg -i ' . $tempFileName . ' ' . $fileName . ' 2>&1',  $output, $returncode);
-        // exec('cd audio ; soxi -D ' . $fileName . ' 2>&1',  $tracklength, $length_returncode);
 
         if($returncode === 0)
         {
@@ -62,12 +59,9 @@ class SingleTrackController extends Controller
         }
         else
         {
-            // Remove cmd-output in production! 
             return response()->json([
                 'status'            => 'failed',
-                'error_location'    => 'convert',
-                'error_code'        => $returncode,
-                'cmd-output'        => $output
+                'error_location'    => 'convert'
             ]);
         } 
     }

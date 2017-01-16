@@ -12,7 +12,6 @@ class MergedTrackController extends Controller
     {
     	$tracks = Merged_track::with('artist')->get();
 
-    	// Json staat op /api/mergedtracks
     	if($tracks->count())
     	{
     		return response()->json($tracks);
@@ -26,7 +25,6 @@ class MergedTrackController extends Controller
     {
     	$track = Merged_track::where('id', $id)->with('artist')->get();
 
-    	// Json staat op /api/mergedtracks/1
     	if($track->count())
         {
             return response()->json($track);
@@ -46,29 +44,24 @@ class MergedTrackController extends Controller
         return response()->download(public_path() . "/audio/" . $url);
     }
 
-    // POST naar /api/mergedtracks/create
     public function store(Request $request)
-    {
-        // header("Access-Control-Allow-Origin: *");
-        
+    {  
         $tracks = $request->input();
 
         // Sox installation: sudo apt-get install sox
         // Lame installation: sudo apt-get install lame
         // Ffmpeg installation: sudo apt-get install ffmpeg
 
-        // Gebruik ffmpeg om mp3 naar wav te converteren!
-
-        $trackstring = "";
+        $trackstring    = "";
         $wavtrackstring = "";
 
-        // Trim tracks, geef aantal sec.msec mee om te trimmen vanaf begin en vanaf einde
         for ($i = 0; $i < count($tracks); $i++) { 
             $track_id           = $tracks[$i]['track_id'];
             $trimBegining       = $tracks[$i]['trim_amount'];
 
             $track              = Single_track::find($track_id); 
             $trackname          = $track->file_url;
+
             $wavTrackName       = uniqid('wav_', true).'.wav';
             $trimmedTrackName   = uniqid('trimmed_temp_', true).'.wav';
 
@@ -127,7 +120,7 @@ class MergedTrackController extends Controller
 
                 $mergedtrack                = new Merged_track();
 
-                $mergedtrack->users()->attach($request->users);
+                // $mergedtrack->users()->attach($request->users);
 
                 $mergedtrack->songname      = $track->songname;
                 $mergedtrack->artist_id     = $track->artist_id;
@@ -142,23 +135,17 @@ class MergedTrackController extends Controller
             }
             else
             {
-                // Remove cmd-output in production! 
                 return response()->json([
                     'status'            => 'failed',
-                    'error_location'    => 'convert',
-                    'error_code'        => $convert_returncode,
-                    'cmd-output'        => $convert_output
+                    'error_location'    => 'convert'
                 ]);
             }
         }
         else
         {
-            // Remove cmd-output in production! 
             return response()->json([
                 'status'            => 'failed',
-                'error_location'    => 'merge',
-                'error_code'        => $merge_returncode,
-                'cmd-output'        => $merge_output
+                'error_location'    => 'merge'
             ]);
         }
     }
