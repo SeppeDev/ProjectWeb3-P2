@@ -20,6 +20,7 @@ Route::get('mergedtracks/{id}', 'MergedTrackController@show');
 Route::get('mergedtracks/{id}/download', 'MergedTrackController@download');
 Route::get('instruments', 'InstrumentController@index');
 Route::get('artists', 'ArtistController@index');
+Route::get('votes/{id}', 'VoteController@index');
 
 Route::post('mergedtracks/create', 'MergedTrackController@store');
 Route::post('tracks/create', 'SingleTrackController@store');

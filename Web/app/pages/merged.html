@@ -41,8 +41,8 @@
 						    	<i class="fa fa-pause valign" aria-hidden="true"></i>
 					      	</div>
 					      	<div class="votes-count" ng-click="merged.upVote(track.id)">
-					      		<!-- <a href="#"><div class="rockhand"></div><a href=""></a><span ng-bind="merge.handsToBeColored.indexOf(vm.loggedinUserId)"></span> -->
-					      		<img ng-src="{{ merged.source }}" id="#rockhand{{track.id}}" class="rockhand">
+					      		<img ng-show="merged.votedTrackArray.indexOf(track.id) == -1" class="rockhand" src="/dist/img/rockhand.png">
+					      		<img ng-show="merged.votedTrackArray.indexOf(track.id) != -1" class="rockhand" src="/dist/img/rockhand-active.png">
 					      		<span>{{ merged.voteCountPerTrack[track.id] }} users think this track rocks!</span>
 					      	</div>
 			          	</div>

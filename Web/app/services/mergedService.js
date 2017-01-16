@@ -42,4 +42,10 @@ app.service("mergedService", function($http) {
 		
 		return getData(url);
 	}
+
+	svc.getUserVotes = function(user_id) {
+		var url = CONSTANTS.API_BASE_URL + "/votes/" + user_id;
+		
+		return getData(url);
+	}
 })

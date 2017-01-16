@@ -8,6 +8,13 @@ use DB;
 
 class VoteController extends Controller
 {
+    public function index($id)
+    {
+        $votes = Merged_track_vote::where('user_id', '=', $id)->get();
+
+        return response()->json($votes);
+    }
+
     public function store(Request $request) 
     {
     	$userHasVotedForThis = DB::table('merged_track_votes')

@@ -3,6 +3,13 @@ app.controller("mergedController", function($scope, mergedService, filterService
 	var vm  		= this;
 	var mgdSvc 		= mergedService;
 	var fltSvc 		= filterService;
+	var user_id		= null;
+
+	if(JSON.parse(getCookie('user')).userId)
+	{
+		var user_id 	= JSON.parse(getCookie('user')).userId;
+	}
+	
 
 	//Private functions
 	function playAudioFile(track)
@@ -47,6 +54,24 @@ app.controller("mergedController", function($scope, mergedService, filterService
 			});
 	}
 
+	function getUserVotes() {
+		if(user_id != null)
+		{
+			mergedService.getUserVotes(user_id)
+			.then(function(data) {
+				console.log(data);
+				vm.votedtracks = data.data;
+				for (var i = vm.votedtracks.length - 1; i >= 0; i--) {
+					vm.votedTrackArray.push(vm.votedtracks[i].merged_track_id);
+				}
+				console.log(vm.votedTrackArray);
+			}, function(error) {
+
+				console.log(error);
+			});
+		}
+	}
+
 	function filter() {
 		
 		vm.filteredTracks = [];
@@ -76,10 +101,12 @@ app.controller("mergedController", function($scope, mergedService, filterService
 	function _init() {
 		vm.mergedTrackAudio 	= [];
 		vm.currentAudioTrackId 	= "";
-		vm.source = "/dist/img/rockhand.png";
 		getMergedTracks();
-		vm.filterData 	= fltSvc.mergedFilterData;
-		vm.voteCountPerTrack = [];
+		getUserVotes();
+		vm.filterData 			= fltSvc.mergedFilterData;
+		vm.voteCountPerTrack 	= [];
+		vm.coloredHands 		= [];
+		vm.votedTrackArray 		= [];
 	}
 
 	//Vm functions
@@ -103,7 +130,6 @@ app.controller("mergedController", function($scope, mergedService, filterService
 	}
 
 	vm.upVote = function(id) {
-		var user_id = JSON.parse(getCookie('user')).userId;
 	    var data = {
             track_id: id,
             user_id: user_id
@@ -115,6 +141,7 @@ app.controller("mergedController", function($scope, mergedService, filterService
         	if(data.data.status == "OK")
         	{
         		vm.voteCountPerTrack[id]++;
+        		vm.votedTrackArray.push(id);
         	}
         	else
         	{
@@ -124,9 +151,7 @@ app.controller("mergedController", function($scope, mergedService, filterService
         {
           console.log(error);
         });
-		
 	}
-
 
 	//Watches
 	$scope.$watch(
@@ -138,12 +163,6 @@ app.controller("mergedController", function($scope, mergedService, filterService
 				filter();
 			}
 		}, true);
-
-
-
-	//vm.track1 = new Audio("dist/audio/Behemoth - Conquer All - Drum.mp3");
-	//vm.track2 = new Audio("dist/audio/Behemoth - Conquer All - Guitar.mp3");
-
 
 	_init();
 });
