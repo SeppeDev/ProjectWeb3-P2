@@ -47,7 +47,6 @@ class MergedTrackController extends Controller
     public function store(Request $request)
     {  
         $tracks = $request->input();
-
         // Sox installation: sudo apt-get install sox
         // Lame installation: sudo apt-get install lame
         // Ffmpeg installation: sudo apt-get install ffmpeg
@@ -120,13 +119,15 @@ class MergedTrackController extends Controller
 
                 $mergedtrack                = new Merged_track();
 
-                // $mergedtrack->users()->attach($request->users);
-
                 $mergedtrack->songname      = $track->songname;
                 $mergedtrack->artist_id     = $track->artist_id;
                 $mergedtrack->file_url      = $fileName;
                 
                 $mergedtrack->save();
+
+                for ($i = 0; $i < count($tracks); $i++) { 
+                    $mergedtrack->users()->attach($tracks[$i]['user_id']);
+                }
 
                 return response()->json([
                     'status'            => 'success',

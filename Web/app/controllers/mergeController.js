@@ -34,8 +34,11 @@ app.controller("mergeController", function(bandService, mergedService, $state) {
 
 				vm.loadedTracks.push({
 	            	track_id: track_id,
-	            	trim_amount: 0
+	            	trim_amount: 0,
+	            	user_id: vm.tracks[i].user.id
 	        	});
+
+	        	console.log(vm.loadedTracks);
 			}
 			vm.showTracks = true;
 		}
