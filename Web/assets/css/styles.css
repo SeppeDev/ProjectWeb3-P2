@@ -263,6 +263,10 @@ nav .nav-wrapper {
   .card-button:hover.remove i {
     color: #ec191a; }
 
+/* MERGED */
+.contributors {
+  margin-right: 25px; }
+
 /************UPLOAD************/
 /************UPLOAD************/
 .drop-box {

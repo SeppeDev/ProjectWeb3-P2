@@ -27,6 +27,12 @@
 		    <div class="card horizontal row" ng-repeat="track in merged.filteredTracks">
 		      	<div class="card-content">
 			          	<h4>{{track.artist.name}} - {{track.songname}}</h4>
+			          	<div class="mar-btm-m">
+			          		<span class="contributors" ng-repeat="user in track.users">
+			          			{{user.username}}
+			          		</span>
+			          	</div>
+
 			          	<div class="row">
 			          		<div class="card-button play col s1 valign-wrapper" ng-click="merged.play(track.id)" ng-if="track.id != merged.currentAudioTrackId">
 						    	<i class="fa fa-play valign" aria-hidden="true"></i>
