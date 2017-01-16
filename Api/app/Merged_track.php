@@ -8,7 +8,7 @@ class Merged_track extends Model
 {
     public function users()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\User', 'user_merged_track', 'user_id', 'merged_track_id');
     }
 
     public function Artist()

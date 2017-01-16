@@ -10,7 +10,7 @@ class MergedTrackController extends Controller
 {
     public function index()
     {
-    	$tracks = Merged_track::with('artist')->get();
+    	$tracks = Merged_track::with('artist', 'users')->get();
 
     	if($tracks->count())
     	{
