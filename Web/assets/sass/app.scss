@@ -492,3 +492,20 @@ nav {
 #materialize-modal-overlay-1 {
 	opacity: 0.8 !important;
 }
+
+#processing_modal {
+	color: $black;
+	text-align: center;
+	font-weight: 700;
+	font-size: 24px;
+}
+
+.trim-info {
+	top: 15px;
+    position: relative;
+    left: 10px;
+}
+
+.trim-explanation {
+	font-size: 18px;
+}

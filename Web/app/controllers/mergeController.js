@@ -70,7 +70,6 @@ app.controller("mergeController", function(bandService, mergedService, $state) {
 			if(!wavesurfer[id].isPlaying())
 			{
 				vm.savedTime[id] = wavesurfer[id].getCurrentTime();
-				console.log(vm.savedTime);
 			}
 
     		wavesurfer[id].playPause();
@@ -94,11 +93,14 @@ app.controller("mergeController", function(bandService, mergedService, $state) {
 
 	
 	vm.save = function() {
+		$('#processing_modal').modal();
+		$('#processing_modal').modal('open');
+		
 		mergedSvc.mergeTracks(vm.loadedTracks)
 		.then(function(data)
         {
-          console.log(data);
-          $state.go("merged");
+        	$('#processing_modal').modal('close');
+        	$state.go("merged");
 
         }, function(error)
         {
