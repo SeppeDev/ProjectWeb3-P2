@@ -60,29 +60,42 @@ class MergedTrackController extends Controller
         // Gebruik ffmpeg om mp3 naar wav te converteren!
 
         $trackstring = "";
+        $wavtrackstring = "";
 
         // Trim tracks, geef aantal sec.msec mee om te trimmen vanaf begin en vanaf einde
         for ($i = 0; $i < count($tracks); $i++) { 
-            $track_id       = $tracks[$i]['track_id'];
-            $trimBegining   = $tracks[$i]['trim_amount'];
-            $track          = Single_track::find($track_id); 
-            $trackname      = $track->file_url;
+            $track_id           = $tracks[$i]['track_id'];
+            $trimBegining       = $tracks[$i]['trim_amount'];
 
-            $trimmedTrackName = uniqid('trimmed_temp_', true).'.wav';
+            $track              = Single_track::find($track_id); 
+            $trackname          = $track->file_url;
+            $wavTrackName       = uniqid('wav_', true).'.wav';
+            $trimmedTrackName   = uniqid('trimmed_temp_', true).'.wav';
 
-            exec('cd audio ; sox ' . $trackname . ' ' . $trimmedTrackName . ' trim ' . $trimBegining . ' -0 2>&1', $trim_output, $trim_returncode);
-            if($trim_returncode === 0)
+            exec('cd audio ; ffmpeg -i ' . $trackname . ' ' . $wavTrackName . ' 2>&1', $convertToWav_output, $convertToWav_returncode);
+
+            if($convertToWav_returncode === 0)
             {
-                $trackstring .= $trimmedTrackName . " ";
+                exec('cd audio ; sox ' . $wavTrackName . ' ' . $trimmedTrackName . ' trim ' . $trimBegining . ' -0 2>&1', $trim_output, $trim_returncode);
+
+                if($trim_returncode === 0)
+                {
+                    $trackstring .= $trimmedTrackName . " ";
+                    $wavtrackstring .= $wavTrackName . " ";
+                }
+                else
+                {
+                    return response()->json([
+                        'status'            => 'failed',
+                        'error_location'    => 'trim'
+                    ]);
+                }
             }
             else
             {
-                // Remove cmd-output in production! 
                 return response()->json([
                     'status'            => 'failed',
-                    'error_location'    => 'trim',
-                    'error_code'        => $trim_returncode,
-                    'cmd-output'        => $trim_output
+                    'error_location'    => 'convert to wav'
                 ]);
             }
         }
@@ -94,57 +107,47 @@ class MergedTrackController extends Controller
 
         if($merge_returncode === 0)
         {
-            exec('cd audio ; soxi -D ' . $tempFileName . ' 2>&1',  $tracklength, $length_returncode);
+            $fileName = uniqid('merged_', true).'.mp3';
+            exec('cd audio ; lame '. $tempFileName .' ' . $fileName . ' 2>&1', $convert_output, $convert_returncode);
 
-            if($length_returncode === 0)
+            if($convert_returncode === 0)
             {
-                $fileName = uniqid('merged_', true).'.mp3';
-                exec('cd audio ; lame '. $tempFileName .' ' . $fileName . ' 2>&1', $convert_output, $convert_returncode);
+                // Verwijder alle temp files
+                exec('cd audio ; rm ' . $tempFileName);
 
-                if($convert_returncode === 0)
-                {
-                    // Verwijder alle temp files
-                    exec('cd audio ; rm ' . $tempFileName);
-                    $tempTrimmedTracksArray = explode(' ', $trackstring);
-                    for ($i = 0; $i < count($tempTrimmedTracksArray) - 1; $i++) { 
-                        exec('cd audio ; rm ' . $tempTrimmedTracksArray[$i]);
-                    }
-
-                    $mergedtrack                = new Merged_track();
-
-                    $mergedtrack->users()->attach($request->users);
-
-                    $mergedtrack->songname      = $track->songname;
-                    $mergedtrack->artist_id     = $track->artist_id;
-                    $mergedtrack->track_length  = $tracklength[0];
-                    $mergedtrack->file_url      = $fileName;
-                    
-                    $mergedtrack->save();
-
-                    return response()->json([
-                        'status'            => 'success',
-                        'mergedfilename'    => $fileName,
-                    ]);
+                $tempTrimmedTracksArray = explode(' ', $trackstring);
+                for ($i = 0; $i < count($tempTrimmedTracksArray) - 1; $i++) { 
+                    exec('cd audio ; rm ' . $tempTrimmedTracksArray[$i]);
                 }
-                else
-                {
-                    // Remove cmd-output in production! 
-                    return response()->json([
-                        'status'            => 'failed',
-                        'error_location'    => 'convert',
-                        'error_code'        => $convert_returncode,
-                        'cmd-output'        => $convert_output
-                    ]);
+
+                $tempWavTracksArray = explode(' ', $wavtrackstring);
+                for ($i = 0; $i < count($tempWavTracksArray) - 1; $i++) { 
+                    exec('cd audio ; rm ' . $tempWavTracksArray[$i]);
                 }
+
+                $mergedtrack                = new Merged_track();
+
+                $mergedtrack->users()->attach($request->users);
+
+                $mergedtrack->songname      = $track->songname;
+                $mergedtrack->artist_id     = $track->artist_id;
+                $mergedtrack->file_url      = $fileName;
+                
+                $mergedtrack->save();
+
+                return response()->json([
+                    'status'            => 'success',
+                    'mergedfilename'    => $fileName,
+                ]);
             }
             else
             {
                 // Remove cmd-output in production! 
                 return response()->json([
                     'status'            => 'failed',
-                    'error_location'    => 'length',
-                    'error_code'        => $length_returncode,
-                    'cmd-output'        => $tracklength
+                    'error_location'    => 'convert',
+                    'error_code'        => $convert_returncode,
+                    'cmd-output'        => $convert_output
                 ]);
             }
         }

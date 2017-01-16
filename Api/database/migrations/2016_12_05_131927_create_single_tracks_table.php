@@ -17,7 +17,6 @@ class CreateSingleTracksTable extends Migration
             $table->increments('id');
             $table->string('songname');
             $table->string('file_url');
-            $table->double('track_length');
 
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');

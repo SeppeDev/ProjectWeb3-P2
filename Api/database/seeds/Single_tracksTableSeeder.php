@@ -13,8 +13,7 @@ class Single_tracksTableSeeder extends Seeder
     {
         DB::table('single_tracks')->insert([
             'songname' => 'Enter sandman',
-            'file_url' => 'drum.wav',
-            'track_length' => 254.121456,
+            'file_url' => 'drum.mp3',
             'artist_id' => 3,
             'user_id' => 2,
             'instrument_id' => 3
@@ -22,8 +21,7 @@ class Single_tracksTableSeeder extends Seeder
 
         DB::table('single_tracks')->insert([
             'songname' => 'Enter sandman',
-            'file_url' => 'guitar.wav',
-            'track_length' => 254.121456,
+            'file_url' => 'guitar.mp3',
             'artist_id' => 3,
             'user_id' => 1,
             'instrument_id' => 1

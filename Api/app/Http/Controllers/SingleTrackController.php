@@ -46,19 +46,18 @@ class SingleTrackController extends Controller
 
         $path               = $request->song->storeAs('audio', $tempFileName,'upload');
         
-        $fileName           = uniqid('solo_', true) . '.wav';
+        $fileName           = uniqid('solo_', true) . '.mp3';
 
         exec('cd audio ; ffmpeg -i ' . $tempFileName . ' ' . $fileName . ' 2>&1',  $output, $returncode);
-        exec('cd audio ; soxi -D ' . $fileName . ' 2>&1',  $tracklength, $length_returncode);
+        // exec('cd audio ; soxi -D ' . $fileName . ' 2>&1',  $tracklength, $length_returncode);
 
-        if($returncode === 0 && $length_returncode === 0)
+        if($returncode === 0)
         {
             exec('cd audio ; rm ' . $tempFileName);
 
             return response()->json([
                 'status'        => 'success',
-                'name'          => $fileName,
-                'length'        => $tracklength[0]
+                'name'          => $fileName
             ]);
         }
         else
@@ -79,7 +78,6 @@ class SingleTrackController extends Controller
 
         $track->songname           = $request->name;             
         $track->file_url           = $request->file_url;
-        $track->track_length       = $request->track_length;
         $track->instrument_id      = $request->instrument_id;
         $track->user_id            = $request->user_id;
 
