@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class Single_tracksTableSeeder extends Seeder
+class SoloTracksTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,7 @@ class Single_tracksTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('single_tracks')->insert([
+        DB::table('solo_tracks')->insert([
             'songname' => 'Enter sandman',
             'file_url' => 'drum.mp3',
             'artist_id' => 3,
@@ -19,7 +19,7 @@ class Single_tracksTableSeeder extends Seeder
             'instrument_id' => 3
         ]);
 
-        DB::table('single_tracks')->insert([
+        DB::table('solo_tracks')->insert([
             'songname' => 'Enter sandman',
             'file_url' => 'guitar.mp3',
             'artist_id' => 3,

@@ -46,7 +46,8 @@ app.controller("mergedController", function($scope, mergedService, filterService
 				});
 
 				for (var i = vm.mergedTracks.length - 1; i >= 0; i--) {
-					vm.voteCountPerTrack[vm.mergedTracks[i].id] = vm.mergedTracks[i].merged_track_votes.length;
+					console.log(vm.mergedTracks[i]);
+					vm.voteCountPerTrack[vm.mergedTracks[i].id] = vm.mergedTracks[i].votes.length;
 				}
 			}, function(error) {
 

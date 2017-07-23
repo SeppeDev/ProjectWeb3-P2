@@ -19,7 +19,6 @@ class CreateMergedTrackVotesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('merged_track_id')->unsigned();
             $table->foreign('merged_track_id')->references('id')->on('merged_tracks');
-
             $table->timestamps();
         });
     }

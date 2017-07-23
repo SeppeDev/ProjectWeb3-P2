@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSingleTracksTable extends Migration
+class CreateSoloTracksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateSingleTracksTable extends Migration
      */
     public function up()
     {
-        Schema::create('single_tracks', function (Blueprint $table) {
+        Schema::create('solo_tracks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('songname');
             $table->string('file_url');
-
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('instrument_id')->unsigned();
@@ -36,6 +35,6 @@ class CreateSingleTracksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('single_tracks');
+        Schema::dropIfExists('solo_tracks');
     }
 }

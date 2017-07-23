@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class Merged_track_votesTableSeeder extends Seeder
+class MergedTrackVotesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

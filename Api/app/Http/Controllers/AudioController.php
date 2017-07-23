@@ -6,8 +6,14 @@ use Illuminate\Http\Request;
 
 class AudioController extends Controller
 {
-    public function index($track)
+    /**
+     * Fetch the specified file.
+     *
+     * @param string  $path
+     * @return \Illuminate\Http\Response
+     */
+    public function index($path)
     {
-    	return response()->file(public_path() . '/audio/' . $track);
+        return response()->file(public_path() . '/audio/' . $path);
     }
 }

@@ -2,40 +2,48 @@
 
 namespace App\Http\Controllers;
 
+use App\MergedTrack;
+use App\MergedTrackVote;
 use Illuminate\Http\Request;
-use App\Merged_track_vote;
-use DB;
 
 class VoteController extends Controller
 {
-    public function index($id)
+    /**
+     * Fetch specified merged track's votes.
+     *
+     * @param  \App\MergedTrack  $merged_track
+     * @return \Illuminate\Http\Response
+     */
+    public function index(MergedTrack $merged_track)
     {
-        $votes = Merged_track_vote::where('user_id', '=', $id)->get();
+        $votes = $merged_track->votes()->get();
 
         return response()->json($votes);
     }
 
-    public function store(Request $request) 
+    /**
+     * Store a vote for the specified track.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
-    	$userHasVotedForThis = DB::table('merged_track_votes')
-                ->where('merged_track_id', '=', $request->track_id)
-                ->where('user_id', '=', $request->user_id)
-                ->exists();
+        $merged_track = MergedTrack::find($request->track_id);
 
-    	if(!$userHasVotedForThis)
-    	{
-    		$vote = new Merged_track_vote();
+        if (!$merged_track->votes->where('user_id', $request->user_id)->first()) {
+            $vote = new MergedTrackVote();
+            $vote->merged_track_id = $request->track_id;
+            $vote->user_id = $request->user_id;
+            $vote->save();
 
-	    	$vote->merged_track_id 	= $request->track_id;
-	    	$vote->user_id 			= $request->user_id;
-
-	    	$vote->save();
-
-	    	return response()->json(['status' => 'OK']);
-    	}
-    	else
-    	{
-    		return response()->json(['status' => 'EXISTS']);
-    	}
+            return response()->json([
+                'status' => 'Ok'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'Duplicate'
+            ]);
+        }
     }
 }

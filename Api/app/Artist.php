@@ -6,13 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Artist extends Model
 {
-	public function single_tracks()
+    /**
+     * An artist has many solo tracks.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function soloTracks()
     {
-        return $this->hasMany('App\Single_track');
+        return $this->hasMany('App\SoloTrack');
     }
 
-    public function merged_tracks()
+    /**
+     * An artist has many merged tracks.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function mergedTracks()
     {
-        return $this->hasMany('App\Merged_track');
+        return $this->hasMany('App\MergedTrack');
     }
 }

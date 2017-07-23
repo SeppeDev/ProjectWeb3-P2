@@ -7,10 +7,15 @@ use App\Instrument;
 
 class InstrumentController extends Controller
 {
-    public function index() 
+    /**
+     * Fetch all instruments.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-    	$instruments = Instrument::all();
+        $instruments = Instrument::all();
 
-    	return response()->json($instruments);
+        return response()->json($instruments);
     }
 }

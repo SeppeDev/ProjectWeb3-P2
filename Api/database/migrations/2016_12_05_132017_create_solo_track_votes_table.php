@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSingleTrackVotesTable extends Migration
+class CreateSoloTrackVotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateSingleTrackVotesTable extends Migration
      */
     public function up()
     {
-        Schema::create('single_track_votes', function (Blueprint $table) {
+        Schema::create('solo_track_votes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('single_track_id')->unsigned();
-            $table->foreign('single_track_id')->references('id')->on('single_tracks');
-
+            $table->integer('solo_track_id')->unsigned();
+            $table->foreign('solo_track_id')->references('id')->on('solo_tracks');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateSingleTrackVotesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('single_track_votes');
+        Schema::dropIfExists('solo_track_votes');
     }
 }

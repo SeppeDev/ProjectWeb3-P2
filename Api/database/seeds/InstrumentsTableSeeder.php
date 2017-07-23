@@ -34,5 +34,21 @@ class InstrumentsTableSeeder extends Seeder
         DB::table('instruments')->insert([
             'name' => 'Piano',
         ]);
+
+
+        DB::table('user_instrument')->insert([
+            'user_id' => 2,
+            'instrument_id' => 3
+        ]);
+
+        DB::table('user_instrument')->insert([
+            'user_id' => 2,
+            'instrument_id' => 2
+        ]);
+
+        DB::table('user_instrument')->insert([
+            'user_id' => 1,
+            'instrument_id' => 1
+        ]);
     }
 }
