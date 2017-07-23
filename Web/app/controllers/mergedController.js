@@ -5,9 +5,8 @@ app.controller("mergedController", function($scope, mergedService, filterService
 	var fltSvc 		= filterService;
 	var user_id		= null;
 
-	if(JSON.parse(getCookie('user')).userId)
-	{
-		var user_id 	= JSON.parse(getCookie('user')).userId;
+	if(getCookie('user')) {
+		var user_id = JSON.parse(getCookie('user')).userId;
 	}
 	
 
@@ -46,7 +45,6 @@ app.controller("mergedController", function($scope, mergedService, filterService
 				});
 
 				for (var i = vm.mergedTracks.length - 1; i >= 0; i--) {
-					console.log(vm.mergedTracks[i]);
 					vm.voteCountPerTrack[vm.mergedTracks[i].id] = vm.mergedTracks[i].votes.length;
 				}
 			}, function(error) {
@@ -56,16 +54,14 @@ app.controller("mergedController", function($scope, mergedService, filterService
 	}
 
 	function getUserVotes() {
-		if(user_id != null)
+		if(user_id !== null)
 		{
 			mergedService.getUserVotes(user_id)
 			.then(function(data) {
-				console.log(data);
 				vm.votedtracks = data.data;
 				for (var i = vm.votedtracks.length - 1; i >= 0; i--) {
 					vm.votedTrackArray.push(vm.votedtracks[i].merged_track_id);
 				}
-				console.log(vm.votedTrackArray);
 			}, function(error) {
 
 				console.log(error);
@@ -139,14 +135,9 @@ app.controller("mergedController", function($scope, mergedService, filterService
 	    mgdSvc.insertVote(data)
         .then(function(data)
         {
-        	if(data.data.status == "OK")
-        	{
+        	if(data.data.status === "OK") {
         		vm.voteCountPerTrack[id]++;
         		vm.votedTrackArray.push(id);
-        	}
-        	else
-        	{
-        		console.log('already voted');
         	}
         }, function(error)
         {

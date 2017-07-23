@@ -37,8 +37,6 @@ app.controller("mergeController", function(bandService, mergedService, $state) {
 	            	trim_amount: 0,
 	            	user_id: vm.tracks[i].user.id
 	        	});
-
-	        	console.log(vm.loadedTracks);
 			}
 			vm.showTracks = true;
 		}
@@ -48,7 +46,6 @@ app.controller("mergeController", function(bandService, mergedService, $state) {
 		if(!wavesurfer[id].isPlaying())
 		{
 			vm.savedTime[id] = wavesurfer[id].getCurrentTime();
-			console.log(vm.savedTime);
 		}
 
 		wavesurfer[id].playPause();
