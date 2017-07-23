@@ -41,7 +41,7 @@ app.controller("mergedController", function($scope, mergedService, filterService
 				filter();
 
 				angular.forEach(vm.mergedTracks, function(track, key) {
-					newTrack = new Audio('http://discoverbandapi.int/public/audio/' + track.file_url);
+					newTrack = new Audio(CONSTANTS.PUBLIC_BASE_URL + '/audio/' + track.file_url);
 					vm.mergedTrackAudio[track.id] = newTrack;
 				});
 

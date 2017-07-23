@@ -23,7 +23,7 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 
 				angular.forEach(vm.soloTracks, function(track, key) {
 						//newTrack = new Audio(track.file_url);
-						newTrack = new Audio('http://discoverbandapi.int/public/audio/' + track.file_url);
+						newTrack = new Audio(CONSTANTS.PUBLIC_BASE_URL + '/audio/' + track.file_url);
 						vm.soloTrackAudio[track.id] = newTrack;
 					});
 			

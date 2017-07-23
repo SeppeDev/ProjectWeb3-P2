@@ -30,7 +30,7 @@ app.controller("mergeController", function(bandService, mergedService, $state) {
 		    		progressColor: 'purple'
 				});
 
-				wavesurfer[track_id].load('http://discoverbandapi.int/public/api/audio/' + vm.tracks[i].file_url);
+				wavesurfer[track_id].load(CONSTANTS.API_BASE_URL + '/audio/' + vm.tracks[i].file_url);
 
 				vm.loadedTracks.push({
 	            	track_id: track_id,
