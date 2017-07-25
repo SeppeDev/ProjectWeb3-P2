@@ -38,7 +38,7 @@ class VoteController extends Controller
             $vote->save();
 
             return response()->json([
-                'status' => 'Ok'
+                'status' => 'OK'
             ]);
         } else {
             return response()->json([

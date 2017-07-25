@@ -59,9 +59,12 @@ class MergedTrackController extends Controller
     }
 
     /**
-     * Download the specified file.
+     * Manipulate and eventually merge the specified tracks.
      *
-     * @todo: Compile sox with mp3 and simplify the merging process.
+     * Sox installation:
+     * Compile sox with madlib and lame libraries to include mp3 support.
+     * View readme for detailed instructions.
+     *
      * @todo: Make sure at least 2 tracks are selected to be merged.
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -70,94 +73,62 @@ class MergedTrackController extends Controller
     {
         $tracks = $request->input();
 
-        // Sox installation: sudo apt-get install sox
-        // Lame installation: sudo apt-get install lame
-        // Ffmpeg installation: sudo apt-get install ffmpeg
+        $concatenated_tracks = "";
 
-        $trackstring    = "";
-        $wavtrackstring = "";
-
+        // Manipulate every selected track.
         for ($i = 0; $i < count($tracks); $i++) {
             $track_id           = $tracks[$i]['track_id'];
-            $trimBegining       = $tracks[$i]['trim_amount'];
+            $trim_from_start    = $tracks[$i]['trim_amount'];
 
             $track              = SoloTrack::find($track_id);
-            $trackname          = $track->file_url;
+            $track_name         = $track->file_url;
 
-            $wavTrackName       = uniqid('wav_', true).'.wav';
-            $trimmedTrackName   = uniqid('trimmed_temp_', true).'.wav';
+            $trimmed_track_name   = uniqid('tmp_', true).'.mp3';
 
-            exec('cd audio ; ffmpeg -i ' . $trackname . ' ' . $wavTrackName . ' 2>&1', $convertToWav_output, $convertToWav_returncode);
+            exec('cd audio ; sox ' . $track_name . ' ' . $trimmed_track_name . ' trim ' . $trim_from_start . ' -0 2>&1', $trim_output, $trim_returncode);
 
-            if ($convertToWav_returncode === 0) {
-                exec('cd audio ; sox ' . $wavTrackName . ' ' . $trimmedTrackName . ' trim ' . $trimBegining . ' -0 2>&1', $trim_output, $trim_returncode);
-
-                if ($trim_returncode === 0) {
-                    $trackstring .= $trimmedTrackName . " ";
-                    $wavtrackstring .= $wavTrackName . " ";
-                } else {
-                    return response()->json([
-                        'status'            => 'failed',
-                        'error_location'    => 'trim'
-                    ]);
-                }
+            if ($trim_returncode === 0) {
+                $concatenated_tracks .= $trimmed_track_name . " ";
             } else {
                 return response()->json([
-                    'status'            => 'failed',
-                    'error_location'    => 'convert to wav'
+                    'status' => 'failed',
+                    'error' => 'trim'
                 ]);
             }
         }
 
-        // Merge multiple tracks + convert to mp3
-        $tempFileName = uniqid('tmp_', true).'.wav';
+        // Merge multiple tracks.
+        $merged_track_name = uniqid('merged_', true).'.mp3';
 
-        exec('cd audio ; sox -m ' . $trackstring . $tempFileName . ' 2>&1', $merge_output, $merge_returncode);
+        exec('cd audio ; sox -m ' . $concatenated_tracks . $merged_track_name . ' 2>&1', $merge_output, $merge_returncode);
 
         if ($merge_returncode === 0) {
-            $fileName = uniqid('merged_', true).'.mp3';
-            exec('cd audio ; lame '. $tempFileName .' ' . $fileName . ' 2>&1', $convert_output, $convert_returncode);
-
-            if ($convert_returncode === 0) {
-                // Remove all temporary files.
-                exec('cd audio ; rm ' . $tempFileName);
-
-                $tempTrimmedTracksArray = explode(' ', $trackstring);
-                for ($i = 0; $i < count($tempTrimmedTracksArray) - 1; $i++) {
-                    exec('cd audio ; rm ' . $tempTrimmedTracksArray[$i]);
-                }
-
-                $tempWavTracksArray = explode(' ', $wavtrackstring);
-                for ($i = 0; $i < count($tempWavTracksArray) - 1; $i++) {
-                    exec('cd audio ; rm ' . $tempWavTracksArray[$i]);
-                }
-
-                $mergedtrack                = new MergedTrack();
-
-                $mergedtrack->songname      = $track->songname;
-                $mergedtrack->artist_id     = $track->artist_id;
-                $mergedtrack->file_url      = $fileName;
-                
-                $mergedtrack->save();
-
-                for ($i = 0; $i < count($tracks); $i++) {
-                    $mergedtrack->users()->attach($tracks[$i]['user_id']);
-                }
-
-                return response()->json([
-                    'status'            => 'success',
-                    'mergedfilename'    => $fileName
-                ]);
-            } else {
-                return response()->json([
-                    'status'            => 'failed',
-                    'error_location'    => 'convert'
-                ]);
+            // When the merge succeeds, remove all temporary files.
+            $tmp_tracks = explode(' ', $concatenated_tracks);
+            for ($i = 0; $i < count($tmp_tracks) - 1; $i++) {
+                exec('cd audio ; rm ' . $tmp_tracks[$i]);
             }
+
+            $mergedtrack = new MergedTrack();
+
+            $mergedtrack->songname = $track->songname;
+            $mergedtrack->artist_id = $track->artist_id;
+            $mergedtrack->file_url = $merged_track_name;
+
+            $mergedtrack->save();
+
+            for ($i = 0; $i < count($tracks); $i++) {
+                $mergedtrack->users()->attach($tracks[$i]['user_id']);
+            }
+
+            return response()->json([
+                'status' => 'success',
+                'mergedfilename' => $merged_track_name
+            ]);
         } else {
             return response()->json([
-                'status'            => 'failed',
-                'error_location'    => 'merge'
+                'status' => 'failed',
+                'error' => 'merge'
             ]);
         }
     }

@@ -46,7 +46,7 @@ class SoloTrackController extends Controller
     }
 
     /**
-     * Upload a track.
+     * Upload a track and convert it to mp3.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -73,7 +73,7 @@ class SoloTrackController extends Controller
         } else {
             return response()->json([
                 'status' => 'failed',
-                'error_location' => 'convert'
+                'error' => 'convert'
             ]);
         }
     }
