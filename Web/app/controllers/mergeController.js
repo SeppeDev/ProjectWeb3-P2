@@ -30,15 +30,13 @@ app.controller("mergeController", function(bandService, mergedService, $state) {
 		    		progressColor: 'purple'
 				});
 
-				wavesurfer[track_id].load('http://discoverbandapi.int/public/api/audio/' + vm.tracks[i].file_url);
+				wavesurfer[track_id].load(CONSTANTS.API_BASE_URL + '/audio/' + vm.tracks[i].file_url);
 
 				vm.loadedTracks.push({
 	            	track_id: track_id,
 	            	trim_amount: 0,
 	            	user_id: vm.tracks[i].user.id
 	        	});
-
-	        	console.log(vm.loadedTracks);
 			}
 			vm.showTracks = true;
 		}
@@ -48,7 +46,6 @@ app.controller("mergeController", function(bandService, mergedService, $state) {
 		if(!wavesurfer[id].isPlaying())
 		{
 			vm.savedTime[id] = wavesurfer[id].getCurrentTime();
-			console.log(vm.savedTime);
 		}
 
 		wavesurfer[id].playPause();

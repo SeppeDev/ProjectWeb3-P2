@@ -9,6 +9,11 @@ use App\User;
 
 class UserController extends Controller
 {
+    /**
+     * Fetch the authenticated user's info.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $user = JWTAuth::parseToken()->authenticate();
@@ -16,15 +21,21 @@ class UserController extends Controller
         return response()->json($user);
     }
 
+    /**
+     * Update the authenticated user's info.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request)
     {
-    	$user 			= JWTAuth::parseToken()->authenticate();
+        $user = JWTAuth::parseToken()->authenticate();
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->save();
 
-    	$user->username = $request->username;
-    	$user->email 	= $request->email;
-
-    	$user->save();
-
-    	return response()->json(['status' => 'OK'], 200);
+        return response()->json([
+            'status' => 'OK'
+        ], 200);
     }
 }

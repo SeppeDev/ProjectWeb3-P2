@@ -27,28 +27,53 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * A user belongs to many instruments.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
     public function instruments()
     {
         return $this->belongsToMany('App\Instrument');
     }
 
-    public function single_tracks()
+    /**
+     * A user has many solo tracks.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function soloTracks()
     {
-        return $this->hasMany('App\Single_track');
+        return $this->hasMany('App\SoloTrack');
     }
 
-    public function merged_tracks()
+    /**
+     * A user belongs to many merged tracks.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function mergedTracks()
     {
-        return $this->belongsToMany('App\Merged_track');
+        return $this->belongsToMany('App\Mergedtrack');
     }
 
-    public function single_track_votes()
+    /**
+     * A user has many solo track votes.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function singleTrackVotes()
     {
-        return $this->hasMany('App\Single_track_vote');
+        return $this->hasMany('App\SoloTrackVote');
     }
 
-    public function merged_track_votes()
+    /**
+     * A user has many merged track votes.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function mergedTrackVotes()
     {
-        return $this->hasMany('App\Merged_track_vote');
+        return $this->hasMany('App\MergedTrackVote');
     }
 }

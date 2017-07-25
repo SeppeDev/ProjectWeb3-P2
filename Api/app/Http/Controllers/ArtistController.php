@@ -7,10 +7,15 @@ use App\Artist;
 
 class ArtistController extends Controller
 {
-    public function index() 
+    /**
+     * Fetch all artists.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-    	$artists = Artist::all();
+        $artists = Artist::all();
 
-    	return response()->json($artists);
+        return response()->json($artists);
     }
 }

@@ -13,19 +13,19 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('tracks', 'SingleTrackController@index');
-Route::get('tracks/{id}', 'SingleTrackController@show');
+Route::get('tracks', 'SoloTrackController@index');
+Route::get('tracks/{id}', 'SoloTrackController@show');
 Route::get('mergedtracks', 'MergedTrackController@index');
-Route::get('mergedtracks/{id}', 'MergedTrackController@show');
-Route::get('mergedtracks/{id}/download', 'MergedTrackController@download');
+Route::get('mergedtracks/{merged_track}', 'MergedTrackController@show');
+Route::get('mergedtracks/{merged_track}/download', 'MergedTrackController@download');
 Route::get('instruments', 'InstrumentController@index');
 Route::get('artists', 'ArtistController@index');
-Route::get('votes/{id}', 'VoteController@index');
+Route::get('votes/{merged_track}', 'VoteController@index');
 
 Route::post('mergedtracks/create', 'MergedTrackController@store');
-Route::post('tracks/create', 'SingleTrackController@store');
+Route::post('tracks/create', 'SoloTrackController@store');
 Route::post('vote/create', 'VoteController@store');
-Route::post('upload', 'SingleTrackController@upload');
+Route::post('upload', 'SoloTrackController@upload');
 
 Route::get('user', 'UserController@index');
 Route::post('user', 'UserController@update');

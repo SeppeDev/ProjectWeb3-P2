@@ -9,11 +9,26 @@ use App\User;
 
 class AuthenticateController extends Controller
 {
-	public function __construct()
-   	{
-       	$this->middleware('jwt.auth', ['except' => ['login', 'register']]);
-   	}
+    /**
+     * Constructor.
+     * Apply JWT authentication middleware to all controller functions, except for login and register.
+     */
+    public function __construct()
+    {
+        $this->middleware('jwt.auth', [
+            'except' => [
+                'login',
+                'register'
+            ]
+        ]);
+    }
 
+    /**
+     * Authenticates users.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function login(Request $request)
     {
         $this->validate($request, [
@@ -24,20 +39,31 @@ class AuthenticateController extends Controller
         $credentials = $request->only('email', 'password');
 
         try {
-            // verify the credentials and create a token for the user
+            // Verify the credentials and create a token for the user.
             if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 401);
+                return response()->json([
+                    'error' => 'invalid_credentials'
+                ], 401);
             }
         } catch (JWTException $e) {
-            // something went wrong
-            return response()->json(['error' => 'could_not_create_token'], 500);
+            return response()->json([
+                'error' => 'could_not_create_token'
+            ], 500);
         }
 
-        // if no errors are encountered we can return a JWT
-        return response()->json(compact('token'));
+        // If no errors are encountered, return a JWT.
+        return response()->json([
+            'token' => $token
+        ]);
     }
 
-    public function register(Request $request) 
+    /**
+     * Registers users.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
     {
         $this->validate($request, [
             'username'  => 'required|max:18',
@@ -53,6 +79,8 @@ class AuthenticateController extends Controller
 
         $user->save();
 
-        return response()->json(['status' => 'OK'], 200);
+        return response()->json([
+            'status' => 'OK'
+        ], 200);
     }
 }
