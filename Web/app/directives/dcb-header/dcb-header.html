@@ -1,36 +1,40 @@
 <header>
 	<div class="navbar-fixed">
 		<nav class="primary-color">
-		    <div class="nav-wrapper">
-		      	<a ui-sref="home" class="brand-logo center header-title">Discoverband</a>
+			<div class="container">
+				<a ui-sref="home" class="brand-logo center header-title">Discoverband</a>
 		      	<ul id="nav-mobile" class="left hide-on-med-and-down">
 			        <li><a ui-sref="solo">Solo tracks</a></li>
 			        <li><a ui-sref="merged">Band tracks</a></li>
 		      	</ul>
-
 		      	<ul ng-if="!head.isAuthenticated()" class="right hide-on-med-and-down">
 					<li ng-if="head.trackArrayCount() > 0" ng-click="head.showBand()">
-						<a class="waves-effect waves-light btn primary-button-color" ng-click="head.showBand()">My band ({{head.trackArrayCount()}})</a></li>
+						<a class="waves-effect waves-light btn primary-button-color" ng-click="head.showBand()">My band ({{head.trackArrayCount()}})</a>
+					</li>
 
 					<li ng-click="head.showLogin()">
-						<a>Login</a></li>
+						<a>Login</a>
+					</li>
 					
 					<li ng-click="head.showRegister()">
-						<a>Register</a></li>
+						<a>Register</a>
+					</li>
 				</ul>
 				<ul ng-if="head.isAuthenticated()" class="right hide-on-med-and-down">
 					<li ng-if="head.trackArrayCount() > 0" ng-click="head.showBand()">
-						<a class="waves-effect waves-light btn primary-button-color" ng-click="head.showBand()">My band ({{head.trackArrayCount()}})</a></li>
-
-					<li><a class="waves-effect waves-light btn primary-button-color" ui-sref="upload">Upload <i class="fa fa-upload" aria-hidden="true"></i></a></li>
-
+						<a class="waves-effect waves-light btn primary-button-color" ng-click="head.showBand()">My band ({{head.trackArrayCount()}})</a>
+					</li>
 					<li>
-						<a ui-sref="profile">Profile</a></li>
-					
+						<a class="waves-effect waves-light btn primary-button-color" ui-sref="upload">Upload <i class="fa fa-upload" aria-hidden="true"></i></a>
+					</li>
+					<li>
+						<a ui-sref="profile">Profile</a>
+					</li>
 					<li ng-click="head.logout()">
-						<a>Logout</a></li>
+						<a>Logout</a>
+					</li>
 				</ul>
-		    </div>
+			</div>
 	 	</nav>
 	</div>
 </header>

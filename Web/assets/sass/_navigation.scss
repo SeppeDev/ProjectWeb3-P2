@@ -1,16 +1,20 @@
 nav {
-  .nav-wrapper {
-    width: 75%;
-    margin: 0 12.5%;
+  a:focus, a:hover {
+    color: $white;
+    text-decoration: none;
+  }
 
-    a:hover {
-      color: $white !important;
-      text-decoration: underline;
-    }
+  .brand-logo {
+    font-size: 40px;
+    color: $white;
+    font-family: amplify;
+  }
 
-    a:focus {
-      color: $white !important;
-      text-decoration: none;
-    }
+  .dropdown-button > .fa {
+    height: 36px !important;
+  }
+
+  .dropdown-content li > a {
+    color: #2D5696 !important;
   }
 }
