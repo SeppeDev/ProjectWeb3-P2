@@ -1,0 +1,16 @@
+nav {
+  .nav-wrapper {
+    width: 75%;
+    margin: 0 12.5%;
+
+    a:hover {
+      color: $white !important;
+      text-decoration: underline;
+    }
+
+    a:focus {
+      color: $white !important;
+      text-decoration: none;
+    }
+  }
+}

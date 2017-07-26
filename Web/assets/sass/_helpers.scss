@@ -1,0 +1,187 @@
+/* ------------------------------------------
+---- This file is for the helper classes ----
+------------------------------------------ */
+
+/* Margins */
+/* Left */
+.mar-left-xs {
+  margin-left: 5px !important;
+}
+
+.mar-left-s {
+  margin-left: 10px !important;
+}
+
+.mar-left-m {
+  margin-left: 15px !important;
+}
+
+.mar-left-l {
+  margin-left: 30px !important;
+}
+
+.mar-left-xl {
+  margin-left: 45px !important;
+}
+
+/* Right */
+.mar-right-s {
+  margin-right: 5px !important;
+}
+
+.mar-right-m {
+  margin-right: 15px !important;
+}
+
+.mar-right-l {
+  margin-right: 30px !important;
+}
+
+.mar-right-xl {
+  margin-right: 45px !important;
+}
+
+/* Top */
+.no-mar-top {
+  margin-top: 0px !important;
+}
+
+.mar-top-s {
+  margin-top: 5px !important;
+}
+
+.mar-top-m {
+  margin-top: 15px !important;
+}
+
+.mar-top-l {
+  margin-top: 30px !important;
+}
+
+.mar-top-xl {
+  margin-top: 45px !important;
+}
+
+/* Bottom */
+.no-mar-btm {
+  margin-bottom: 0px !important;
+}
+
+.mar-btm-s {
+  margin-bottom: 5px !important;
+}
+
+.mar-btm-m {
+  margin-bottom: 15px !important;
+}
+
+.mar-btm-l {
+  margin-bottom: 30px !important;
+}
+
+.mar-btm-xl {
+  margin-bottom: 45px !important;
+}
+
+/* Auto */
+.mar-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Mobile */
+@media screen and (max-width: 600px) {
+  .mar-top-l-mobile {
+    margin-top: 30px !important;
+  }
+}
+
+/* Paddings */
+/* Left */
+.pad-left-s {
+  padding-left: 5px !important;
+}
+
+.pad-left-m {
+  padding-left: 15px !important;
+}
+
+.pad-left-l {
+  padding-left: 30px !important;
+}
+
+.pad-left-xl {
+  padding-left: 45px !important;
+}
+
+/* Right*/
+.pad-right-s {
+  padding-right: 5px !important;
+}
+
+.pad-right-m {
+  padding-right: 15px !important;
+}
+
+.pad-right-l {
+  padding-right: 30px !important;
+}
+
+.pad-right-xl {
+  padding-right: 45px !important;
+}
+
+/* Top */
+.pad-top-s {
+  padding-top: 5px !important;
+}
+
+.pad-top-m {
+  padding-top: 15px !important;
+}
+
+.pad-top-l {
+  padding-top: 30px !important;
+}
+
+.pad-top-xl {
+  padding-top: 45px !important;
+}
+
+/* Bottom */
+.pad-btm-s {
+  padding-bottom: 5px !important;
+}
+
+.pad-btm-m {
+  padding-bottom: 15px !important;
+}
+
+.pad-btm-l {
+  padding-bottom: 30px !important;
+}
+
+.pad-btm-xl {
+  padding-bottom: 45px !important;
+}
+
+/* Clearfix */
+.cf:before,
+.cf:after {
+  content: " "; /* 1 */
+  display: table; /* 2 */
+}
+
+.cf:after {
+  clear: both;
+}
+
+/* Make something "clickable" */
+.clickable {
+  cursor: pointer;
+}
+
+/* Hotfixes */
+.btn > i.fa {
+  font-size: 1rem;
+}

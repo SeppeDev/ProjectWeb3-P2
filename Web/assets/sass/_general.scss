@@ -1,0 +1,42 @@
+body {
+  color: $white !important;
+  background-color: $black;
+}
+
+/* Custom Colours */
+.primary-color {
+  background-color: transparentize($dark-grey, 0.5) !important;
+}
+
+.primary-color-text {
+  color: $light-grey !important;
+}
+
+/* App-wide button */
+.primary-button-color {
+  background-color: $dark-green !important;
+
+  a:hover {
+    color: $white;
+  }
+}
+
+.btn-flat:focus {
+  background-color: #2D5696 !important;
+  color: $white !important;
+}
+
+.background-img {
+  margin-top: -100px;
+}
+
+.background {
+  display: block;
+  position: fixed;
+  width: 100%;
+  z-index: -1;
+}
+
+.scroll {
+  width: 100% !important;
+}

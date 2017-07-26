@@ -1,0 +1,29 @@
+/*
+* Materialize
+*/
+.well {
+  border-radius: 0px;
+  background-color: $white;
+}
+
+// Override filter color
+[type="checkbox"]:checked+label:before {
+  border-right: 2px solid $dark-green;
+  border-bottom: 2px solid $dark-green;
+}
+
+input[type=text]:focus:not([readonly]) {
+  border-bottom: 1px solid $dark-green;
+  box-shadow: 0 1px 0 0 $dark-green;
+}
+
+.waves-effect {
+  z-index: 0 !important;
+}
+
+/*
+* Font awesome
+*/
+.fa-upload {
+  line-height: inherit !important;
+}

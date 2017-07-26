@@ -1,0 +1,21 @@
+.brand-logo {
+  height: 64px;
+}
+
+.brand-logo > img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.brand-logo > span {
+  display: inline-block;
+  position: absolute;
+}
+
+.dropdown-button > .fa {
+  height: 36px !important;
+}
+
+.dropdown-content li > a {
+  color: #2D5696 !important;
+}

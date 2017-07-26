@@ -1,0 +1,92 @@
+.instrument {
+  background-image: url("../img/instrumentsprite.png");
+  background-repeat: no-repeat;
+}
+
+.Guitar {
+  @extend .instrument;
+  height: 150px;
+  width: 150px;
+  background-position: 0px -150px;
+}
+
+.Leadguitar {
+  @extend .instrument;
+  height: 150px;
+  width: 150px;
+  background-position: 0px -150px;
+}
+
+.Rhythmguitar {
+  @extend .instrument;
+  height: 150px;
+  width: 150px;
+  background-position: 0px 0px;
+}
+
+.Bass {
+  @extend .instrument;
+  height: 150px;
+  width: 150px;
+  background-position: -150px -150px;
+  //background-color: $dark-orange;
+}
+
+.Drum {
+  @extend .instrument;
+  height: 150px;
+  width: 150px;
+  background-position: -300px 0px;
+
+}
+
+.Piano {
+  @extend .instrument;
+  height: 150px;
+  width: 150px;
+  background-position: -300px -150px;
+  //background-color: $dark-purple;
+}
+
+.Vocals {
+  @extend .instrument;
+  height: 150px;
+  width: 150px;
+  background-position: -150px 0px;
+  //background-color: $dark-red;
+}
+
+.Guitar-container {
+  padding: 5px;
+  background-color: $dark-blue;
+}
+
+.Rhythmguitar-container {
+  padding: 5px;
+  background-color: $dark-green;
+}
+
+.Leadguitar-container {
+  padding: 5px;
+  background-color: $dark-blue;
+}
+
+.Drum-container {
+  padding: 5px;
+  background-color: $dark-yellow;
+}
+
+.Piano-container {
+  padding: 5px;
+  background-color: $dark-purple;
+}
+
+.Bass-container {
+  padding: 5px;
+  background-color: $dark-orange;
+}
+
+.Vocals-container {
+  padding: 5px;
+  background-color: $dark-red;
+}

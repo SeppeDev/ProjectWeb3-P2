@@ -1,0 +1,18 @@
+.search {
+  position: absolute;
+  top: 50%;
+  width: 50% !important;
+  left: 25%;
+
+  input {
+    display: inline !important;
+    margin: 0 !important;
+    border-bottom: 2px solid $dark-green;
+    padding-left: 1rem !important;
+  }
+
+  input:focus {
+    color: white !important;
+    background-color: none;
+  }
+}
