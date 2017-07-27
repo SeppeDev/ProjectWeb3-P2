@@ -1,0 +1,49 @@
+body {
+  color: $white !important;
+  background-color: $black;
+  font-family: Raleway, sans-serif;
+}
+
+.primary-color {
+  background-color: $dark-grey;
+}
+
+.primary-color-text {
+  color: $white;
+}
+
+.primary-button-color {
+  background-color: $dark-green !important;
+
+  a:hover {
+    color: $white;
+  }
+}
+
+.btn-flat:focus {
+  background-color: #2D5696 !important;
+  color: $white !important;
+}
+
+.background-img {
+  margin-top: -100px;
+}
+
+.background {
+  display: block;
+  position: fixed;
+  width: 100%;
+  z-index: -1;
+}
+
+.scroll {
+  width: 100% !important;
+}
+
+.input-field label {
+  color: $white !important;
+}
+
+label {
+  color: $white;
+}

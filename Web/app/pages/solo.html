@@ -1,12 +1,8 @@
 <main class="solo">
 	<img class="background background-img" src="dist/img/wn1ch6ferbg-hannu-pekka-peuranen.jpg">
-
 	<div class="container">
-		
 		<h1 class="page-title">Solo Tracks</h1>
-
 		<div class="row">
-			<h2>Filter</h2>
 			<form action="#">
 				<div class="col s6">
 					<label>Artist</label>
@@ -23,36 +19,31 @@
 				</div>
 			</form>
 		</div>
-
 		<div class="divider mar-top-xl"></div>
-
-		<div class="results">
-			<h2>Results</h2>
-			<h5 ng-show="solo.showNoResultsFound">No results found</h5>
-		    <div class="card horizontal row" ng-repeat="track in solo.filteredTracks">
-		      	<div class="card-image {{track.instrument.name}}-container">
-		        	<img class="{{track.instrument.name}}" src="dist/img/transparent.png" alt="{{track.instrument.name}}">
-		      	</div>
-		      	<div class="card-content">
-			          	<h4>{{track.artist.name}} - {{track.songname}}</h4>
-			          	<h5>By {{track.user.username}}</h5>
-			          	<div class="row">
-			          		<div class="card-button play col s1 valign-wrapper" ng-click="solo.play(track.id)" ng-if="track.id != solo.currentAudioTrackId">
-						    	<i class="fa fa-play valign" aria-hidden="true"></i>
-					      	</div>
-					      	<div class="card-button pause col s1 valign-wrapper" ng-click="solo.pause(track.id)" ng-if="track.id == solo.currentAudioTrackId">
-						    	<i class="fa fa-pause valign" aria-hidden="true"></i>
-					      	</div>
-			          	</div>
-			    </div>
-			    <div class="card-button add col s1 valign-wrapper" ng-click="solo.addToBand(track)" ng-if="(track.id | band:solo.bandTrackIdArray()) == false">
-			    	<i class="fa fa-plus valign" aria-hidden="true"></i>
-		      	</div>
-		      	<div class="card-button remove col s1 valign-wrapper" ng-click="solo.removeFromBand(track)" ng-if="track.id | band:solo.bandTrackIdArray()">
-			    	<i class="fa fa-minus valign" aria-hidden="true"></i>
-		      	</div>
-		    </div>
-		    
+		<h2>Results</h2>
+		<h5 ng-show="solo.showNoResultsFound">No results found</h5>
+		<div class="card horizontal row no-margin" ng-repeat="track in solo.filteredTracks">
+			<div class="card-image {{track.instrument.name}}-container">
+				<img class="{{track.instrument.name}}" src="dist/img/transparent.png" alt="{{track.instrument.name}}">
+			</div>
+			<div class="card-content">
+				<h4>{{track.artist.name}} - {{track.songname}}</h4>
+				<h5>By {{track.user.username}}</h5>
+				<div class="row">
+					<div class="card-button play col s1 valign-wrapper" ng-click="solo.play(track.id)" ng-if="track.id != solo.currentAudioTrackId">
+						<i class="fa fa-play valign" aria-hidden="true"></i>
+					</div>
+					<div class="card-button pause col s1 valign-wrapper" ng-click="solo.pause(track.id)" ng-if="track.id == solo.currentAudioTrackId">
+						<i class="fa fa-pause valign" aria-hidden="true"></i>
+					</div>
+				</div>
+			</div>
+			<div class="card-button add col s1 valign-wrapper" ng-click="solo.addToBand(track)" ng-if="(track.id | band:solo.bandTrackIdArray()) == false">
+				<i class="fa fa-plus valign" aria-hidden="true"></i>
+			</div>
+			<div class="card-button remove col s1 valign-wrapper" ng-click="solo.removeFromBand(track)" ng-if="track.id | band:solo.bandTrackIdArray()">
+				<i class="fa fa-minus valign" aria-hidden="true"></i>
+			</div>
 		</div>
 	</div>
 </main>

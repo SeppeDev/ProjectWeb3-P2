@@ -42,28 +42,13 @@ gulp.task("js", function() {
 		.pipe(gulp.dest("dist/js"))
 });
 
-
-// ------------------------------------------------------------- //
-// This task bundles your application styles into dist/styles.js //
-// ------------------------------------------------------------- //
-gulp.task("css", function() {
-
-	gulp.src(["assets/css/*.css"])
-		.pipe(concat("styles.css"))
-		.pipe(cssnano())
-		.pipe(gulp.dest("dist/css"))
-});
-
-
-// ------------------------------------------------------------- //
-// This task bundles your application styles into dist/styles.js //
-// ------------------------------------------------------------- //
+// -------------------------------------------------------------- //
+// This task bundles your application styles into dist/styles.css //
+// -------------------------------------------------------------- //
 gulp.task("sass", function() {
-
-	gulp.src(["assets/sass/*.scss"])
-		.pipe(concat("styles.css"))
-		.pipe(sass().on("error", sass.logError))
-		.pipe(gulp.dest("assets/css"))
+    return gulp.src('assets/sass/*.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('dist/css'));
 });
 
 
@@ -73,7 +58,6 @@ gulp.task("sass", function() {
 gulp.task("build", function() {
 
 	gulp.start("sass");
-	gulp.start("css");
 	gulp.start("js");
 });
 
@@ -101,9 +85,8 @@ gulp.task("watch", function() {
 // This task bundles your scripts and styles and start watching //
 // ------------------------------------------------------------ //
 gulp.task("init", function() {
-	
+
 	gulp.start("sass");
-	gulp.start("css");
 	gulp.start("js");
 	gulp.start("watch");	
 });

@@ -1,0 +1,19 @@
+$white 				: #FFFFFF;
+$light-grey 		: #999999;
+$medium-grey 		: #666666;
+$dark-grey 			: #222222;
+$black 				: #000000;
+
+$purple 			: #9A30D8;
+$orange 			: #F9A02C;
+$blue 				: #296BE3;
+$yellow 			: #FFEC01;
+$red 				: #FF2021;
+$green 				: #4ECE2F;
+
+$dark-purple 		: darken(desaturate($purple, 15%), 5%);	//Piano
+$dark-orange 		: darken(desaturate($orange, 15%), 5%);	//Bass
+$dark-blue 			: darken(desaturate($blue, 15%), 5%);	//Leadguitar
+$dark-yellow 		: darken(desaturate($yellow, 15%), 5%);	//Drum
+$dark-red 			: darken(desaturate($red, 15%), 5%);	//Vocals
+$dark-green 		: darken(desaturate($green, 15%), 5%);	//Rhythguitar

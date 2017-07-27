@@ -3,26 +3,21 @@
 		<h1 class="title">Discoverband</h1>
 	    <img class="background-img scroll" src="dist/img/wn1ch6ferbg-hannu-pekka-peuranen.jpg">
 	</div>
+	<div class="search">
+		<form>
+			<div class="row input-field">
+				<input class="col l5 s12" type="search" placeholder="Search for an artist" ng-model="home.filterData.artist">
+				<input class="col l5 s12" type="search" placeholder="or song" ng-model="home.filterData.title">
+				<a class="col l2 s12 primary-button-color btn-search" ui-sref="solo">Search</a>
+			</div>
+		</form>
+	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col s12">
 				<div class="section">
 					<h1>Welcome to DisCoverBand</h1>
 					<p class="text-large">As Alice Cooper once said "Every good band in the world was a cover band first". Starting a coverband can be hard, so we've come up with something that can kickstart your cover carreer! To start a coverband, you need bandmembers, playing different instruments, coming together and making music together. But what if you could all play music at home, record that "one magnificent play", and then combine it with other people's best recordings, to a full, multi-insturment cover of the song!</p>	
-				</div>
-				<div class="search">
-			      	<form>
-			        	<div class="row input-field">
-			          		<input id="search" class="col l6 s12" type="search" placeholder="Search for an ARTIST..." ng-model="home.filterData.artist">
-			          		<input id="search" class="col l6 s12" type="search" placeholder="or SONGTITLE" ng-model="home.filterData.title">
-			          		<input type="submit" value="Search" ui-sref="solo" ng-hide="true">
-			        	</div>
-			      	</form>
-			      	<div class="row">
-			      		<div>
-			      			<a class="btn-large primary-button-color col l2 s12 push-l5" ui-sref="solo">Search</a>
-			      		</div>
-			      	</div>
 				</div>
 				<div class="divider mar-top-l"></div>
 			</div>
