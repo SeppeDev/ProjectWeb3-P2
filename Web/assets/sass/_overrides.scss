@@ -1,9 +1,9 @@
 /*
 * Materialize
 */
-.well {
-  border-radius: 0px;
-  background-color: $white;
+.container .row.no-margin {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 // Override filter color

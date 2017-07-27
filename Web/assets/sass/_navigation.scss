@@ -17,4 +17,33 @@ nav {
   .dropdown-content li > a {
     color: #2D5696 !important;
   }
+
+  li a {
+    font-size: 16px;
+    font-weight: 600;
+
+    &.btn {
+      padding: 0 2rem !important;
+    }
+  }
+
+  .left {
+    li a {
+      padding: 0 45px 0 0;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+
+  .right {
+    li a {
+      padding: 0 0 0 45px;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
 }

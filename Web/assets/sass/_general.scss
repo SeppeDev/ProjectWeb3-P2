@@ -4,16 +4,14 @@ body {
   font-family: Raleway, sans-serif;
 }
 
-/* Custom Colours */
 .primary-color {
-  background-color: transparentize($dark-grey, 0.5) !important;
+  background-color: $dark-grey;
 }
 
 .primary-color-text {
   color: $white;
 }
 
-/* App-wide button */
 .primary-button-color {
   background-color: $dark-green !important;
 
@@ -40,4 +38,12 @@ body {
 
 .scroll {
   width: 100% !important;
+}
+
+.input-field label {
+  color: $white !important;
+}
+
+label {
+  color: $white;
 }
