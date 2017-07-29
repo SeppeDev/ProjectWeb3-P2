@@ -2,12 +2,12 @@
 
 ## Back end
 * cd Api
-* Run "composer install"
-* Copy the example environment file: "cp .env.example .env"
-* Edit the .env file
-* Run "php artisan key:generate"
-* Run "php artisan migrate --seed"
-* Sudo chown -R www-data:www-data storage/
+* composer install
+* cp .env.example .env
+* Edit .env
+* php artisan key:generate
+* php artisan migrate --seed
+* chown -R www-data:www-data storage/
 * Set up apache to host "Api/public" as "discoverband.api"
 
 ## Front end
@@ -15,8 +15,6 @@
 * npm install
 * gulp init
 * Set up apache to host "Web" as "discoverband.local"
-
-#
 
 ## Compile sox with mp3 support (Ubuntu 16.04 LTS)
 
@@ -43,9 +41,9 @@ e.g. tar -xzvf archive.tar.gz
 #### Sox
 1. ./configure
 2. check OPTIONAL FILE FORMATS: 
-> mp2/mp3: yes  
-> lame: yes  
-> mad: yes  
+    > mp2/mp3: yes  
+    > lame: yes  
+    > mad: yes  
 3. make -s
 4. sudo make install
 5. sudo ldconfig
