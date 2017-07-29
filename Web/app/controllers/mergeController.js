@@ -14,8 +14,7 @@ app.controller("mergeController", function(bandService, mergedService, $state) {
 
         $('#band_modal').modal('close');
 
-		if(vm.tracks.length > 0)
-		{
+		if(vm.tracks.length > 0) {
 			vm.thereAreTracks	= true;
 		}
 	}
