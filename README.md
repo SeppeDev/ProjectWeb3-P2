@@ -18,13 +18,13 @@
 
 #
 
-#### Compile sox with mp3 support (Ubuntu 16.04 LTS)
+## Compile sox with mp3 support (Ubuntu 16.04 LTS)
 
 Download the latest source for libmad, lame and sox (.tar.gz or .tar.bz2)
 
-> https://sourceforge.net/projects/mad/files/libmad/
-> https://sourceforge.net/projects/lame/files/lame/
-> https://sourceforge.net/projects/sox/files/sox/
+> https://sourceforge.net/projects/mad/files/libmad/  
+> https://sourceforge.net/projects/lame/files/lame/  
+> https://sourceforge.net/projects/sox/files/sox/  
 
 #### Unpack archives
 e.g. tar -xzvf archive.tar.gz
@@ -43,9 +43,9 @@ e.g. tar -xzvf archive.tar.gz
 #### Sox
 1. ./configure
 2. check OPTIONAL FILE FORMATS: 
-    - mp2/mp3: yes
-    - lame: yes
-    - mad: yes
+> mp2/mp3: yes  
+> lame: yes  
+> mad: yes  
 3. make -s
 4. sudo make install
 5. sudo ldconfig
