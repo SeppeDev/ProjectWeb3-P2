@@ -1,4 +1,4 @@
-#Discoverband
+# Discoverband
 
 ## Back end
 * cd Api
@@ -26,21 +26,21 @@ Download the latest source for libmad, lame and sox (.tar.gz or .tar.bz2)
 > https://sourceforge.net/projects/lame/files/lame/
 > https://sourceforge.net/projects/sox/files/sox/
 
-##### Unpack archives
+#### Unpack archives
 e.g. tar -xzvf archive.tar.gz
 
-##### Lame
+#### Lame
 1. ./configure
 2. make
 3. sudo make install
 
-##### Libmad
+#### Libmad
 1. ./configure
 2. Remove ‘-fforce-mem’ from ‘makefile’
 3. make
 4. sudo make install
 
-##### Sox
+#### Sox
 1. ./configure
 2. check OPTIONAL FILE FORMATS: 
     - mp2/mp3: yes
