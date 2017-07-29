@@ -41,9 +41,11 @@ e.g. tar -xzvf archive.tar.gz
 #### Sox
 1. ./configure
 2. check OPTIONAL FILE FORMATS: 
+
     > mp2/mp3: yes  
     > lame: yes  
     > mad: yes  
+    
 3. make -s
 4. sudo make install
 5. sudo ldconfig

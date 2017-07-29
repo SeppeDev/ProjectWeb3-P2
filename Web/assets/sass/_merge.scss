@@ -4,19 +4,28 @@
   width: 100px !important;
 }
 
-.manage-all {
-  a {
-    margin-top: 20px;
+.sync-container {
+  margin-left: -10px !important;
+  margin-right: -10px !important;
 
-    &.play-pause {
-      background-color: $dark-green;
+  .manage-all {
+    a {
+      margin-top: 20px;
+
+      &.play-pause {
+        background-color: $dark-green;
+      }
+      &.start {
+        background-color: $dark-orange;
+      }
+      &.trim {
+        background-color: $dark-purple;
+      }
     }
-    &.start {
-      background-color: $dark-orange;
-    }
-    &.trim {
-      background-color: $dark-purple;
-    }
+  }
+
+  .row .col {
+    padding: 0;
   }
 }
 
