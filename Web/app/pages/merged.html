@@ -1,57 +1,44 @@
 <main class="merged">
-	<img class="background background-img" src="dist/img/wn1ch6ferbg-hannu-pekka-peuranen.jpg">
-
 	<div class="container">
-		
 		<h1 class="page-title">Band tracks</h1>
-
 		<div class="row">
-			<h2>Filter</h2>
-
 			<form action="#">
 				<div class="col s6">
 					<label>Artist</label>
-					<input type="text" name="artist" placeholder="Artist" ng-model="merged.filterData.artist">
+					<input type="text" name="artist" placeholder="Artist name" ng-model="merged.filterData.artist">
 				</div>
 				<div class="col s6">
-					<label>Title</label>
-					<input type="text" name="title" placeholder="Title" ng-model="merged.filterData.title">
+					<label>Song</label>
+					<input type="text" name="title" placeholder="Song title" ng-model="merged.filterData.title">
 				</div>
 			</form>
 		</div>
-
-		<div class="divider mar-top-xl"></div>
-
-		<div class="results">
-			<h2 >Results</h2>
-		    <div class="card horizontal row" ng-repeat="track in merged.filteredTracks">
-		      	<div class="card-content">
-			          	<h4>{{track.artist.name}} - {{track.songname}}</h4>
-			          	<div class="mar-btm-m">
-			          		<span class="contributors" ng-repeat="user in track.users">
-			          			<i class="fa fa-user" aria-hidden="true"></i> {{user.username}}
-			          		</span>
-			          	</div>
-	
-			          	<div class="row">
-			          		<div class="card-button play col s1 valign-wrapper" ng-click="merged.play(track.id)" ng-if="track.id != merged.currentAudioTrackId">
-						    	<i class="fa fa-play valign" aria-hidden="true"></i>
-					      	</div>
-					      	<div class="card-button pause col s1 valign-wrapper" ng-click="merged.pause(track.id)" ng-if="track.id == merged.currentAudioTrackId">
-						    	<i class="fa fa-pause valign" aria-hidden="true"></i>
-					      	</div>
-					      	<div class="votes-count" ng-click="merged.upVote(track.id)">
-					      		<img ng-show="merged.votedTrackArray.indexOf(track.id) == -1" class="rockhand" src="/dist/img/rockhand.png">
-					      		<img ng-show="merged.votedTrackArray.indexOf(track.id) != -1" class="rockhand" src="/dist/img/rockhand-active.png">
-					      		<span>{{ merged.voteCountPerTrack[track.id] }} users think this track rocks!</span>
-					      	</div>
-			          	</div>
-			    </div>
-			    <div class="card-button add col s1 valign-wrapper" ng-click="merged.download(track.id)">
-			    	<i class="fa fa-download" aria-hidden="true"></i>
-		      	</div>
-		    </div>
-		    
+		<div class="divider mar-top-xl mar-btm-xl"></div>
+		<div class="card horizontal row no-margin" ng-repeat="track in merged.filteredTracks">
+			<div class="card-content">
+					<h4>{{track.artist.name}} - {{track.songname}}</h4>
+					<div class="mar-btm-m">
+						<span class="contributors" ng-repeat="user in track.users">
+							<i class="fa fa-user" aria-hidden="true"></i> {{user.username}}
+						</span>
+					</div>
+					<div class="row">
+						<div class="card-button play col s1 valign-wrapper" ng-click="merged.play(track.id)" ng-if="track.id != merged.currentAudioTrackId">
+							<i class="fa fa-play valign" aria-hidden="true"></i>
+						</div>
+						<div class="card-button pause col s1 valign-wrapper" ng-click="merged.pause(track.id)" ng-if="track.id == merged.currentAudioTrackId">
+							<i class="fa fa-pause valign" aria-hidden="true"></i>
+						</div>
+						<div class="votes-count" ng-click="merged.upVote(track.id)">
+							<img ng-show="merged.votedTrackArray.indexOf(track.id) == -1" class="rockhand" src="/dist/img/rockhand.png">
+							<img ng-show="merged.votedTrackArray.indexOf(track.id) != -1" class="rockhand" src="/dist/img/rockhand-active.png">
+							<span>{{ merged.voteCountPerTrack[track.id] }} users think this track rocks!</span>
+						</div>
+					</div>
+			</div>
+			<div class="card-button add col s1 valign-wrapper" ng-click="merged.download(track.id)">
+				<i class="fa fa-download" aria-hidden="true"></i>
+			</div>
 		</div>
 	</div>
 </main>

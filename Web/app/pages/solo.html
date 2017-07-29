@@ -1,16 +1,15 @@
 <main class="solo">
-	<img class="background background-img" src="dist/img/wn1ch6ferbg-hannu-pekka-peuranen.jpg">
 	<div class="container">
 		<h1 class="page-title">Solo Tracks</h1>
 		<div class="row">
 			<form action="#">
 				<div class="col s6">
 					<label>Artist</label>
-					<input type="text" name="artist" placeholder="Artist" ng-model="solo.filterData.artist">
+					<input type="text" name="artist" placeholder="Artist name" ng-model="solo.filterData.artist">
 				</div>
 				<div class="col s6">
-					<label>Title</label>
-					<input type="text" name="title" placeholder="Title" ng-model="solo.filterData.title">
+					<label>Song</label>
+					<input type="text" name="title" placeholder="Song title" ng-model="solo.filterData.title">
 				</div>
 
 				<div class="input-field col s2" ng-repeat="instrument in solo.instruments">
@@ -19,9 +18,8 @@
 				</div>
 			</form>
 		</div>
-		<div class="divider mar-top-xl"></div>
-		<h2>Results</h2>
-		<h5 ng-show="solo.showNoResultsFound">No results found</h5>
+		<div class="divider mar-top-xl mar-btm-xl"></div>
+		<h5 ng-show="solo.showNoResultsFound">No tracks found</h5>
 		<div class="card horizontal row no-margin" ng-repeat="track in solo.filteredTracks">
 			<div class="card-image {{track.instrument.name}}-container">
 				<img class="{{track.instrument.name}}" src="dist/img/transparent.png" alt="{{track.instrument.name}}">

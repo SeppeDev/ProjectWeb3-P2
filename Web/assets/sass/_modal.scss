@@ -43,6 +43,14 @@
   background-color: transparentize($black, 0.05);
   border-top: 2px solid $dark-green;
 
+  .close-band-modal {
+    float: right;
+  }
+
+  .modal-footer {
+    padding: 0;
+  }
+
   .modal-footer {
     margin-bottom: 20px;
     background-color: transparent;

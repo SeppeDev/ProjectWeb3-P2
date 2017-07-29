@@ -8,8 +8,8 @@
 			        <li><a ui-sref="merged">Band tracks</a></li>
 		      	</ul>
 		      	<ul ng-if="!head.isAuthenticated()" class="right hide-on-med-and-down">
-					<li ng-if="head.trackArrayCount() > 0" ng-click="head.showBand()">
-						<a class="waves-effect waves-light btn primary-button-color" ng-click="head.showBand()">My band ({{head.trackArrayCount()}})</a>
+					<li ng-if="head.trackArrayCount() > 0">
+						<a class="waves-effect waves-light btn primary-button-color" ng-click="head.showBand()" title="My band"><i class="fa fa-users" aria-hidden="true"></i> {{head.trackArrayCount()}}</a>
 					</li>
 
 					<li ng-click="head.showLogin()">
@@ -21,11 +21,11 @@
 					</li>
 				</ul>
 				<ul ng-if="head.isAuthenticated()" class="right hide-on-med-and-down">
-					<li ng-if="head.trackArrayCount() > 0" ng-click="head.showBand()">
-						<a class="waves-effect waves-light btn primary-button-color" ng-click="head.showBand()">My band ({{head.trackArrayCount()}})</a>
+					<li ng-if="head.trackArrayCount() > 0">
+						<a class="waves-effect waves-light btn primary-button-color" ng-click="head.showBand()" title="My band"><i class="fa fa-users" aria-hidden="true"></i> {{head.trackArrayCount()}}</a>
 					</li>
 					<li>
-						<a class="waves-effect waves-light btn primary-button-color" ui-sref="upload">Upload <i class="fa fa-upload" aria-hidden="true"></i></a>
+						<a class="waves-effect waves-light btn primary-button-color" ui-sref="upload" title="Upload"><i class="fa fa-upload" aria-hidden="true"></i></a>
 					</li>
 					<li>
 						<a ui-sref="profile">Profile</a>

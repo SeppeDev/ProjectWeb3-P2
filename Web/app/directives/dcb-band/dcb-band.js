@@ -13,16 +13,14 @@ app.directive("dcbBand", function(bandService) {
 				vm.trackArray 			= bandSvc.getTrackArray;
 				vm.bandTrackIdArray 	= bandSvc.getTrackIdArray;
 				vm.trackArrayCount 		= bandSvc.getTrackArrayCount;
+			}
 
-				//console.log(vm.trackArrayCount);
+			vm.closeModal = function() {
+                $('#band_modal').modal('close');
 			}
 
 			vm.removeFromBand = function(track) {
-		
 				bandSvc.removeFromTrackArray(track);
-
-				console.log("Track removed from new band: " + track);
-				//console.log(bandSvc.trackArray);
 			}
 
 			_init();

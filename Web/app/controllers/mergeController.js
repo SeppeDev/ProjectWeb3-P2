@@ -12,6 +12,8 @@ app.controller("mergeController", function(bandService, mergedService, $state) {
 		vm.savedTime 		= [];
 		vm.trimAmounts  	= [];
 
+        $('#band_modal').modal('close');
+
 		if(vm.tracks.length > 0)
 		{
 			vm.thereAreTracks	= true;

@@ -6,6 +6,25 @@
   margin-right: 0;
 }
 
+.card.white {
+  .input-field label {
+    color: $black !important;
+  }
+}
+
+.modal.bottom-sheet {
+  top: 0;
+  max-height: 100%;
+
+  .modal-content {
+    padding: 0;
+  }
+}
+
+ul.dropdown-content.select-dropdown li span {
+  color: $black;
+}
+
 // Override filter color
 [type="checkbox"]:checked+label:before {
   border-right: 2px solid $dark-green;
