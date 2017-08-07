@@ -29,10 +29,10 @@
 						<div class="card-button pause col s1 valign-wrapper" ng-click="merged.pause(track.id)" ng-if="track.id == merged.currentAudioTrackId">
 							<i class="fa fa-pause valign" aria-hidden="true"></i>
 						</div>
-						<div class="votes-count" ng-click="merged.upVote(track.id)">
-							<img ng-show="merged.votedTrackArray.indexOf(track.id) == -1" class="rockhand" src="/dist/img/rockhand.png">
-							<img ng-show="merged.votedTrackArray.indexOf(track.id) != -1" class="rockhand" src="/dist/img/rockhand-active.png">
-							<span>{{ merged.voteCountPerTrack[track.id] }} users think this track rocks!</span>
+						<div class="card-button votes-count" ng-click="merged.upVote(track.id)">
+							<i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true" ng-hide="merged.userHasVoted(track)"></i>
+							<i class="fa fa-thumbs-up fa-2x" aria-hidden="true" ng-show="merged.userHasVoted(track)"></i>
+							<span>{{ track.votes.length }} users think this track rocks!</span>
 						</div>
 					</div>
 			</div>

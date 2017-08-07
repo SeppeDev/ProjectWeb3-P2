@@ -5,22 +5,10 @@ namespace App\Http\Controllers;
 use App\MergedTrack;
 use App\MergedTrackVote;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class VoteController extends Controller
 {
-    /**
-     * Fetch specified merged track's votes.
-     *
-     * @param  \App\MergedTrack  $merged_track
-     * @return \Illuminate\Http\Response
-     */
-    public function index(MergedTrack $merged_track)
-    {
-        $votes = $merged_track->votes()->get();
-
-        return response()->json($votes);
-    }
-
     /**
      * Store a vote for the specified track.
      *
@@ -31,7 +19,8 @@ class VoteController extends Controller
     {
         $merged_track = MergedTrack::find($request->track_id);
 
-        if (!$merged_track->votes->where('user_id', $request->user_id)->first()) {
+        $user_vote = $merged_track->votes->where('user_id', $request->user_id)->first();
+        if (empty($user_vote)) {
             $vote = new MergedTrackVote();
             $vote->merged_track_id = $request->track_id;
             $vote->user_id = $request->user_id;
@@ -41,6 +30,8 @@ class VoteController extends Controller
                 'status' => 'OK'
             ]);
         } else {
+            $user_vote->delete();
+
             return response()->json([
                 'status' => 'Duplicate'
             ]);
