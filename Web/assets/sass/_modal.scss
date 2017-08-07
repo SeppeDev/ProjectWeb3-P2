@@ -1,5 +1,14 @@
 .modal {
   bottom: auto;
+  top: 15%;
+
+  &#login_modal {
+    width: 25%;
+  }
+
+  &#register_modal {
+    width: 25%;
+  }
 
   h3 {
     color: $black;

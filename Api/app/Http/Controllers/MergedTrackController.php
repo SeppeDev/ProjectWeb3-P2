@@ -15,7 +15,7 @@ class MergedTrackController extends Controller
      */
     public function index()
     {
-        $tracks = MergedTrack::with('artist', 'users', 'votes')->get();
+        $tracks = MergedTrack::with(['artist', 'users', 'votes'])->get();
 
         if ($tracks->count()) {
             return response()->json($tracks);
