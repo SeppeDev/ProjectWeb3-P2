@@ -3,10 +3,11 @@ app.controller("mergedController", function($scope, mergedService, filterService
 	var vm  		= this;
 	var mgdSvc 		= mergedService;
 	var fltSvc 		= filterService;
-	var user_id		= null;
+
+	var user_id = null;
 
 	if(getCookie('user')) {
-		var user_id = JSON.parse(getCookie('user')).userId;
+		user_id = JSON.parse(getCookie('user')).userId;
 	}
 	
 
@@ -44,29 +45,9 @@ app.controller("mergedController", function($scope, mergedService, filterService
 					vm.mergedTrackAudio[track.id] = newTrack;
 				});
 
-				for (var i = vm.mergedTracks.length - 1; i >= 0; i--) {
-					vm.voteCountPerTrack[vm.mergedTracks[i].id] = vm.mergedTracks[i].votes.length;
-				}
 			}, function(error) {
-
 				console.log(error);
 			});
-	}
-
-	function getUserVotes() {
-		if(user_id !== null)
-		{
-			mergedService.getUserVotes(user_id)
-			.then(function(data) {
-				vm.votedtracks = data.data;
-				for (var i = vm.votedtracks.length - 1; i >= 0; i--) {
-					vm.votedTrackArray.push(vm.votedtracks[i].merged_track_id);
-				}
-			}, function(error) {
-
-				console.log(error);
-			});
-		}
 	}
 
 	function filter() {
@@ -77,19 +58,16 @@ app.controller("mergedController", function($scope, mergedService, filterService
 
 			goodSearch = true;
 
-			if(!vm.filterData.artist == "" && !track.artist.name.match(new RegExp(vm.filterData.artist, "i")))
-			{
+			if(!vm.filterData.artist == "" && !track.artist.name.match(new RegExp(vm.filterData.artist, "i"))) {
 				goodSearch = false;
 			}
 
-			if(!vm.filterData.title == "" && !track.songname.match(new RegExp(vm.filterData.title, "i")))
-			{
+			if(!vm.filterData.title == "" && !track.songname.match(new RegExp(vm.filterData.title, "i"))) {
 				goodSearch = false;
 			}
 
 
-			if(goodSearch)
-			{
+			if(goodSearch) {
 				vm.filteredTracks.push(track);
 			}
 		})
@@ -99,9 +77,7 @@ app.controller("mergedController", function($scope, mergedService, filterService
 		vm.mergedTrackAudio 	= [];
 		vm.currentAudioTrackId 	= "";
 		getMergedTracks();
-		getUserVotes();
 		vm.filterData 			= fltSvc.mergedFilterData;
-		vm.voteCountPerTrack 	= [];
 		vm.coloredHands 		= [];
 		vm.votedTrackArray 		= [];
 	}
@@ -132,18 +108,24 @@ app.controller("mergedController", function($scope, mergedService, filterService
             user_id: user_id
 	    }
 
-	    mgdSvc.insertVote(data)
-        .then(function(data)
-        {
-        	if(data.data.status === "OK") {
-        		vm.voteCountPerTrack[id]++;
-        		vm.votedTrackArray.push(id);
-        	}
+	    mgdSvc.insertVote(data).then(function(data) {
+			vm.votedTrackArray.push(id);
+			getMergedTracks();
         }, function(error)
         {
           console.log(error);
         });
 	}
+
+    vm.userHasVoted = function(track) {
+		for(var i = 0; i < track.votes.length; i++) {
+			if(track.votes[i].user_id === user_id) {
+				return true;
+			}
+		}
+
+        return false;
+    };
 
 	//Watches
 	$scope.$watch(
