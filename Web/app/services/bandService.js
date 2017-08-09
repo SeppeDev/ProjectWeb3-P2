@@ -50,7 +50,6 @@ app.service("bandService", function() {
 		return trackIdArray;
 	}
 
-
 	svc.addToTrackArray = function(track) {
 		trackArray.push(track);
 		incrementTrackArrayCount();
@@ -71,14 +70,5 @@ app.service("bandService", function() {
 
 	svc.getTrackArray = function() {
 		return trackArray;
-	}
-
-	
-
-
-
-
-	svc.testFunction = function() {
-		alert("Test function called from inside service!");
 	}
 })

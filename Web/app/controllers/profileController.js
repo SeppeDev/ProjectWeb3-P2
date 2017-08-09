@@ -4,6 +4,9 @@ app.controller("profileController", function(userService) {
 	var userSvc = userService;
 	var target 	= document.getElementById('update-profile-spinner');
 
+	/**
+	 * Custom spinner
+	 */
 	var opts = {
 			lines: 13 // The number of lines to draw
 		, length: 28 // The length of each line
@@ -34,6 +37,14 @@ app.controller("profileController", function(userService) {
 		});
 	}
 
+	/**
+	 * Update the userprofile
+	 * 
+	 * Start the spinner
+	 * Update the userinfo
+	 * Post the new uwerinfo
+	 * Stop the spinner
+	 */
 	vm.update = function() {
 		var spinner = new Spinner(opts).spin(target);
 	    vm.loading 	= true;

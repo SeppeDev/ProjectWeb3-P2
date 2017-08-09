@@ -17,6 +17,10 @@ app.controller("mergedController", function($scope, mergedService, filterService
 		track.play();
 	}
 
+	/**
+	 * Get and decode a cookie by its name
+	 * @param cname 
+	 */
 	function getCookie(cname) {
           var name = cname + "=";
           var decodedCookie = decodeURIComponent(document.cookie);
@@ -33,6 +37,11 @@ app.controller("mergedController", function($scope, mergedService, filterService
           return "";
       }
 
+	/**
+	 * Get all the merged tracks
+	 * Filter the tracks
+	 * Add audio and votecounter per track
+	 */
 	function getMergedTracks() {
 		mergedService.getTracks()
 			.then(function(data) {
@@ -50,6 +59,28 @@ app.controller("mergedController", function($scope, mergedService, filterService
 			});
 	}
 
+	/**
+	 * Create a list of all Merged Track Ids the current user voted for
+	 */
+	function getUserVotes() {
+		if(user_id !== null)
+		{
+			mergedService.getUserVotes(user_id)
+			.then(function(data) {
+				vm.votedtracks = data.data;
+				for (var i = vm.votedtracks.length - 1; i >= 0; i--) {
+					vm.votedTrackArray.push(vm.votedtracks[i].merged_track_id);
+				}
+			}, function(error) {
+
+				console.log(error);
+			});
+		}
+	}
+
+	/**
+	 * Filter all tracks according to the filderData the user has given
+	 */
 	function filter() {
 		
 		vm.filteredTracks = [];
@@ -83,6 +114,10 @@ app.controller("mergedController", function($scope, mergedService, filterService
 	}
 
 	//Vm functions
+	/**
+	 * Pause the current playing audiotrack if there is any
+	 * Start the new audiotrack
+	 */
 	vm.play = function(trackId) {
 
 		if(vm.currentAudioTrackId != "") {
@@ -102,6 +137,9 @@ app.controller("mergedController", function($scope, mergedService, filterService
     	window.open(CONSTANTS.API_BASE_URL + '/mergedtracks/' + id + '/download', '_blank', '');  
 	}
 
+	/**
+	 * Upvote the selected track
+	 */
 	vm.upVote = function(id) {
 	    var data = {
             track_id: id,

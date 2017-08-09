@@ -12,6 +12,9 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 		track.play();
 	}
 
+	/**
+	 * Load all the solo tracks in
+	 */
 	function getSoloTracks()
 	{
 		soloSvc.getTracks()
@@ -22,7 +25,6 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 				filter();
 
 				angular.forEach(vm.soloTracks, function(track, key) {
-						//newTrack = new Audio(track.file_url);
 						newTrack = new Audio(CONSTANTS.PUBLIC_BASE_URL + '/audio/' + track.file_url);
 						vm.soloTrackAudio[track.id] = newTrack;
 					});
@@ -33,6 +35,9 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 			});
 	}
 
+	/**
+	 * Filter all tracks according to the filderData the user has given
+	 */
 	function filter()
 	{
 		vm.filteredTracks = [];
@@ -73,20 +78,14 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 		}
 	}
 
-	/*function arrayObjectIndexOf(myArray, searchTerm, property) {
-    	
-    	for(var i = 0, len = myArray.length; i < len; i++) {
-        	if (myArray[i][property] === searchTerm) return i;
-    	}
-
-    	return -1;
-	}*/
-
 	function _init() {
 		vm.soloTrackAudio 		= [];
 		vm.currentAudioTrackId 	= "";
 		vm.showNoResultsFound 	= false;
 
+		/**
+		 * Get all instruments
+		 */
 		instSvc.getInstruments()
 			.then(function(data)
 			{
@@ -104,39 +103,29 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 	}
 
 	//Vm functions
+	/**
+	 * Add track to the current band
+	 */
 	vm.addToBand = function(track) {
 
 		bandSvc.addToTrackArray(track);
-		/*vm.bandTrackIdArray = [];
 
-		bandSvc.trackArray.push(track);
-		bandSvc.trackArrayCount ++;
-		angular.forEach(bandSvc.trackArray, function(track, key) {
-			vm.bandTrackIdArray.push(track.id);
-		});*/
-
-		console.log(track);
+		console.log("Track added to new band: " + track);
 	}
 
+	/**
+	 * Remove track from the current band
+	 */
 	vm.removeFromBand = function(track) {
 		
 		bandSvc.removeFromTrackArray(track);
-		/*index = arrayObjectIndexOf(bandSvc.trackArray, track.id, "id");
-		if (index > -1) {
-			bandSvc.trackArray.splice(index, 1);
-			bandSvc.trackArrayCount --;
-			vm.bandTrackArray = bandSvc.trackArray;
-
-			intIndex = vm.bandTrackIdArray.indexOf(track.id);
-			if (intIndex > -1) {
-				vm.bandTrackIdArray.splice(intIndex, 1);
-			}
-		}*/
 
 		console.log("Track removed from new band: " + track);
-		//console.log(bandSvc.trackArray);
 	}
 
+	/**
+	 * Play the track after checking if there is another playing currently, and if so, pausing it
+	 */
 	vm.play = function(trackId) {
 
 		if(vm.currentAudioTrackId != "") {
@@ -147,6 +136,9 @@ app.controller("soloController", function($scope, bandService, soloService, inst
 		vm.soloTrackAudio[trackId].play();
 	}
 
+	/**
+	 * Pause the track
+	 */
 	vm.pause = function(trackId) {
 		vm.soloTrackAudio[trackId].pause();
 		vm.currentAudioTrackId = "";

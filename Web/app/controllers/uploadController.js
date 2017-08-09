@@ -6,6 +6,9 @@ app.controller("uploadController", function(Upload, artistService, instrumentSer
   var instrumentSvc = instrumentService;
   var target        = document.getElementById('upload-spinner');
   
+  /**
+   * Custom spinner
+   */
   var opts = {
       lines: 13 // The number of lines to draw
     , length: 28 // The length of each line
@@ -33,6 +36,9 @@ app.controller("uploadController", function(Upload, artistService, instrumentSer
       vm.uploaded       = false;
       vm.showform       = false;
 
+      /**
+       * Get all Instruments
+       */
       vm.instruments    = instrumentSvc.getInstruments()
       .then(function(data)
       {
@@ -43,6 +49,9 @@ app.controller("uploadController", function(Upload, artistService, instrumentSer
         console.log(error);
       });
 
+      /**
+       * Get all Artists
+       */
       vm.artists        = artistSvc.getArtists()
       .then(function(data)
       {
@@ -55,73 +64,83 @@ app.controller("uploadController", function(Upload, artistService, instrumentSer
       });
   }
 
+  /**
+   * Upload the file
+   */
   vm.uploadFile = function (file) {
-        var spinner = new Spinner(opts).spin(target);
-        vm.loading  = true;
-        vm.uploaded = false;
+    var spinner = new Spinner(opts).spin(target);
+    vm.loading  = true;
+    vm.uploaded = false;
 
-        // Initialize form
-        vm.showform     = true;
-        $('select').material_select();
+    // Initialize form
+    vm.showform     = true;
+    $('select').material_select();
 
-        Upload.upload({
-            url: CONSTANTS.API_BASE_URL + "/upload",
-            fileFormDataName: 'song',
-            sendFieldsAs: 'form',
-            data: {
-              song: file
-            }
-        })
-        .then(function (resp) {
-            vm.filename     = resp.data.name;
-            vm.tracklength  = resp.data.length;
-            spinner.stop();
-            vm.loading      = false;
-            vm.uploaded     = true;
-        }, 
-        function (resp) {
-            vm.loading  = false;
-            spinner.stop();
-            vm.uploadfailed = true;
-        });
-    };
-
-    vm.save = function () {
-      var user_id = JSON.parse(getCookie('user')).userId;
-      var data = {
-            name: vm.songname,
-            file_url: vm.filename,
-            track_length: vm.tracklength,
-            user_id: user_id,
-            instrument_id: vm.instrumentsdropdown,
-            artist_id : vm.artistname
-        }
-
-      soloSvc.insertTrack(data)
-        .then(function(data)
-        {
-          $state.go("solo");
-          console.log(data);
-        }, function(error)
-        {
-          console.log(error);
-        });
-    }
-
-    function getCookie(cname) {
-          var name = cname + "=";
-          var decodedCookie = decodeURIComponent(document.cookie);
-          var ca = decodedCookie.split(';');
-          for(var i = 0; i <ca.length; i++) {
-              var c = ca[i];
-              while (c.charAt(0) == ' ') {
-                  c = c.substring(1);
-              }
-              if (c.indexOf(name) == 0) {
-                  return c.substring(name.length, c.length);
-              }
-          }
-          return "";
+    Upload.upload({
+      url: CONSTANTS.API_BASE_URL + "/upload",
+      fileFormDataName: 'song',
+      sendFieldsAs: 'form',
+      data: {
+        song: file
       }
+     })
+    .then(function (resp) {
+      vm.filename     = resp.data.name;
+      vm.tracklength  = resp.data.length;
+      spinner.stop();
+      vm.loading      = false;
+      vm.uploaded     = true;
+    }, 
+    function (resp) {
+      vm.loading  = false;
+      spinner.stop();
+      vm.uploadfailed = true;
+    });
+  };
+
+  /**
+   * Save the song
+   */
+  vm.save = function () {
+    var user_id = JSON.parse(getCookie('user')).userId;
+    var data = {
+          name: vm.songname,
+          file_url: vm.filename,
+          track_length: vm.tracklength,
+          user_id: user_id,
+          instrument_id: vm.instrumentsdropdown,
+          artist_id : vm.artistname
+      }
+
+    soloSvc.insertTrack(data)
+      .then(function(data)
+      {
+        $state.go("solo");
+        console.log(data);
+      }, function(error)
+      {
+        console.log(error);
+      });
+  }
+
+  /**
+   * Get a cookie by name
+   * @param cname 
+   */
+  function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+  }
   _init();
 });
