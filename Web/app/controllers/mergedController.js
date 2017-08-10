@@ -60,25 +60,6 @@ app.controller("mergedController", function($scope, mergedService, filterService
 	}
 
 	/**
-	 * Create a list of all Merged Track Ids the current user voted for
-	 */
-	function getUserVotes() {
-		if(user_id !== null)
-		{
-			mergedService.getUserVotes(user_id)
-			.then(function(data) {
-				vm.votedtracks = data.data;
-				for (var i = vm.votedtracks.length - 1; i >= 0; i--) {
-					vm.votedTrackArray.push(vm.votedtracks[i].merged_track_id);
-				}
-			}, function(error) {
-
-				console.log(error);
-			});
-		}
-	}
-
-	/**
 	 * Filter all tracks according to the filderData the user has given
 	 */
 	function filter() {
