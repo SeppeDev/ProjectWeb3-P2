@@ -23,15 +23,15 @@
 						</span>
 					</div>
 					<div class="row">
-						<div class="card-button play col s1 valign-wrapper" ng-click="merged.play(track.id)" ng-if="track.id != merged.currentAudioTrackId">
+						<div class="card-button play col s1 valign-wrapper clickable" ng-click="merged.play(track.id)" ng-if="track.id != merged.currentAudioTrackId">
 							<i class="fa fa-play valign" aria-hidden="true"></i>
 						</div>
-						<div class="card-button pause col s1 valign-wrapper" ng-click="merged.pause(track.id)" ng-if="track.id == merged.currentAudioTrackId">
+						<div class="card-button pause col s1 valign-wrapper clickable" ng-click="merged.pause(track.id)" ng-if="track.id == merged.currentAudioTrackId">
 							<i class="fa fa-pause valign" aria-hidden="true"></i>
 						</div>
-						<div class="card-button votes-count" ng-click="merged.upVote(track.id)">
-							<i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true" ng-hide="merged.userHasVoted(track)"></i>
-							<i class="fa fa-thumbs-up fa-2x" aria-hidden="true" ng-show="merged.userHasVoted(track)"></i>
+						<div class="card-button votes-count">
+							<i class="fa fa-thumbs-o-up fa-2x clickable" aria-hidden="true" ng-hide="merged.userHasVoted(track)" ng-click="merged.upVote(track.id)"></i>
+							<i class="fa fa-thumbs-up fa-2x clickable" aria-hidden="true" ng-show="merged.userHasVoted(track)" ng-click="merged.upVote(track.id)"></i>
 							<span>{{ track.votes.length }} users think this track rocks!</span>
 						</div>
 					</div>

@@ -12,6 +12,9 @@ app.controller("mergeController", function(bandService, mergedService, $state) {
 		vm.savedTime 		= [];
 		vm.trimAmounts  	= [];
 
+        vm.toggleSound 		= [];
+        vm.togglePlay 		= [];
+
         $('#band_modal').modal('close');
 
 		if(vm.tracks.length > 0) {
@@ -47,6 +50,9 @@ app.controller("mergeController", function(bandService, mergedService, $state) {
 	            	trim_amount: 0,
 	            	user_id: vm.tracks[i].user.id
 	        	});
+
+                vm.toggleSound[track_id] = false;
+                vm.togglePlay[track_id] = true;
 			}
 			vm.showTracks = true;
 		}
@@ -63,6 +69,7 @@ app.controller("mergeController", function(bandService, mergedService, $state) {
 
 		wavesurfer[id].playPause();
 		wavesurfer[id].zoom(50);
+        vm.togglePlay[id] = !vm.togglePlay[id];
 	}
 
 	/**
@@ -92,6 +99,8 @@ app.controller("mergeController", function(bandService, mergedService, $state) {
 
     		wavesurfer[id].playPause();
     		wavesurfer[id].zoom(50);
+
+            vm.togglePlay[id] = !vm.togglePlay[id];
 		}
 	}
 
@@ -113,6 +122,14 @@ app.controller("mergeController", function(bandService, mergedService, $state) {
 	 */
 	vm.toStart = function(id) {
 		wavesurfer[id].seekAndCenter(0);
+	}
+
+    /**
+     * Function to toggle mute.
+     */
+	vm.toggleMute = function(id) {
+		wavesurfer[id].toggleMute();
+        vm.toggleSound[id] = !vm.toggleSound[id];
 	}
 
 	/**

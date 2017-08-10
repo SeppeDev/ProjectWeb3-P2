@@ -8,19 +8,20 @@
   margin-left: -10px !important;
   margin-right: -10px !important;
 
-  .manage-all {
-    a {
-      margin-top: 20px;
+  a {
+    margin-top: 20px;
 
-      &.play-pause {
-        background-color: $dark-green;
-      }
-      &.start {
-        background-color: $dark-orange;
-      }
-      &.trim {
-        background-color: $dark-purple;
-      }
+    &.play-pause {
+      background-color: $dark-green;
+    }
+    &.start {
+      background-color: $dark-orange;
+    }
+    &.mute {
+      background-color: $dark-blue;
+    }
+    &.trim {
+      background-color: $dark-purple;
     }
   }
 
