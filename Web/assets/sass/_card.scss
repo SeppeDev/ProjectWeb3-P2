@@ -2,6 +2,12 @@
   background-color: $dark-grey;
 
   .card-content {
+    cursor: default;
+
+    .clickable {
+      cursor: pointer;
+    }
+
     .row {
       margin-bottom: 0px;
     }
@@ -12,13 +18,12 @@
 
     .votes-count {
       position: relative;
-      top: 5px;
       left: 40px;
 
       span {
         position: relative;
         left: 10px;
-        top: -2.5px;
+        top: -5px;
         font-size: 14px;
         font-weight: 600;
       }
@@ -74,8 +79,4 @@
       margin: 0 auto;
     }
   }
-}
-
-.card-button:hover {
-  cursor: pointer;
 }
