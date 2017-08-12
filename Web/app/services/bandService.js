@@ -41,6 +41,15 @@ app.service("bandService", function($cookies) {
 		return trackIdArray;
 	}
 
+	function _init() {
+			var cookieBand = JSON.parse($cookies.get("band"));
+
+			cookieBand.forEach(function(track) {
+				trackIdArray.push(track.id);
+			});
+			
+	}
+
 	//Svc functions
 	svc.getTrackArrayCount = function() {
 		return trackArrayCount;
@@ -104,4 +113,6 @@ app.service("bandService", function($cookies) {
 	svc.getTrackArray = function() {
 		return trackArray;
 	}
+
+	_init();
 })
