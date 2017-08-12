@@ -34,7 +34,7 @@ class SoloTrackController extends Controller
      */
     public function show($id)
     {
-        $track = SoloTrack::find($id)->with('instrument', 'artist', 'user')->get();
+        $track = SoloTrack::with('instrument', 'artist', 'user')->find($id);
 
         if ($track->count()) {
             return response()->json($track);

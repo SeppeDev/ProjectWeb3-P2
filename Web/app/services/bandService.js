@@ -1,6 +1,7 @@
-app.service("bandService", function($cookies) {
+app.service("bandService", function($cookies, soloService) {
 	
 	var svc = this;
+	var soloSvc = soloService;
 
 	trackArray = [];
 	trackIdArray = [];
@@ -42,14 +43,24 @@ app.service("bandService", function($cookies) {
 	}
 
 	function _init() {
+		if($cookies.get("band")){
 			var cookieBand = JSON.parse($cookies.get("band"));
 
 			cookieBand.forEach(function(track) {
 				trackIdArray.push(track.id);
+
+				soloSvc.getTrackById(track.id)
+					.then(function(data)
+					{
+						trackArray.push(data.data);
+					}, function(error)
+					{
+						console.log(error);
+					});
 			});
 
 			trackArrayCount = cookieBand.length;
-			
+		}
 	}
 
 	//Svc functions
