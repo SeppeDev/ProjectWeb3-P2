@@ -1,4 +1,4 @@
-app.service("bandService", function() {
+app.service("bandService", function($cookies) {
 	
 	var svc = this;
 
@@ -54,6 +54,23 @@ app.service("bandService", function() {
 		trackArray.push(track);
 		incrementTrackArrayCount();
 		addToTrackIdArray(track.id);
+
+		/**
+		 * Add track to cookie
+		 */
+		var expirationTime = new Date();
+		expirationTime.setHours(expirationTime.getHours() + 2);
+		
+		var cookieBand = [];
+		if($cookies.get("band")){
+			cookieBand = JSON.parse($cookies.get("band"));
+		}
+		cookieBand.push({
+			id:	track.id
+		});
+
+		$cookies.putObject("band", cookieBand, {expires: expirationTime});
+
 		return trackArray;
 	}
 
