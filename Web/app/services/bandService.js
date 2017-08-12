@@ -47,6 +47,8 @@ app.service("bandService", function($cookies) {
 			cookieBand.forEach(function(track) {
 				trackIdArray.push(track.id);
 			});
+
+			trackArrayCount = cookieBand.length;
 			
 	}
 
