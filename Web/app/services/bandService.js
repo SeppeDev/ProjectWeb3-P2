@@ -82,6 +82,22 @@ app.service("bandService", function($cookies) {
 		
 		decrementTrackArrayCount();
 		removeFromTrackIdArray(track.id);
+
+		/**
+		 * Remove from cookie
+		 */
+		var expirationTime = new Date();
+		expirationTime.setHours(expirationTime.getHours() + 2);
+
+		var cookieBand = [];
+		if($cookies.get("band")){
+			cookieBand = JSON.parse($cookies.get("band"));
+		}
+		var index = cookieBand.indexOf({id: track.id});
+		cookieBand.splice(index, 1);
+
+		$cookies.putObject("band", cookieBand, {expires: expirationTime});
+
 		return trackArray;
 	}
 
