@@ -1,6 +1,7 @@
-app.service("bandService", function() {
+app.service("bandService", function($cookies, soloService) {
 	
 	var svc = this;
+	var soloSvc = soloService;
 
 	trackArray = [];
 	trackIdArray = [];
@@ -41,6 +42,27 @@ app.service("bandService", function() {
 		return trackIdArray;
 	}
 
+	function _init() {
+		if($cookies.get("band")){
+			var cookieBand = JSON.parse($cookies.get("band"));
+
+			cookieBand.forEach(function(track) {
+				trackIdArray.push(track.id);
+
+				soloSvc.getTrackById(track.id)
+					.then(function(data)
+					{
+						trackArray.push(data.data);
+					}, function(error)
+					{
+						console.log(error);
+					});
+			});
+
+			trackArrayCount = cookieBand.length;
+		}
+	}
+
 	//Svc functions
 	svc.getTrackArrayCount = function() {
 		return trackArrayCount;
@@ -54,6 +76,23 @@ app.service("bandService", function() {
 		trackArray.push(track);
 		incrementTrackArrayCount();
 		addToTrackIdArray(track.id);
+
+		/**
+		 * Add track to cookie
+		 */
+		var expirationTime = new Date();
+		expirationTime.setHours(expirationTime.getHours() + 2);
+		
+		var cookieBand = [];
+		if($cookies.get("band")){
+			cookieBand = JSON.parse($cookies.get("band"));
+		}
+		cookieBand.push({
+			id:	track.id
+		});
+
+		$cookies.putObject("band", cookieBand, {expires: expirationTime});
+
 		return trackArray;
 	}
 
@@ -65,10 +104,28 @@ app.service("bandService", function() {
 		
 		decrementTrackArrayCount();
 		removeFromTrackIdArray(track.id);
+
+		/**
+		 * Remove from cookie
+		 */
+		var expirationTime = new Date();
+		expirationTime.setHours(expirationTime.getHours() + 2);
+
+		var cookieBand = [];
+		if($cookies.get("band")){
+			cookieBand = JSON.parse($cookies.get("band"));
+		}
+		var index = cookieBand.indexOf({id: track.id});
+		cookieBand.splice(index, 1);
+
+		$cookies.putObject("band", cookieBand, {expires: expirationTime});
+
 		return trackArray;
 	}
 
 	svc.getTrackArray = function() {
 		return trackArray;
 	}
+
+	_init();
 })
