@@ -1,32 +1,27 @@
-app.service("filterService", function(instrumentService) {
-	
-	var svc = this;
-	var instSvc = instrumentService;
+app.service("filterService", function (instrumentService) {
 
+    var svc = this;
+    var instSvc = instrumentService;
 
-	svc.createSoloFilterData = function()
-	{
-		svc.soloFilterData = {	"artist": "",
-								"title": "",
-								};
+    svc.createSoloFilterData = function () {
+        svc.soloFilterData = {
+            "artist": "",
+            "title": ""
+        };
+    };
 
-		angular.forEach(instSvc.instruments, function(value, key)
-		{
-			svc.soloFilterData[value.id] = true;
-		});
-	}
+    svc.createMergedFilterData = function () {
+        svc.mergedFilterData = {
+            "artist": "",
+            "title": ""
+        };
+    };
 
-	svc.createMergedFilterData = function()
-	{
-		svc.mergedFilterData = {	"artist": "",
-									"title": "",
-									};
-	}
+    function _init() {
+        console.log('test');
+        svc.createSoloFilterData();
+        svc.createMergedFilterData();
+    }
 
-	function _init() {
-		svc.createSoloFilterData();
-		svc.createMergedFilterData();
-	}
-
-	_init();
-})
+    _init();
+});

@@ -1,11 +1,11 @@
-app.controller("bandController", function(bandService) {
-	
-	var vm 		= this;
-	var bandSvc = bandService;
+app.controller("bandController", function (bandService) {
 
-	function _init() {
-		vm.trackArray = bandSvc.getTrackArray;
-	}
+    var vm = this;
+    var bandSvc = bandService;
 
-	_init();
+    function _init() {
+        vm.trackArray = bandSvc.getTrackArray;
+    }
+
+    _init();
 });

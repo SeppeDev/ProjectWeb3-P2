@@ -1,7 +1,7 @@
 app.service("artistService", function($http) {
 	
 	//Globals
-	var svc 			= this;
+	var svc = this;
 
 	//Private functions
 	function getData (url, options) {
@@ -18,4 +18,4 @@ app.service("artistService", function($http) {
 		
 		return getData(url);
 	}
-})
+});

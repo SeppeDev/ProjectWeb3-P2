@@ -1,6 +1,9 @@
 <div id="register_modal" class="modal">
     <div class="modal-content">
       <h3 class="page-title">Register</h3>
+        <ul ng-show="register.errors">
+          <li ng-repeat="error in register.errors" class="validation-error">{{ error }}</li>
+        </ul>
         <form ng-hide="register.loading">
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Username" ng-model="register.username">

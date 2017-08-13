@@ -1,62 +1,62 @@
-app.directive("dcbHeader", function(bandService) {
-	return {
-		restrict: "E",
-		templateUrl: "app/directives/dcb-header/dcb-header.html",
-		replace: true,
-		scope: {},
-		controllerAs: "head",
-		controller: function($scope, userService, authService, $auth, $rootScope) {
-			
-			var vm 			= this;
-			var userSvc 	= userService;
-			var authSvc 	= authService;
-			var bandSvc 	= bandService;
+app.directive("dcbHeader", function (bandService) {
+    return {
+        restrict: "E",
+        templateUrl: "app/directives/dcb-header/dcb-header.html",
+        replace: true,
+        scope: {},
+        controllerAs: "head",
+        controller: function ($scope, userService, authService, $auth, $rootScope) {
 
-			function _init() {
-				vm.trackArray = bandSvc.getTrackArray;
-				vm.trackArrayCount = bandSvc.getTrackArrayCount;
+            var vm = this;
+            var userSvc = userService;
+            var authSvc = authService;
+            var bandSvc = bandService;
 
-				if($auth.isAuthenticated())
-				{
-					userSvc.getUser().then(function (data) {
-						$rootScope.username = data.data.username;
-					});
-				}
-			}
+            function _init() {
+                vm.trackArray = bandSvc.getTrackArray;
+                vm.trackArrayCount = bandSvc.getTrackArrayCount;
 
-			vm.showLogin = function () {
-				$('#login_modal').modal();
-				$('#login_modal').modal('open');
-			}
+                if ($auth.isAuthenticated()) {
+                    userSvc.getUser().then(function (data) {
+                        $rootScope.username = data.data.username;
+                    });
+                }
+            }
 
-			vm.logout = function () {
-				authSvc.logout();
-			}
+            vm.showLogin = function () {
+                $('#login_modal').modal();
+                $('#login_modal').modal('open');
+            };
 
-			vm.showRegister = function () {
-				$('#register_modal').modal();
-				$('#register_modal').modal('open');
-			}
+            vm.logout = function () {
+                authSvc.logout();
+            };
 
-			vm.showBand = function () {
-				$('#band_modal').modal();
-				$('#band_modal').modal('open');
-			}
+            vm.showRegister = function () {
+                $('#register_modal').modal();
+                $('#register_modal').modal('open');
+            };
 
-			vm.isAuthenticated = function() {
-				return $auth.isAuthenticated();
-			};
+            vm.showBand = function () {
+                $('#band_modal').modal();
+                $('#band_modal').modal('open');
+            };
 
-			_init();
+            vm.isAuthenticated = function () {
+                return $auth.isAuthenticated();
+            };
 
-			//Watches
-			$scope.$watch(
-				function () { return authSvc.user }, 
-				function () {
+            _init();
 
-					vm.user = authSvc.user;
-					//console.log(vm.user);
-				});
-		}
-	}
-})
+            //Watches
+            $scope.$watch(
+                function () {
+                    return authSvc.user
+                },
+                function () {
+
+                    vm.user = authSvc.user;
+                });
+        }
+    }
+});

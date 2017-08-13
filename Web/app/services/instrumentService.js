@@ -1,47 +1,21 @@
-app.service("instrumentService", function($http) {
-	
-	//Globals
-	var svc = this;
+app.service("instrumentService", function ($http) {
 
-	//Private functions
-	function getData (url, options) {
+    //Globals
+    var svc = this;
 
-		!options ? options = {} : "";
+    //Private functions
+    function getData(url, options) {
 
-		return $http.get(url, options)
-	}
+        !options ? options = {} : "";
 
-	//Svc functions
-	svc.getInstruments = function () {
+        return $http.get(url, options)
+    }
 
-		var url = CONSTANTS.API_BASE_URL + "/instruments";
-		
-		return getData(url);
-	}
+    //Svc functions
+    svc.getInstruments = function () {
 
-	// Initial values (will be overwritte by db values)
-	svc.instruments = [{
- 							"name":"Lead-guitar",
- 							"id":1
- 						},
- 						{
- 							"name":"Rythm-guitar",
- 							"id":2
- 						},
- 						{
- 							"name":"Drum",
- 							"id":3
- 						},
- 						{
- 							"name":"Bass",
-							"id":4
- 						},
- 						{
- 							"name":"Bass",
-							"id":5
- 						},
-						{
-							"name":"Keys",
- 							"id":6
- 						}];
-})
+        var url = CONSTANTS.API_BASE_URL + "/instruments";
+
+        return getData(url);
+    }
+});

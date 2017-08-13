@@ -1,14 +1,13 @@
-app.directive("dcbMergeprocessing", function() {
+app.directive("dcbMergeprocessing", function () {
     return {
         restrict: "E",
         templateUrl: "app/directives/dcb-mergeprocessing/dcb-mergeprocessing.html",
         replace: true,
         scope: {},
         controllerAs: "processing",
-        controller: function($interval) 
-        {
-            var vm          = this;
-            var target      = document.getElementById('processing-spinner');
+        controller: function ($interval) {
+            var vm = this;
+            var target = document.getElementById('processing-spinner');
 
             var opts = {
                 lines: 13 // The number of lines to draw
@@ -31,32 +30,30 @@ app.directive("dcbMergeprocessing", function() {
                 , shadow: false // Whether to render a shadow
                 , hwaccel: false // Whether to use hardware acceleration
                 , position: 'absolute' // Element positioning
-            }
+            };
 
-            var textArray       = [
-                "Tuning instruments...", 
-                "Adjusting amp settings...", 
-                "Soundchecking...", 
-                "Recording...", 
-                "Mixing sound...", 
+            var textArray = [
+                "Tuning instruments...",
+                "Adjusting amp settings...",
+                "Soundchecking...",
+                "Recording...",
+                "Mixing sound...",
                 "Finishing up..."
             ];
 
-            var spinner         = new Spinner(opts).spin(target);
-            var currentIndex    = 0;
+            var spinner = new Spinner(opts).spin(target);
+            var currentIndex = 0;
 
-            $interval(function() {
-                if($('#processing_modal').is(":visible"))
-                {
+            $interval(function () {
+                if ($('#processing_modal').is(":visible")) {
                     vm.text = textArray[currentIndex];
                     currentIndex++;
 
-                    if(currentIndex >= textArray.length - 1)
-                    {
+                    if (currentIndex >= textArray.length - 1) {
                         currentIndex = 0;
                     }
                 }
             }, 4000);
         }
     }
-})
+});

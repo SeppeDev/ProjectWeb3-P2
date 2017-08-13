@@ -1,44 +1,44 @@
-app.service("mergedService", function($http) {
-	
-	//Globals
-	var svc = this;
+app.service("mergedService", function ($http) {
 
-	//Private functions
-	function getData (url, options) {
+    //Globals
+    var svc = this;
 
-		!options ? options = {} : "";
+    //Private functions
+    function getData(url, options) {
 
-		return $http.get(url, options)
-	}
+        !options ? options = {} : "";
 
-	//Svc functions
-	svc.getTracks = function () {
-		var url = CONSTANTS.API_BASE_URL + "/mergedtracks";
-		
-		return getData(url);
-	}
+        return $http.get(url, options)
+    }
 
-	svc.getTrackById = function (id) {
+    //Svc functions
+    svc.getTracks = function () {
+        var url = CONSTANTS.API_BASE_URL + "/mergedtracks";
 
-		var url = CONSTANTS.API_BASE_URL + "/mergedtracks/" + id;
+        return getData(url);
+    };
 
-		return getData(url);
-	}
+    svc.getTrackById = function (id) {
 
-	svc.mergeTracks = function(data)
-	{
-		return $http.post(CONSTANTS.API_BASE_URL + "/mergedtracks/create", data);
-	}
+        var url = CONSTANTS.API_BASE_URL + "/mergedtracks/" + id;
 
-	svc.insertVote = function(data)
-	{
-		return $http.post(CONSTANTS.API_BASE_URL + "/vote/create", data);
-	}
+        return getData(url);
+    };
 
-	svc.download = function (id) {
+    svc.mergeTracks = function (data) {
 
-		var url = CONSTANTS.API_BASE_URL + "/mergedtracks/" + id + "/download";
-		
-		return getData(url);
-	}
-})
+        return $http.post(CONSTANTS.API_BASE_URL + "/mergedtracks/create", data);
+    };
+
+    svc.insertVote = function (data) {
+
+        return $http.post(CONSTANTS.API_BASE_URL + "/vote/create", data);
+    };
+
+    svc.download = function (id) {
+
+        var url = CONSTANTS.API_BASE_URL + "/mergedtracks/" + id + "/download";
+
+        return getData(url);
+    }
+});
