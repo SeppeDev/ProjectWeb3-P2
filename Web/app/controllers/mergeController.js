@@ -5,6 +5,7 @@ app.controller("mergeController", function (bandService, mergedService, $state) 
     var wavesurfer = [];
 
     function _init() {
+
         vm.tracks = bandSvc.getTrackArray();
         vm.showTracks = false;
         vm.thereAreTracks = false;
@@ -26,6 +27,7 @@ app.controller("mergeController", function (bandService, mergedService, $state) 
      * Function to load in all the audiotracks in the band
      */
     vm.load = function () {
+
         if (vm.thereAreTracks) {
             for (var i = vm.tracks.length - 1; i >= 0; i--) {
                 var track_id = vm.tracks[i].id;
@@ -61,6 +63,7 @@ app.controller("mergeController", function (bandService, mergedService, $state) 
      * Function to toggle between Play and Pause
      */
     vm.playPause = function (id) {
+
         if (!wavesurfer[id].isPlaying()) {
             vm.savedTime[id] = wavesurfer[id].getCurrentTime();
         }
@@ -74,6 +77,7 @@ app.controller("mergeController", function (bandService, mergedService, $state) 
      * Function to cut as much audio from the start of the track as was indicated by the user
      */
     vm.trim = function (id) {
+
         var timeToTrim = wavesurfer[id].getCurrentTime();
         for (var i = vm.loadedTracks.length - 1; i >= 0; i--) {
             if (vm.loadedTracks[i].track_id === id) {
@@ -87,6 +91,7 @@ app.controller("mergeController", function (bandService, mergedService, $state) 
      * Function to toggle between Play and Pause for all tracks as once
      */
     vm.playPauseAll = function () {
+
         for (var i = vm.loadedTracks.length - 1; i >= 0; i--) {
             var id = vm.loadedTracks[i].track_id;
             if (!wavesurfer[id].isPlaying()) {
@@ -104,6 +109,7 @@ app.controller("mergeController", function (bandService, mergedService, $state) 
      * Function to reset the progress to the last paused moment
      */
     vm.toPrevious = function () {
+
         for (var i = vm.loadedTracks.length - 1; i >= 0; i--) {
             var id = vm.loadedTracks[i].track_id;
             var previousTime = vm.savedTime[id];
@@ -117,6 +123,7 @@ app.controller("mergeController", function (bandService, mergedService, $state) 
      * Function to reset the progress to the start of the audiofile
      */
     vm.toStart = function (id) {
+
         wavesurfer[id].seekAndCenter(0);
     };
 
@@ -124,6 +131,7 @@ app.controller("mergeController", function (bandService, mergedService, $state) 
      * Function to toggle mute.
      */
     vm.toggleMute = function (id) {
+
         wavesurfer[id].toggleMute();
         vm.toggleSound[id] = !vm.toggleSound[id];
     };
@@ -132,6 +140,7 @@ app.controller("mergeController", function (bandService, mergedService, $state) 
      * Function to proceed to the processing modal, where the user can save the changes he/she made to the audio tracks
      */
     vm.save = function () {
+
         $('#processing_modal').modal();
         $('#processing_modal').modal('open');
 

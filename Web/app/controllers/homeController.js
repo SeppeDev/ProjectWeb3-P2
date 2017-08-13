@@ -5,6 +5,7 @@ app.controller("homeController", function (instrumentService, filterService) {
     var fltSvc = filterService;
 
     function _init() {
+
         vm.filterData = fltSvc.soloFilterData;
     }
 

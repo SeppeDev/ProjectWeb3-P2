@@ -1,4 +1,5 @@
 app.directive("dcbMergeprocessing", function () {
+
     return {
         restrict: "E",
         templateUrl: "app/directives/dcb-mergeprocessing/dcb-mergeprocessing.html",
@@ -6,6 +7,7 @@ app.directive("dcbMergeprocessing", function () {
         scope: {},
         controllerAs: "processing",
         controller: function ($interval) {
+
             var vm = this;
             var target = document.getElementById('processing-spinner');
 

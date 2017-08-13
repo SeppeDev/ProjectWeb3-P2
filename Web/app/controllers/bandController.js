@@ -4,6 +4,7 @@ app.controller("bandController", function (bandService) {
     var bandSvc = bandService;
 
     function _init() {
+
         vm.trackArray = bandSvc.getTrackArray;
     }
 

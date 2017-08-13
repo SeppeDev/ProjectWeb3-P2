@@ -60,6 +60,7 @@ app.controller("uploadController", function (Upload, artistService, instrumentSe
      * Upload the file
      */
     vm.uploadFile = function (file) {
+
         var spinner = new Spinner(opts).spin(target);
         vm.loading = true;
         vm.uploaded = false;
@@ -94,6 +95,7 @@ app.controller("uploadController", function (Upload, artistService, instrumentSe
      * Save the song
      */
     vm.save = function () {
+
         var data = {
             name: vm.songname,
             file_url: vm.filename,

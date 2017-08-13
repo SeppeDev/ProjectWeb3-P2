@@ -7,6 +7,7 @@ app.controller("mergedController", function ($scope, mergedService, filterServic
     var user = null;
 
     function _init() {
+
         getUser();
         getMergedTracks();
 
@@ -18,6 +19,7 @@ app.controller("mergedController", function ($scope, mergedService, filterServic
     }
 
     function getUser() {
+
         if ($cookies.getObject('user')) {
             user = $cookies.getObject('user');
             return true;
@@ -32,6 +34,7 @@ app.controller("mergedController", function ($scope, mergedService, filterServic
      * Add audio and votecounter per track
      */
     function getMergedTracks() {
+
         mergedService.getTracks()
             .then(function (data) {
                 vm.mergedTracks = data.data;
@@ -125,6 +128,7 @@ app.controller("mergedController", function ($scope, mergedService, filterServic
     };
 
     vm.userHasVoted = function (track) {
+
         if (!user && !getUser()) {
             return;
         }

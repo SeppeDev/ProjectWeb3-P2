@@ -1,11 +1,14 @@
 app.filter("band", function () {
+
     return function (trackId, list) {
+        var val = false;
+
         angular.forEach(list, function (id) {
             if (id === trackId) {
-                return true;
+                val = true;
             }
         });
 
-        return false;
+        return val;
     }
 });

@@ -1,11 +1,13 @@
 app.directive("dcbLogin", function () {
+
     return {
         restrict: "E",
         templateUrl: "app/directives/dcb-login/dcb-login.html",
         replace: true,
         scope: {},
         controllerAs: "login",
-        controller: function ($auth, $scope, $rootScope, userService, authService, $timeout) {
+        controller: function ($auth, $scope, $rootScope, userService, authService) {
+
             var vm = this;
             var authSvc = authService;
             var target = document.getElementById('login-spinner');
@@ -34,6 +36,7 @@ app.directive("dcbLogin", function () {
             };
 
             vm.login = function () {
+
                 var credentials = {
                     email: vm.email,
                     password: vm.password

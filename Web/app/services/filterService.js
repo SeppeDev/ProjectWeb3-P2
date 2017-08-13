@@ -1,9 +1,9 @@
 app.service("filterService", function (instrumentService) {
 
     var svc = this;
-    var instSvc = instrumentService;
 
     svc.createSoloFilterData = function () {
+
         svc.soloFilterData = {
             "artist": "",
             "title": ""
@@ -11,6 +11,7 @@ app.service("filterService", function (instrumentService) {
     };
 
     svc.createMergedFilterData = function () {
+
         svc.mergedFilterData = {
             "artist": "",
             "title": ""
@@ -18,7 +19,7 @@ app.service("filterService", function (instrumentService) {
     };
 
     function _init() {
-        console.log('test');
+
         svc.createSoloFilterData();
         svc.createMergedFilterData();
     }

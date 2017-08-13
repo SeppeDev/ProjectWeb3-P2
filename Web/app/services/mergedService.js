@@ -13,6 +13,7 @@ app.service("mergedService", function ($http) {
 
     //Svc functions
     svc.getTracks = function () {
+
         var url = CONSTANTS.API_BASE_URL + "/mergedtracks";
 
         return getData(url);
