@@ -1,6 +1,9 @@
 <div id="login_modal" class="modal">
     <div class="modal-content">
       <h3 class="page-title">Login</h3>
+        <ul ng-show="login.errors">
+          <li ng-repeat="error in login.errors" class="validation-error">{{ error }}</li>
+        </ul>
         <form ng-hide="login.loading">
             <div class="form-group">
                 <input type="email" class="form-control" placeholder="Email" ng-model="login.email">

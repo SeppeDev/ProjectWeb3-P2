@@ -13,8 +13,8 @@
 				</div>
 
 				<div class="input-field col s2" ng-repeat="instrument in solo.instruments">
-					<input type="checkbox" id="{{instrument.name}}" ng-model="solo.filterData[instrument.id]" checked="checked" class="item">
-					<label for="{{instrument.name}}">{{instrument.name}}</label>
+					<input type="checkbox" id="{{ instrument.name }}" ng-checked="solo.filterData[instrument.id]" checked class="item">
+					<label for="{{ instrument.name }}">{{ instrument.name }}</label>
 				</div>
 			</form>
 		</div>

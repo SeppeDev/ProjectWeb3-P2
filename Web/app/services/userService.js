@@ -1,14 +1,14 @@
-app.service("userService", function($http) {	
-	
-	var svc = this;
+app.service("userService", function ($http) {
 
-	svc.getUser = function()
-	{
-		return $http.get(CONSTANTS.API_BASE_URL + "/user");
-	}
+    var svc = this;
 
-	svc.updateUser = function(data)
-	{
-		return $http.post(CONSTANTS.API_BASE_URL + "/user", data);
-	}
-})
+    svc.getUser = function () {
+
+        return $http.get(CONSTANTS.API_BASE_URL + "/user");
+    };
+
+    svc.updateUser = function (data) {
+
+        return $http.post(CONSTANTS.API_BASE_URL + "/user", data);
+    }
+});

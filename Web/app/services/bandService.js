@@ -1,131 +1,142 @@
-app.service("bandService", function($cookies, soloService) {
-	
-	var svc = this;
-	var soloSvc = soloService;
+app.service("bandService", function ($cookies, soloService) {
 
-	trackArray = [];
-	trackIdArray = [];
-	trackArrayCount = 0;
+    var svc = this;
+    var soloSvc = soloService;
 
-	//Private functions
-	function arrayObjectIndexOf(myArray, searchTerm, property) {
-    	
-    	for(var i = 0, len = myArray.length; i < len; i++) {
-        	if (myArray[i][property] === searchTerm) return i;
-    	}
+    trackArray = [];
+    trackIdArray = [];
+    trackArrayCount = 0;
 
-    	return -1;
-	}
-	//TrackArrayCount
-	function incrementTrackArrayCount() {
-		trackArrayCount ++;
-		return trackArrayCount;
-	}
+    //Private functions
+    function arrayObjectIndexOf(myArray, searchTerm, property) {
 
-	function decrementTrackArrayCount() {
-		trackArrayCount --;
-		return trackArrayCount;
-	}
+        for (var i = 0, len = myArray.length; i < len; i++) {
+            if (myArray[i][property] === searchTerm) return i;
+        }
 
-	//TrackIdArray
-	function addToTrackIdArray(trackId) {
-		trackIdArray.push(trackId);
-		return trackIdArray;
-	}
+        return -1;
+    }
 
-	function removeFromTrackIdArray(trackId) {
-		index = trackIdArray.indexOf(trackId);
-		if(index > -1) {
-			trackIdArray.splice(index, 1);
-		}
+    //TrackArrayCount
+    function incrementTrackArrayCount() {
 
-		return trackIdArray;
-	}
+        trackArrayCount++;
+        return trackArrayCount;
+    }
 
-	function _init() {
-		if($cookies.get("band")){
-			var cookieBand = JSON.parse($cookies.get("band"));
+    function decrementTrackArrayCount() {
 
-			cookieBand.forEach(function(track) {
-				trackIdArray.push(track.id);
+        trackArrayCount--;
+        return trackArrayCount;
+    }
 
-				soloSvc.getTrackById(track.id)
-					.then(function(data)
-					{
-						trackArray.push(data.data);
-					}, function(error)
-					{
-						console.log(error);
-					});
-			});
+    //TrackIdArray
+    function addToTrackIdArray(trackId) {
 
-			trackArrayCount = cookieBand.length;
-		}
-	}
+        trackIdArray.push(trackId);
+        return trackIdArray;
+    }
 
-	//Svc functions
-	svc.getTrackArrayCount = function() {
-		return trackArrayCount;
-	}
+    function removeFromTrackIdArray(trackId) {
 
-	svc.getTrackIdArray = function() {
-		return trackIdArray;
-	}
+        index = trackIdArray.indexOf(trackId);
+        if (index > -1) {
+            trackIdArray.splice(index, 1);
+        }
 
-	svc.addToTrackArray = function(track) {
-		trackArray.push(track);
-		incrementTrackArrayCount();
-		addToTrackIdArray(track.id);
+        return trackIdArray;
+    }
 
-		/**
-		 * Add track to cookie
-		 */
-		var expirationTime = new Date();
-		expirationTime.setHours(expirationTime.getHours() + 2);
-		
-		var cookieBand = [];
-		if($cookies.get("band")){
-			cookieBand = JSON.parse($cookies.get("band"));
-		}
-		cookieBand.push({
-			id:	track.id
-		});
+    function _init() {
 
-		$cookies.putObject("band", cookieBand, {expires: expirationTime});
+        if ($cookies.get("band")) {
+            var cookieBand = JSON.parse($cookies.get("band"));
 
-		return trackArray;
-	}
+            cookieBand.forEach(function (track) {
+                trackIdArray.push(track.id);
 
-	svc.removeFromTrackArray = function(track) {
-		index = arrayObjectIndexOf(trackArray, track.id, "id");
-		if(index > -1) {
-			trackArray.splice(index, 1);
-		}
-		
-		decrementTrackArrayCount();
-		removeFromTrackIdArray(track.id);
+                soloSvc.getTrackById(track.id)
+                    .then(function (data) {
+                        trackArray.push(data.data);
+                    }, function (error) {
+                        console.log(error);
+                    });
+            });
 
-		/**
-		 * Remove from cookie
-		 */
-		var expirationTime = new Date();
-		expirationTime.setHours(expirationTime.getHours() + 2);
+            trackArrayCount = cookieBand.length;
+        }
+    }
 
-		var cookieBand = [];
-		if($cookies.get("band")){
-			cookieBand = JSON.parse($cookies.get("band"));
-		}
-		var index = cookieBand.indexOf({id: track.id});
-		cookieBand.splice(index, 1);
+    //Svc functions
+    svc.getTrackArrayCount = function () {
 
-		$cookies.putObject("band", cookieBand, {expires: expirationTime});
+        return trackArrayCount;
+    };
 
-		return trackArray;
-	}
+    svc.getTrackIdArray = function () {
 
-	svc.getTrackArray = function() {
-		return trackArray;
-	}
+        return trackIdArray;
+    };
 
-	_init();
-})
+    svc.addToTrackArray = function (track) {
+
+        trackArray.push(track);
+        incrementTrackArrayCount();
+        addToTrackIdArray(track.id);
+
+        /**
+         * Add track to cookie
+         */
+        var expirationTime = new Date();
+        expirationTime.setHours(expirationTime.getHours() + 2);
+
+        var cookieBand = [];
+        if ($cookies.get("band")) {
+            cookieBand = JSON.parse($cookies.get("band"));
+        }
+        cookieBand.push({
+            id: track.id
+        });
+
+        $cookies.putObject("band", cookieBand, {expires: expirationTime});
+
+        return trackArray;
+    };
+
+    svc.removeFromTrackArray = function (track) {
+
+        index = arrayObjectIndexOf(trackArray, track.id, "id");
+        if (index > -1) {
+            trackArray.splice(index, 1);
+        }
+
+        decrementTrackArrayCount();
+        removeFromTrackIdArray(track.id);
+
+        /**
+         * Remove from cookie
+         */
+        var expirationTime = new Date();
+        expirationTime.setHours(expirationTime.getHours() + 2);
+
+        var cookieBand = [];
+
+        if ($cookies.get("band")) {
+            cookieBand = JSON.parse($cookies.get("band"));
+        }
+
+        var index = cookieBand.indexOf({id: track.id});
+        cookieBand.splice(index, 1);
+
+        $cookies.putObject("band", cookieBand, {expires: expirationTime});
+
+        return trackArray;
+    };
+
+    svc.getTrackArray = function () {
+
+        return trackArray;
+    };
+
+    _init();
+});

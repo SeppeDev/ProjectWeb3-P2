@@ -1,33 +1,33 @@
-app.service("soloService", function($http) {
-	
-	//Globals
-	var svc = this;
+app.service("soloService", function ($http) {
 
-	//Private functions
-	function getData (url, options) {
+    //Globals
+    var svc = this;
 
-		!options ? options = {} : "";
+    //Private functions
+    function getData(url, options) {
 
-		return $http.get(url, options)
-	}
+        !options ? options = {} : "";
 
-	//Svc functions
-	svc.getTracks = function () {
+        return $http.get(url, options)
+    }
 
-		var url = CONSTANTS.API_BASE_URL + "/tracks";
-		
-		return getData(url);
-	}
+    //Svc functions
+    svc.getTracks = function () {
 
-	svc.getTrackById = function (id) {
+        var url = CONSTANTS.API_BASE_URL + "/tracks";
 
-		var url = CONSTANTS.API_BASE_URL + "/tracks/" + id;
+        return getData(url);
+    };
 
-		return getData(url);
-	}
+    svc.getTrackById = function (id) {
 
-	svc.insertTrack = function(data)
-	{
-		return $http.post(CONSTANTS.API_BASE_URL + "/tracks/create", data);
-	}
-})
+        var url = CONSTANTS.API_BASE_URL + "/tracks/" + id;
+
+        return getData(url);
+    };
+
+    svc.insertTrack = function (data) {
+
+        return $http.post(CONSTANTS.API_BASE_URL + "/tracks/create", data);
+    }
+});

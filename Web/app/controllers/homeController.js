@@ -1,12 +1,13 @@
-app.controller("homeController", function(instrumentService, filterService) {
-	
-	var vm = this;
-	var instSvc = instrumentService;
-	var fltSvc = filterService;
+app.controller("homeController", function (instrumentService, filterService) {
 
-	function _init() {
-		vm.filterData = fltSvc.soloFilterData;
-	}
+    var vm = this;
+    var instSvc = instrumentService;
+    var fltSvc = filterService;
 
-	_init();
+    function _init() {
+
+        vm.filterData = fltSvc.soloFilterData;
+    }
+
+    _init();
 });
