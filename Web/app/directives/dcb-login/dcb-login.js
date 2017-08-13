@@ -5,11 +5,10 @@ app.directive("dcbLogin", function() {
 		replace: true,
 		scope: {},
 		controllerAs: "login",
-		controller: function($auth, $scope, $rootScope, userService, authService, $cookies) {
+		controller: function($auth, $scope, $rootScope, userService, authService, $timeout) {
 			var vm 			= this;
-			var userSvc 	= userService;
 			var authSvc 	= authService;
-			var target 		= document.getElementById('login-spinner');
+            var target = document.getElementById('login-spinner');
 
 			var opts = {
 	  			lines: 13 // The number of lines to draw
@@ -27,72 +26,52 @@ app.directive("dcbLogin", function() {
 				, fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
 				, zIndex: 2e9 // The z-index (defaults to 2000000000)
 				, className: 'spinner' // The CSS class to assign to the spinner
-				, top: '60%' // Top position relative to parent
+				, top: '70%' // Top position relative to parent
 				, left: '50%' // Left position relative to parent
 				, shadow: false // Whether to render a shadow
 				, hwaccel: false // Whether to use hardware acceleration
 				, position: 'absolute' // Element positioning
-			}
+			};
 
-			//Private functions
-			function login (token, id, username, email) {
+            vm.login = function () {
+                var credentials = {
+                    email: vm.email,
+                    password: vm.password
+                };
 
-				var expirationTime = new Date();
-				expirationTime = expirationTime.setTime(expirationTime.getTime() + (token["expires_in"] * 1000));
-				expirationTime = new Date(expirationTime);
+                vm.loading = true;
+                var spinner = new Spinner(opts).spin(target);
 
-				var userData = {
+				authSvc.login(credentials, function(status) {
+					if(status === "success") {
+						$('#login_modal').modal();
+						$('#login_modal').modal('close');
 
-					token: token,
-					userId: id,
-					username: username,
-					email: email,
-					//isAdmin: data.data.isAdmin
-				}
+                        spinner.stop();
+                        vm.loading = false;
 
-				console.log(userData.token);
+						return;
+					}
 
-				authSvc.user = userData;
+                    spinner.stop();
+                    vm.loading = false;
 
-				$cookies.putObject("user", userData, { expires: expirationTime });
-				$rootScope.isLoggedIn = true;
-				
-				//Check if returned user is Admin
-				userData.isAdmin == "1" ? $rootScope.isAdmin = true : $rootScope.isAdmin = false;
-			}
+					var errors =  [];
 
-
-			//Vm functions
-	        vm.login = function() {
-	        	var spinner = new Spinner(opts).spin(target);
-	        	vm.loading 	= true;
-	        	console.log(vm.loading);
-
-	            var credentials = {
-	                email: vm.email,
-	                password: vm.password
-	            }
-	            
-	            authSvc.login(credentials);
-	            
-	            //Watches
-				var unregister = $scope.$watch(
-				 	function () { return authSvc.isLoggedIn }, 
-				 	function () {
-						if(authSvc.isLoggedIn) 
-						{
-							vm.loading = false;
-				        	$('#login_modal').modal();
-							$('#login_modal').modal('close');
-				        	spinner.stop();
+                    for (var field in status.data)  {
+                    	if(field === "error") {
+                            errors.push("Invalid credentials");
+                    		break;
 						}
-						if(!authSvc.isLoggedIn)
-						{
-							spinner.stop();
-							vm.loading = false;
+
+						for (var i = 0; i < status.data[field].length; i++) {
+                            errors.push(status.data[field][i]);
 						}
-					}, true);
-	        }
+                    }
+
+					vm.errors = errors;
+				});
+            };
 		}
 	}
-})
+});

@@ -17,13 +17,15 @@ class VoteController extends Controller
      */
     public function store(Request $request)
     {
+        $user = JWTAuth::parseToken()->authenticate();
+
         $merged_track = MergedTrack::find($request->track_id);
 
-        $user_vote = $merged_track->votes->where('user_id', $request->user_id)->first();
+        $user_vote = $merged_track->votes->where('user_id', $user->id)->first();
         if (empty($user_vote)) {
             $vote = new MergedTrackVote();
             $vote->merged_track_id = $request->track_id;
-            $vote->user_id = $request->user_id;
+            $vote->user_id = $user->id;
             $vote->save();
 
             return response()->json([

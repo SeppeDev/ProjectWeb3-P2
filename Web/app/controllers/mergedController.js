@@ -1,41 +1,30 @@
-app.controller("mergedController", function($scope, mergedService, filterService) {
+app.controller("mergedController", function($scope, mergedService, filterService, $cookies) {
 	
 	var vm  		= this;
 	var mgdSvc 		= mergedService;
 	var fltSvc 		= filterService;
 
-	var user_id = null;
+	var user = null;
 
-	if(getCookie('user')) {
-		user_id = JSON.parse(getCookie('user')).userId;
+    function _init() {
+        getUser();
+        getMergedTracks();
+
+        vm.mergedTrackAudio 	= [];
+        vm.currentAudioTrackId 	= "";
+        vm.filterData 			= fltSvc.mergedFilterData;
+        vm.coloredHands 		= [];
+        vm.votedTrackArray 		= [];
+    }
+
+	function getUser() {
+        if($cookies.getObject('user')) {
+			user = $cookies.getObject('user');
+            return true;
+        }
+
+        return false;
 	}
-	
-
-	//Private functions
-	function playAudioFile(track)
-	{
-		track.play();
-	}
-
-	/**
-	 * Get and decode a cookie by its name
-	 * @param cname 
-	 */
-	function getCookie(cname) {
-          var name = cname + "=";
-          var decodedCookie = decodeURIComponent(document.cookie);
-          var ca = decodedCookie.split(';');
-          for(var i = 0; i <ca.length; i++) {
-              var c = ca[i];
-              while (c.charAt(0) == ' ') {
-                  c = c.substring(1);
-              }
-              if (c.indexOf(name) == 0) {
-                  return c.substring(name.length, c.length);
-              }
-          }
-          return "";
-      }
 
 	/**
 	 * Get all the merged tracks
@@ -85,15 +74,6 @@ app.controller("mergedController", function($scope, mergedService, filterService
 		})
 	}
 
-	function _init() {
-		vm.mergedTrackAudio 	= [];
-		vm.currentAudioTrackId 	= "";
-		getMergedTracks();
-		vm.filterData 			= fltSvc.mergedFilterData;
-		vm.coloredHands 		= [];
-		vm.votedTrackArray 		= [];
-	}
-
 	//Vm functions
 	/**
 	 * Pause the current playing audiotrack if there is any
@@ -121,24 +101,34 @@ app.controller("mergedController", function($scope, mergedService, filterService
 	/**
 	 * Upvote the selected track
 	 */
-	vm.upVote = function(id) {
-	    var data = {
-            track_id: id,
-            user_id: user_id
-	    }
+	vm.vote = function(id) {
 
-	    mgdSvc.insertVote(data).then(function(data) {
+		if(!user && !getUser()) {
+            $('#login_modal').modal();
+            $('#login_modal').modal('open');
+
+            return;
+		}
+
+		var data = {
+			track_id: id
+		};
+
+		mgdSvc.insertVote(data).then(function(data) {
 			vm.votedTrackArray.push(id);
 			getMergedTracks();
-        }, function(error)
-        {
-          console.log(error);
-        });
-	}
+		}, function(error) {
+			console.log(error);
+		});
+	};
 
     vm.userHasVoted = function(track) {
+    	if(!user && !getUser()) {
+    		return;
+		}
+
 		for(var i = 0; i < track.votes.length; i++) {
-			if(track.votes[i].user_id === user_id) {
+			if(track.votes[i].user_id === user.id) {
 				return true;
 			}
 		}
@@ -151,8 +141,7 @@ app.controller("mergedController", function($scope, mergedService, filterService
 		function () { return vm.filterData }, 
 		function () {
 
-			if(vm.filterData) 
-			{
+			if(vm.filterData) {
 				filter();
 			}
 		}, true);

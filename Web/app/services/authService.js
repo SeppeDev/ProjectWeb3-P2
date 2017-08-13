@@ -3,81 +3,57 @@ app.service("authService", function ($auth, $rootScope, $cookies, $state, userSe
 	var svc 		= this;
 	var userSvc 	= userService;
 
-	svc.isLoggedIn 	= false;
-
 	//Private functions
-	function login (token, id, username, email) {
-
-		var expirationTime = new Date();
-		expirationTime = expirationTime.setTime(expirationTime.getTime() + (token["expires_in"] * 1000));
-		expirationTime = new Date(expirationTime);
+	function setUser(id, username, email) {
+        var expirationTime = new Date();
+        expirationTime.setHours(expirationTime.getHours() + 6);
 
 		var userData = {
-
-			token: token,
-			userId: id,
+			id: id,
 			username: username,
-			email: email,
-			//isAdmin: data.data.isAdmin
-		}
-
-		//console.log(userData.token);
+			email: email
+		};
 
 		svc.user = userData;
 
 		$cookies.putObject("user", userData, { expires: expirationTime });
 		$rootScope.isLoggedIn = true;
-		
-		//Check if returned user is Admin
-		userData.isAdmin == "1" ? $rootScope.isAdmin = true : $rootScope.isAdmin = false;
 	}
 
 	//Svc functions
-	svc.login = function (credentials) {
+	svc.login = function (credentials, callback) {
 
 		$auth.login(credentials).then(function(data) {
-        	// Authentication success
-        	token 		= data.data.token;
-        	id 			= 0;
-        	username 	= "";
-        	email 		= "";
-
 			userSvc.getUser().then(function (data) {
-				id 			= data.data.id;
-				username 	= data.data.username;
-				email 		= data.data.email;
-				
-				login(token, id, username, email);
-				svc.isLoggedIn = true;
-			}, function(error) {
-				console.log(error);
-				svc.isLoggedIn = false;
+				id = data.data.id;
+				username = data.data.username;
+				email = data.data.email;
+
+                setUser(id, username, email);
+
+                callback('success');
 			});
         }, 
         function(error){
-        	// Authentication failed
-        	console.log(error);
-        	svc.isLoggedIn = false; 
+            callback(error);
         });
-	}
+	};
 
 	svc.logout = function () {
-		$auth.logout()
-			.then(function (data) {
+		$auth.logout().then(function (data) {
 
-				$rootScope.isLoggedIn = false;
-				$rootScope.isAdmin = false;
-				svc.user = null;
-				svc.isLoggedIn = null;
+			$rootScope.isLoggedIn = false;
+			$rootScope.isAdmin = false;
+			svc.user = null;
 
-				$cookies.remove("user");
-				
-				$state.go("home");
-			}, function (error) {
+			$cookies.remove("user");
 
-				console.log(error);
-			})
-	}
+			$state.go("home");
+		}, function (error) {
+
+			console.log(error);
+		})
+	};
 
 	svc.register = function (user) {
 

@@ -30,8 +30,8 @@
 							<i class="fa fa-pause valign" aria-hidden="true"></i>
 						</div>
 						<div class="card-button votes-count">
-							<i class="fa fa-thumbs-o-up fa-2x clickable" aria-hidden="true" ng-hide="merged.userHasVoted(track)" ng-click="merged.upVote(track.id)"></i>
-							<i class="fa fa-thumbs-up fa-2x clickable" aria-hidden="true" ng-show="merged.userHasVoted(track)" ng-click="merged.upVote(track.id)"></i>
+							<i class="fa fa-thumbs-o-up fa-2x clickable" aria-hidden="true" ng-hide="merged.userHasVoted(track)" ng-click="merged.vote(track.id)"></i>
+							<i class="fa fa-thumbs-up fa-2x clickable" aria-hidden="true" ng-show="merged.userHasVoted(track)" ng-click="merged.vote(track.id)"></i>
 							<span>{{ track.votes.length }} users think this track rocks!</span>
 						</div>
 					</div>

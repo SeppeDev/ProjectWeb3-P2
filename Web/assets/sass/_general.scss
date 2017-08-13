@@ -48,3 +48,8 @@ body {
 label {
   color: $white;
 }
+
+.validation-error {
+  color: $dark-red;
+  font-weight: 600;
+}
