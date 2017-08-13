@@ -96,7 +96,7 @@ class SoloTrackController extends Controller
 
         $request->song->storeAs('audio', $temp_file_name, 'upload');
 
-        exec('cd audio ; ffmpeg -i ' . $temp_file_name . ' ' . $file_name . ' 2>&1', $output, $return_code);
+        exec('cd audio ; ffmpeg -i ' . $temp_file_name . ' -ar 44100 ' . $file_name . ' 2>&1', $output, $return_code);
 
         if ($return_code === 0) {
             exec('cd audio ; rm ' . $temp_file_name);
