@@ -1,69 +1,72 @@
 <main class="band">
-	<div class="container">
-		<h2>Step 1: Load selected tracks</h2>
-		<div class="row">
-			<div class="col s12">
-				<h3>Selected tracks: </h3>
-				<span ng-hide="merge.thereAreTracks">No tracks added. <br><br><a class="waves-effect waves-light btn primary-button-color" ui-sref="solo">Click here to add some tracks!</a></span>
-				<table class="table" ng-show="merge.thereAreTracks">
-					<tr>
-						<th>Name</th>
-						<th>Instrument</th>
-						<th>Creator</th>
-					</tr>
-					<tr ng-repeat="track in merge.tracks">
-						<td>
-							{{track.songname}}
-						</td>
-						<td>
-							{{track.instrument.name}}
-						</td>
-						<td>
-							{{track.user.username}}
-						</td>
-					</tr>
-				</table>
-				<div ng-show="merge.showTracks">
-					<h2>Step 2: Sync all tracks</h2>
-					<span class="trim-explanation">Use "trim" to cut a piece of each individual track, until all the tracks sync up! The purple color indicates the part that will be cut when you click the trim button.</span>
-				</div>
-				<div class="sync-container">
-					<div class="col s3" dcb-sticky="sticky">
-						<a type="button" class="btn btn-danger primary-button-color" ng-show="merge.thereAreTracks && !merge.showTracks" ng-click="merge.load()">Load <span aria-hidden="true" ></span></a>
-						<a type="button" class="btn play-pause" ng-show="merge.showTracks" ng-click="merge.playPauseAll()">Play/Pause all<span aria-hidden="true" ></span></a>
-						<a type="button" class="btn start" ng-show="merge.showTracks" ng-click="merge.toPrevious()">Previous position<span aria-hidden="true" ></span></a>
-					</div>
-					<div class="col s9" dcb-sticky="push-s3">
-						<div ng-repeat="track in merge.tracks" ng-show="merge.showTracks" class="audiotrack">
-							<div class="card">
-								<div class="card-content">
-									<span class="card-title">{{ track.instrument.name }} - {{ track.user.username }}</span>
-									<div id="waveform{{track.id}}" ></div>
-									<div class="card-action">
-										<a type="button" class="btn start" ng-click="merge.toStart(track.id)" title="Move back to the start of this track">
-											<i class="fa fa-fast-backward" aria-hidden="true"></i>
-										</a>
-										<a type="button" class="btn play-pause" ng-click="merge.playPause(track.id)" title="Play/pause this track">
-											<i class="fa" ng-class="{'fa-play' : merge.togglePlay[track.id], 'fa-pause' : !merge.togglePlay[track.id]}" aria-hidden="true"></i>
-										</a>
-										<a type="button" class="btn mute" ng-click="merge.toggleMute(track.id)" title="Mute/unmute this track">
-											<i class="fa" ng-class="{'fa-volume-off' : merge.toggleSound[track.id], 'fa-volume-up' : !merge.toggleSound[track.id]}"aria-hidden="true"></i>
-										</a>
-										<a type="button" class="btn trim" ng-click="merge.trim(track.id)" title="Trim this track">
-											<i class="fa fa-scissors" aria-hidden="true"></i>
-										</a>
-										<span ng-if="merge.trimAmounts[track.id]" class="trim-info">{{ merge.trimAmounts[track.id] }} seconds will be cut off this track.</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<h2 ng-show="merge.showTracks">Step 3: Save!</h2>
-			<a type="button" class="btn btn-danger primary-button-color" ng-show="merge.showTracks" ng-click="merge.save()">Save <span aria-hidden="true" ></span></a>
-		</div>
-	</div>
+  <div class="container">
+    <h2>Step 1: Load selected tracks</h2>
+    <div class="row">
+      <div class="col s12">
+        <h3>Selected tracks: </h3>
+        <table class="table" ng-show="merge.tracks.length">
+          <tr>
+          <th>Name</th>
+          <th>Instrument</th>
+          <th>Creator</th>
+          </tr>
+          <tr ng-repeat="track in merge.tracks">
+          <td>
+            {{track.songname}}
+          </td>
+          <td>
+            {{track.instrument.name}}
+          </td>
+          <td>
+            {{track.user.username}}
+          </td>
+          </tr>
+        </table>
+        <span ng-show="merge.tracks.length < 1">No tracks added.</span>
+        <span ng-show="merge.tracks.length == 1">Add one more track to continue.</span>
+        <br><br>
+        <a class="waves-effect waves-light btn primary-button-color" ui-sref="solo" ng-hide="merge.tracks.length > 1">Click here to add some tracks!</a></span>
+        <a type="button" class="btn btn-danger primary-button-color" ng-show="merge.tracks.length >= 2 && !merge.showTracks" ng-click="merge.load()">Load</a>
+        <div ng-show="merge.showTracks">
+          <h2>Step 2: Sync all tracks</h2>
+          <span class="trim-explanation">Use "trim" to cut a piece of each individual track, until all the tracks sync up! The purple color indicates the part that will be cut when you click the trim button.</span>
+        </div>
+        <div class="sync-container">
+          <div class="col s3" dcb-sticky="sticky">
+            <a type="button" class="btn play-pause" ng-show="merge.showTracks" ng-click="merge.playPauseAll()">Play/Pause all<span aria-hidden="true"></span></a>
+            <a type="button" class="btn start" ng-show="merge.showTracks" ng-click="merge.toPrevious()">Previous position<span aria-hidden="true"></span></a>
+          </div>
+          <div class="col s9" dcb-sticky="push-s3">
+            <div ng-repeat="track in merge.tracks" ng-show="merge.showTracks" class="audiotrack">
+              <div class="card">
+                <div class="card-content">
+                  <span class="card-title">{{ track.instrument.name }} - {{ track.user.username }}</span>
+                  <div id="waveform{{track.id}}"></div>
+                  <div class="card-action">
+                    <a type="button" class="btn start" ng-click="merge.toStart(track.id)" title="Move back to the start of this track">
+                      <i class="fa fa-fast-backward" aria-hidden="true"></i>
+                    </a>
+                    <a type="button" class="btn play-pause" ng-click="merge.playPause(track.id)" title="Play/pause this track">
+                      <i class="fa" ng-class="{'fa-play' : merge.togglePlay[track.id], 'fa-pause' : !merge.togglePlay[track.id]}" aria-hidden="true"></i>
+                    </a>
+                    <a type="button" class="btn mute" ng-click="merge.toggleMute(track.id)" title="Mute/unmute this track">
+                      <i class="fa" ng-class="{'fa-volume-off' : merge.toggleSound[track.id], 'fa-volume-up' : !merge.toggleSound[track.id]}" aria-hidden="true"></i>
+                    </a>
+                    <a type="button" class="btn trim" ng-click="merge.trim(track.id)" title="Trim this track">
+                      <i class="fa fa-scissors" aria-hidden="true"></i>
+                    </a>
+                    <span ng-if="merge.trimAmounts[track.id]" class="trim-info">{{ merge.trimAmounts[track.id] }} seconds will be cut off this track.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <h2 ng-show="merge.showTracks">Step 3: Save!</h2>
+      <a type="button" class="btn btn-danger primary-button-color" ng-show="merge.showTracks" ng-click="merge.save()">Save</a>
+    </div>
+  </div>
 </main>

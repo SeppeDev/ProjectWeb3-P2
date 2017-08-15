@@ -130,6 +130,10 @@ app.service("bandService", function ($cookies, soloService) {
 
         $cookies.putObject("band", cookieBand, {expires: expirationTime});
 
+        if (trackArray.length < 1) {
+            $('#band_modal').modal('close');
+        }
+
         return trackArray;
     };
 

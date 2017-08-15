@@ -1,27 +1,30 @@
 <div id="band_modal" class="modal bottom-sheet">
-	<div class="container mar-top-xl">
-		<div ng-click="band.closeModal()" class="close-band-modal">
-			<i class="fa fa-times fa-4x" aria-hidden="true"></i>
-		</div>
-	    <div class="modal-footer mar-btm-xl">
-			<h2 class="left">My band</h2>
-		</div>
-	    <div class="modal-content">
-	      	<div class="card horizontal row no-margin" ng-repeat="track in band.trackArray()">
-				<div class="card-image {{track.instrument.name}}-container">
-					<img class="{{track.instrument.name}}" src="dist/img/transparent.png" alt="{{track.instrument.name}}">
-				</div>
-				<div class="card-content">
-					<h4>{{track.artist.name}} - {{track.songname}}</h4>
-					<h5>By {{track.user.username}}</h5>
-				</div>
-				<div class="card-button remove col s1 valign-wrapper" ng-click="band.removeFromBand(track)" ng-if="track.id | band:band.bandTrackIdArray()">
-					<i class="fa fa-minus valign" aria-hidden="true"></i>
-				</div>
-			</div>
-			<div class="mar-top-l">
-				<a class="waves-effect waves-light btn primary-button-color" ui-sref="merge">LET'S MERGE!</a>
-			</div>
-	    </div>
-	</div>
+  <div class="container mar-top-xl">
+    <div ng-click="band.closeModal()" class="close-band-modal">
+      <i class="fa fa-times fa-4x" aria-hidden="true"></i>
+    </div>
+    <div class="modal-footer mar-btm-xl">
+      <h2 class="left">My band</h2>
+    </div>
+    <div class="modal-content">
+      <div class="card horizontal row no-margin" ng-repeat="track in band.trackArray()">
+        <div class="card-image {{track.instrument.name}}-container">
+          <img class="{{track.instrument.name}}" src="dist/img/transparent.png" alt="{{track.instrument.name}}">
+        </div>
+        <div class="card-content">
+          <h4>{{track.artist.name}} - {{track.songname}}</h4>
+          <h5>By {{track.user.username}}</h5>
+        </div>
+        <div class="card-button remove col s1 valign-wrapper" ng-click="band.removeFromBand(track)" ng-if="track.id | band:band.bandTrackIdArray()">
+          <i class="fa fa-minus valign" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="mar-top-l">
+        <div class="center">
+          <a class="waves-effect waves-light btn primary-button-color" ui-sref="merge" ng-show="band.trackArray().length > 1">LET'S MERGE!</a>
+          <h5 ng-hide="band.trackArray().length > 1">Add at least one more track to get started!</h5>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
