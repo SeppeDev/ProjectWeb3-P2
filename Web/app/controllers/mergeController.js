@@ -8,7 +8,6 @@ app.controller("mergeController", function (bandService, mergedService, $state) 
 
         vm.tracks = bandSvc.getTrackArray();
         vm.showTracks = false;
-        vm.thereAreTracks = false;
         vm.loadedTracks = [];
         vm.savedTime = [];
         vm.trimAmounts = [];
@@ -17,10 +16,6 @@ app.controller("mergeController", function (bandService, mergedService, $state) 
         vm.togglePlay = [];
 
         $('#band_modal').modal('close');
-
-        if (vm.tracks.length > 0) {
-            vm.thereAreTracks = true;
-        }
     }
 
     /**
@@ -28,35 +23,33 @@ app.controller("mergeController", function (bandService, mergedService, $state) 
      */
     vm.load = function () {
 
-        if (vm.thereAreTracks) {
-            for (var i = vm.tracks.length - 1; i >= 0; i--) {
-                var track_id = vm.tracks[i].id;
+        for (var i = vm.tracks.length - 1; i >= 0; i--) {
+            var track_id = vm.tracks[i].id;
 
-                /**
-                 * Create a new wavesurver line for each track in the mergelist
-                 * Load the audiofile into that line
-                 */
-                wavesurfer[track_id] = WaveSurfer.create({
-                    container: '#waveform' + track_id,
-                    waveColor: 'green',
-                    progressColor: 'purple'
-                });
-                wavesurfer[track_id].load(CONSTANTS.API_BASE_URL + '/audio/' + vm.tracks[i].file_url);
+            /**
+             * Create a new wavesurver line for each track in the mergelist
+             * Load the audiofile into that line
+             */
+            wavesurfer[track_id] = WaveSurfer.create({
+                container: '#waveform' + track_id,
+                waveColor: 'green',
+                progressColor: 'purple'
+            });
+            wavesurfer[track_id].load(CONSTANTS.API_BASE_URL + '/audio/' + vm.tracks[i].file_url);
 
-                /**
-                 * Add the track to an array with all the loaded tracks
-                 */
-                vm.loadedTracks.push({
-                    track_id: track_id,
-                    trim_amount: 0,
-                    user_id: vm.tracks[i].user.id
-                });
+            /**
+             * Add the track to an array with all the loaded tracks
+             */
+            vm.loadedTracks.push({
+                track_id: track_id,
+                trim_amount: 0,
+                user_id: vm.tracks[i].user.id
+            });
 
-                vm.toggleSound[track_id] = false;
-                vm.togglePlay[track_id] = true;
-            }
-            vm.showTracks = true;
+            vm.toggleSound[track_id] = false;
+            vm.togglePlay[track_id] = true;
         }
+        vm.showTracks = true;
     };
 
     /**
