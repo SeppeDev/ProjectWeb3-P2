@@ -49,23 +49,55 @@
 }
 
 .card-button {
-  &.add {
-    background-color: $dark-green;
+  position: relative;
 
-    i {
-      font-size: 2rem;
-      color: transparentize($dark-grey, 0.25);
-      margin: 0 auto;
+  &_triangle {
+    overflow: hidden;
+  }
+
+  &.add {
+    .triangle {
+      background-color: $dark-green;
+      width: 100px;
+      height: 100px;
+  
+      position: absolute;
+      right: -50px;
+      top: -50px;
+  
+      transform: rotate(45deg);
     }
   }
 
   &.remove {
-    background-color: $dark-red;
+    .triangle {
+      background-color: $dark-red;
+      width: 100px;
+      height: 100px;
+  
+      position: absolute;
+      right: -50px;
+      top: -50px;
+  
+      transform: rotate(45deg);
+    }
+  }
+
+  .content {
+    position: relative;
 
     i {
+      position: absolute;
+      right: -1px;
+      top: 6px;
+
       font-size: 2rem;
       color: transparentize($dark-grey, 0.25);
       margin: 0 auto;
+
+      &.fa-download{
+        right: -5px;
+      }
     }
   }
 

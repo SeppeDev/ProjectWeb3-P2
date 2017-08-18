@@ -36,12 +36,22 @@
 					</div>
 				</div>
 			</div>
-			<div class="card-button add col s1 valign-wrapper" ng-click="solo.addToBand(track)" ng-if="(track.id | band:solo.bandTrackIdArray()) == false">
-				<i class="fa fa-plus valign" aria-hidden="true"></i>
+
+			<div class="card-button card-button_triangle add col s1" ng-if="(track.id | band:solo.bandTrackIdArray()) == false">
+				<div class="triangle"></div>
+				<div class="content" ng-click="solo.addToBand(track)">
+					<i class="fa fa-plus" aria-hidden="true"></i>
+				</div>
 			</div>
-			<div class="card-button remove col s1 valign-wrapper" ng-click="solo.removeFromBand(track)" ng-if="track.id | band:solo.bandTrackIdArray()">
-				<i class="fa fa-minus valign" aria-hidden="true"></i>
+
+			<div class="card-button card-button_triangle remove col s1" ng-if="track.id | band:solo.bandTrackIdArray()">
+				<div class="triangle"></div>
+				<div class="content" ng-click="solo.removeFromBand(track)">
+					<i class="fa fa-minus" aria-hidden="true"></i>
+				</div>
 			</div>
+
+
 		</div>
 	</div>
 </main>
