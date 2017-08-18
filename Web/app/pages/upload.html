@@ -1,44 +1,44 @@
 <main>
-    <div class="container">
-        <h1 class="page-title">Upload</h1>
-        <div class="row">
-            <div class="col s12">
-                <div class="card white">
-                    <div class="card-content black-text">
-                        <span class="card-title">Upload your recorded tracks here:</span>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <div ngf-select="upload.uploadFile($file)" ngf-drop="upload.uploadFile($file)" class="drop-box" ngf-drag-over-class="'dragover'" ngf-accept="'audio/mp3,audio/ogg,audio/mpeg'" ngf-pattern="'audio/mp3,audio/ogg,audio/mpeg'" type="file" name="file" ng-hide="upload.loading">Drop/click to upload</div>
-                                <span ng-show="upload.uploaded">File uploaded! You can always replace this file by uploading another.</span>
-                                <span ng-show="upload.uploadfailed">Oops! Something went wrong.</span>
-                                <div id="upload-spinner" ng-show="upload.loading"></div>
-                                <input type="hidden" value="{{ upload.filename }}">
-                                <input type="hidden" value="{{ upload.tracklength }}">
-                            </div>
-                            <div ng-show="upload.showform">
-                                <div class="input-field col s12">
-                                  <input id="songname" type="text" ng-model="upload.songname">
-                                  <label for="songname">Song name</label>
-                                </div>
-                                <div class="input-field col s12">
-                                  <input id="artistname" type="text" ng-model="upload.artistname">
-                                  <label for="artistname">Original band</label>
-                                </div>
-                                <div class="input-field col s12">
-                                  <select ng-model="upload.instrumentsdropdown">
-                                      <option value="" disabled selected>Choose your option</option>
-                                      <option ng-repeat="instrument in upload.instruments" value="{{instrument.id}}">{{instrument.name}}</option>
-                                  </select>
-                                  <label>Instrument</label>
-                                </div>
-                            </div>
-                            <div class="col s12">
-                                <a class="waves-effect waves-light btn primary-button-color" ng-click="upload.save()" ng-show="upload.uploaded">Save</a>
-                            </div>
-                        </div>
-                    </div>
+  <div class="container">
+    <h1 class="page-title">Upload</h1>
+    <div class="row">
+      <div class="col s12">
+        <div class="card white">
+          <div class="card-content black-text">
+            <span class="card-title">Upload your recorded tracks here:</span>
+            <div class="row">
+              <div class="input-field col s12">
+                <div ngf-select="upload.uploadFile($file)" ngf-drop="upload.uploadFile($file)" class="drop-box" ngf-drag-over-class="'dragover'" ngf-accept="'audio/mp3,audio/ogg,audio/mpeg'" ngf-pattern="'audio/mp3,audio/ogg,audio/mpeg'" type="file" name="file" ng-hide="upload.loading">Drop/click to upload</div>
+                <span ng-show="upload.uploaded">File uploaded! You can always replace this file by uploading another.</span>
+                <span ng-show="upload.uploadfailed">Oops! Something went wrong.</span>
+                <div id="upload-spinner" ng-show="upload.loading"></div>
+                <input type="hidden" value="{{ upload.filename }}">
+                <input type="hidden" value="{{ upload.tracklength }}">
+              </div>
+              <div ng-show="upload.showform">
+                <div class="input-field col s12">
+                  <input id="songname" type="text" ng-model="upload.songname">
+                  <label for="songname">Song name</label>
                 </div>
+                <div class="input-field col s12">
+                  <input type="text" id="artist-ac" class="autocomplete" ng-model="upload.artist">
+                  <label for="artist-ac">Original band</label>
+                </div>
+                <div class="input-field col s12">
+                  <select ng-model="upload.instrumentsdropdown">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option ng-repeat="instrument in upload.instruments" value="{{instrument.id}}">{{instrument.name}}</option>
+                  </select>
+                  <label>Instrument</label>
+                </div>
+              </div>
+              <div class="col s12">
+                <a class="waves-effect waves-light btn primary-button-color" ng-click="upload.save()" ng-show="upload.uploaded">Save</a>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </main>
