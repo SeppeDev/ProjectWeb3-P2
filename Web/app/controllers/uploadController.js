@@ -1,9 +1,11 @@
 app.controller("uploadController", function (Upload, artistService, instrumentService, soloService, $state) {
 
     var vm = this;
+
     var soloSvc = soloService;
     var artistSvc = artistService;
     var instrumentSvc = instrumentService;
+
     var target = document.getElementById('upload-spinner');
 
     /**
@@ -47,13 +49,27 @@ app.controller("uploadController", function (Upload, artistService, instrumentSe
         });
 
         /**
-         * Get all Artists
+         * Get all artists
          */
-        vm.artists = artistSvc.getArtists().then(function (data) {
-            vm.artists = data.data;
-        }, function (error) {
-            console.log(error);
+        artistSvc.getArtistNames().then(function(data) {
+            var json = {};
+
+            // Materialize autocomplete expects a json object of the format: { artist : image }.
+            // Since we don't use images for artists, pass null.
+            for (var i = 0; i < data.data.length; i++) {
+                json[data.data[i]] = null;
+            }
+
+            $('#artist-ac').autocomplete({
+                data: json,
+                limit: 20,
+                onAutocomplete: function(val) {
+                    console.log(val);
+                },
+                minLength: 1
+            });
         });
+
     }
 
     /**
@@ -101,7 +117,7 @@ app.controller("uploadController", function (Upload, artistService, instrumentSe
             file_url: vm.filename,
             track_length: vm.tracklength,
             instrument_id: vm.instrumentsdropdown,
-            artist_id: vm.artistname
+            artist_id: vm.artist
         };
 
         soloSvc.insertTrack(data).then(function (data) {
